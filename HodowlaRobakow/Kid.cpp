@@ -91,9 +91,6 @@ void Kid::updateMove(sf::Sprite &target)
 		y = SCREEN_HEIGHT;
 	}
 
-	// Clear the window and apply grey background
-	//target.clear(sf::Color(50, 50, 50));
-
 	// Rotate and draw the sprite
 	target.setPosition(x, y);
 

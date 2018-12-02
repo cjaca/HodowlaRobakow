@@ -21,7 +21,6 @@ private:
 	void HandleInput();
 	void Update();
 	void Draw();
-	//sf::RenderWindow
 
 	sf::RenderWindow *window;
 
@@ -29,7 +28,5 @@ private:
 
 	GameStates state;
 	PlayState *playState;
-
-	//PlayState *playstate;
 
 };

@@ -74,7 +74,6 @@ void MainState::Draw()
 	}
 	window->display();
 	window->clear(sf::Color(50, 50, 50));
-	//window->clear();
 }
 
 

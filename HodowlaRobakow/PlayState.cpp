@@ -14,7 +14,6 @@ PlayState::~PlayState()
 
 void PlayState::Init()
 {
-	//mucha = new Mature(sf::Vector2f(rand() % SCREEN_WIDTH, rand() % SCREEN_HEIGHT));
 	for (int i = 0; i < iloscMuch; i++) {
 		Mature *mature;
 		Kid *kid;
