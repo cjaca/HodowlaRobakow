@@ -10,7 +10,7 @@
 
 int main()
 {
-	MainState game{ "Hodowla much", sf::Vector2f(SCREEN_WIDTH, SCREEN_HEIGHT) };
+	MainState game{ "Hodowla much XD", sf::Vector2f(SCREEN_WIDTH, SCREEN_HEIGHT) };
 	game.runGame();
 	return 0;
 }
