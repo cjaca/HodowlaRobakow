@@ -2,18 +2,14 @@
 #define SPRITE_SPEED	1
 
 
-Mature::Mature(int oria, int orib,sf::Vector2f position)
+Mature::Mature(sf::Vector2f position)
 {
 	this->position = position;
 	x = position.x;
 	y = position.y;
 	loadTexture();
-	AntSprite.setOrigin(oria,orib);
+	AntSprite.setOrigin(12,12);
 	AntSprite.setPosition(position);
-	a = 0;
-	b = 0;
-	c = 0;
-	licznik = 0;
 }
 
 Mature::~Mature()

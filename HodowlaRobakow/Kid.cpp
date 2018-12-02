@@ -2,13 +2,13 @@
 
 
 
-Kid::Kid(int oria, int orib, sf::Vector2f position)
+Kid::Kid(sf::Vector2f position)
 {
 	this->position = position;
 	x = position.x;
 	y = position.y;
 	loadTexture();
-	KidSprite.setOrigin(oria, orib);
+	KidSprite.setOrigin(8,8);
 	KidSprite.setPosition(position);
 	a = 0;
 	b = 0;

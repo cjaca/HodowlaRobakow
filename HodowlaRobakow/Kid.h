@@ -25,7 +25,7 @@ protected:
 	int a, b, c, licznik, predkosc = 1;
 
 public:
-	Kid(int oria = 8, int orib = 8, sf::Vector2f position = sf::Vector2f(0.0f, 0.0f));
+	Kid(sf::Vector2f position = sf::Vector2f(rand() % 800, rand() % 600));
 	~Kid();
 	void draw(sf::RenderTarget & target);
 	void updateMove(sf::Sprite &target);

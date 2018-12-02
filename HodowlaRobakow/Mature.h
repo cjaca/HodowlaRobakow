@@ -23,7 +23,7 @@ private:
 
 public:
 	
-	Mature(int oria, int orib, sf::Vector2f position);
+	Mature(sf::Vector2f position);
 	~Mature();
 	void draw(sf::RenderTarget & target);
 	sf::Sprite *getSprite();

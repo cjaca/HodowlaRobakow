@@ -17,8 +17,8 @@ void PlayState::Init()
 	for (int i = 0; i < iloscMuch; i++) {
 		Mature *mature;
 		Kid *kid;
-		mature = new Mature(12, 12, sf::Vector2f(rand() % 800, rand() % 600));
-		kid = new Kid(8,8,sf::Vector2f(rand() % 800, rand() % 600));
+		mature = new Mature(sf::Vector2f(rand() % 800, rand() % 600));
+		kid = new Kid(sf::Vector2f(rand() % 800, rand() % 600));
 		dorosli.push_back(*mature);
 		dzieci.push_back(*kid);
 	}
@@ -42,7 +42,7 @@ void PlayState::HandleInput()
 			case sf::Keyboard::Space:
 				std::cout << "Dodano kid muche" << std::endl;
 				Kid *kid;
-				kid = new Kid(8,8,sf::Vector2f(rand() % SCREEN_WIDTH, rand() % SCREEN_HEIGHT));
+				kid = new Kid(sf::Vector2f(rand() % SCREEN_WIDTH, rand() % SCREEN_HEIGHT));
 				dzieci.push_back(*kid);
 				break;
 			case sf::Keyboard::X:
@@ -139,16 +139,16 @@ void PlayState::evolution()
 
 	for (int i = 0; i < dzieci.size(); i++) {
 		if (dzieci[i].getSize() > 300) {
-			std::cout <<"x: "<< (dzieci[i].getPosition()).x <<" y: "<< (dzieci[i].getPosition()).y << std::endl;
+			//std::cout <<"x: "<< (dzieci[i].getPosition()).x <<" y: "<< (dzieci[i].getPosition()).y << std::endl;
 			iks = (dzieci[i].getPosition()).x;
 			igrek = (dzieci[i].getPosition()).y;
 
 			Mature *mature;
-			mature = new Mature(12,12,sf::Vector2f(iks, igrek));
+			mature = new Mature(sf::Vector2f(iks, igrek));
 			dorosli.push_back(*mature);
-			std::cout << "x: " << (mature->getPosition()).x << " y: " << (mature->getPosition()).y << std::endl;
+			//std::cout << "x: " << (mature->getPosition()).x << " y: " << (mature->getPosition()).y << std::endl;
 
-			std::cout << "DZIECKO EWOLUOWALO W MUCHE!" << std::endl;
+			//std::cout << "DZIECKO EWOLUOWALO W MUCHE!" << std::endl;
 			dzieci.erase(dzieci.begin() + i);
 
 			iks = 0;
