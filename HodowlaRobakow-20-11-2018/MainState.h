@@ -1,13 +1,10 @@
 #pragma once
-#include "DEFINITIONS.h"
 #include "State.h"
-#include "PlayState.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Main.hpp>
 
-
-
+using namespace std;
 
 class MainState : public State
 {
@@ -21,15 +18,14 @@ private:
 	void HandleInput();
 	void Update();
 	void Draw();
-	//sf::RenderWindow
 
 	sf::RenderWindow *window;
 
 	sf::Vector2f ScreenSize;
 
 	GameStates state;
-	PlayState *playState;
 
 	//PlayState *playstate;
 
 };
+
