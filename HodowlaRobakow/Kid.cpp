@@ -14,6 +14,7 @@ Kid::Kid(sf::Vector2f position)
 	b = 0;
 	c = 0;
 	licznik = 0;
+	hpBar();
 }
 
 
@@ -24,6 +25,7 @@ Kid::~Kid()
 void Kid::draw(sf::RenderTarget & target)
 {
 	target.draw(this->KidSprite);
+	target.draw(HpBar);
 }
 
 int Kid::loadTexture()
@@ -93,7 +95,9 @@ void Kid::updateMove(sf::Sprite &target)
 
 	// Rotate and draw the sprite
 	target.setPosition(x, y);
-
+	//Change HpBar position with Fly
+	this->HpBar.setPosition(x-10, y+10);
+	
 }
 
 sf::Sprite *Kid::getSprite()
@@ -131,5 +135,19 @@ int Kid::getSize()
 
 void Kid::setSize()
 {
+	//set size of Fly
 	size = size + 1;
+	//change color of HpBar
+	int kolor = 0.5*size;
+	int rozmiarPaskaHP = 0.04*size;
+	HpBar.setFillColor(sf::Color(kolor, 250-kolor, 0));
+	HpBar.setSize(sf::Vector2f(20-rozmiarPaskaHP, 4));
+}
+
+void Kid::hpBar()
+{
+	HpBar.setSize(sf::Vector2f(20, 4));
+	HpBar.setOutlineColor(sf::Color::Red);
+	HpBar.setPosition(position);
+
 }

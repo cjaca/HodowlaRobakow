@@ -68,6 +68,8 @@ void PlayState::Update()
 	if(dorosli.size()>0){
 		for (int i = 0; i < dorosli.size(); i++) {
 			dorosli[i].updateMove(*dorosli[i].getSprite()); //poruszanie doroslymi
+			dorosli[i].setSize(); // zwiekszanie wieku doroslych 
+
 			for (int j = 0; j < dorosli.size() - 1; j++) {
 				if (i!=j) {
 					dorosli[i].kolizja(*dorosli[j].getSprite());
@@ -84,7 +86,7 @@ void PlayState::Update()
 		for (int i = 0; i < dzieci.size(); i++) {
 			dzieci[i].updateMove(*dzieci[i].getSprite()); //poruszanie dziecmi
 			dzieci[i].setSize(); //zwiekszanie ich wieku
-
+			
 
 
 			for (int j = 0; j < dzieci.size() - 1; j++) {
@@ -138,7 +140,7 @@ void PlayState::evolution()
 	float igrek = 0;
 
 	for (int i = 0; i < dzieci.size(); i++) {
-		if (dzieci[i].getSize() > 300) {
+		if (dzieci[i].getSize() > 500) {
 			//std::cout <<"x: "<< (dzieci[i].getPosition()).x <<" y: "<< (dzieci[i].getPosition()).y << std::endl;
 			iks = (dzieci[i].getPosition()).x;
 			igrek = (dzieci[i].getPosition()).y;

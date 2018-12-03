@@ -19,7 +19,7 @@ private:
 	sf::Sprite AntSprite;
 	sf::Vector2f position;
 	int loadTexture();
-
+	int size = 0;
 
 public:
 	

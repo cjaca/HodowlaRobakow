@@ -10,6 +10,8 @@ Mature::Mature(sf::Vector2f position)
 	loadTexture();
 	AntSprite.setOrigin(12,12);
 	AntSprite.setPosition(position);
+
+	hpBar();
 }
 
 Mature::~Mature()
@@ -19,6 +21,7 @@ Mature::~Mature()
 void Mature::draw(sf::RenderTarget & target)
 {
 	target.draw(this->AntSprite);
+	target.draw(this->HpBar);
 }
 
 int Mature::loadTexture()
