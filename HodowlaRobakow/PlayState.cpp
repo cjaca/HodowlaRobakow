@@ -21,8 +21,11 @@ void PlayState::Init()
 		kid = new Kid(sf::Vector2f(rand() % 800, rand() % 600));
 		dorosli.push_back(*mature);
 		dzieci.push_back(*kid);
+
+
 	}
 
+	gniazdo = new Nest();
 }
 
 void PlayState::HandleInput()
@@ -53,6 +56,12 @@ void PlayState::HandleInput()
 				}
 				else std::cout << "Nie ma juz much do usuniecia" << std::endl;
 				break;
+
+			case sf::Keyboard::C:
+
+				//dorosli[1].setMove(dorosli[1].getPosition());
+
+				break;
 			}
 		}
 	}
@@ -64,15 +73,16 @@ void PlayState::HandleInput()
 
 void PlayState::Update()
 {
-	evolution();
+	evolution(); //sprawdzanie ewolucji malej muchy
 	if(dorosli.size()>0){
 		for (int i = 0; i < dorosli.size(); i++) {
 			dorosli[i].updateMove(*dorosli[i].getSprite()); //poruszanie doroslymi
 			dorosli[i].setSize(); // zwiekszanie wieku doroslych 
+			dorosli[i].kolizja(*gniazdo->getSprite()); //sprawdzanie kolizji dorosly-gniazdo
 
 			for (int j = 0; j < dorosli.size() - 1; j++) {
 				if (i!=j) {
-					dorosli[i].kolizja(*dorosli[j].getSprite());
+					dorosli[i].kolizja(*dorosli[j].getSprite()); //sprawdzanie kolizji dorosly-dziecko
 					for (int k = 0; k < dzieci.size(); k++)
 					{
 						dorosli[j].kolizja(*dzieci[k].getSprite());
@@ -86,12 +96,13 @@ void PlayState::Update()
 		for (int i = 0; i < dzieci.size(); i++) {
 			dzieci[i].updateMove(*dzieci[i].getSprite()); //poruszanie dziecmi
 			dzieci[i].setSize(); //zwiekszanie ich wieku
-			
+			dzieci[i].kolizja(*gniazdo->getSprite()); //sprawdzanie kolizji dziecko-gniazdo
+
 
 
 			for (int j = 0; j < dzieci.size() - 1; j++) {
 				if (i != j) {
-					dzieci[i].kolizja(*dzieci[j].getSprite());
+					dzieci[i].kolizja(*dzieci[j].getSprite()); //sprawdzanie kolizji dziecko-dorosly
 					for (int k = 0; k < dorosli.size(); k++)
 					{
 						dzieci[j].kolizja(*dorosli[k].getSprite());
@@ -115,6 +126,9 @@ void PlayState::Draw()
 	for (int i = 0; i < dzieci.size(); i++) {
 		dzieci[i].draw(*window);
 	}
+
+	gniazdo->draw(*window);
+
 }
 
 int PlayState::IloscMuch()
@@ -141,16 +155,12 @@ void PlayState::evolution()
 
 	for (int i = 0; i < dzieci.size(); i++) {
 		if (dzieci[i].getSize() > 500) {
-			//std::cout <<"x: "<< (dzieci[i].getPosition()).x <<" y: "<< (dzieci[i].getPosition()).y << std::endl;
 			iks = (dzieci[i].getPosition()).x;
 			igrek = (dzieci[i].getPosition()).y;
 
 			Mature *mature;
 			mature = new Mature(sf::Vector2f(iks, igrek));
 			dorosli.push_back(*mature);
-			//std::cout << "x: " << (mature->getPosition()).x << " y: " << (mature->getPosition()).y << std::endl;
-
-			//std::cout << "DZIECKO EWOLUOWALO W MUCHE!" << std::endl;
 			dzieci.erase(dzieci.begin() + i);
 
 			iks = 0;

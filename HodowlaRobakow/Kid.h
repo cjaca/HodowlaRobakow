@@ -13,10 +13,8 @@ private:
 
 	sf::Texture KidTexture;
 	sf::Sprite KidSprite;
-	//sf::RectangleShape HpBar;
 	
 	int loadTexture();
-
 	int size=0;
 
 protected:
@@ -38,5 +36,6 @@ public:
 	void setSize();
 	void evolution();
 	void hpBar();
+	void setMove(sf::Vector2f &target);
 };
 

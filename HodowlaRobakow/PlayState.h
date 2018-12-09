@@ -3,6 +3,7 @@
 #include "DEFINITIONS.h"
 #include "Mature.h"
 #include "Kid.h"
+#include "Nest.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
@@ -25,7 +26,7 @@ private:
 	int IloscMuch();
 	sf::RenderWindow *window;
 	GameStates *state;
-	Mature *mucha;
+	Nest *gniazdo;
 	sf::Vector2f ScreenSize;
 	int iloscMuch = 3;
 	std::vector<Mature> dorosli;

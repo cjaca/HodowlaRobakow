@@ -1,11 +1,11 @@
 #pragma once
 #include "DEFINITIONS.h"
+#include "MainState.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <string>
 #include <vector>
-#include "Mature.h"
-#include "MainState.h"
+
 
 
 int main()

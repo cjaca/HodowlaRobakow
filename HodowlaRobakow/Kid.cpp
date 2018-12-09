@@ -151,3 +151,12 @@ void Kid::hpBar()
 	HpBar.setPosition(position);
 
 }
+
+void Kid::setMove(sf::Vector2f & target)
+{
+	float xtarget = target.x;
+	float ytarget = target.y;
+
+
+	
+}

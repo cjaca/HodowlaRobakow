@@ -25,6 +25,12 @@
     <Filter Include="Pliki źródłowe\flys">
       <UniqueIdentifier>{895ff111-37df-498b-bae0-4790bf2f8f57}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pliki nagłówkowe\Nest">
+      <UniqueIdentifier>{c9af8061-c53e-4989-a6f6-5e0b2f03d67d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\Nest">
+      <UniqueIdentifier>{823ce63b-f201-40a8-a034-9b86f2cbddd5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -41,6 +47,9 @@
     </ClCompile>
     <ClCompile Include="Kid.cpp">
       <Filter>Pliki źródłowe\flys</Filter>
+    </ClCompile>
+    <ClCompile Include="Nest.cpp">
+      <Filter>Pliki źródłowe\Nest</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -61,6 +70,9 @@
     </ClInclude>
     <ClInclude Include="Kid.h">
       <Filter>Pliki nagłówkowe\Flys</Filter>
+    </ClInclude>
+    <ClInclude Include="Nest.h">
+      <Filter>Pliki nagłówkowe\Nest</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
