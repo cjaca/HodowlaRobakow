@@ -4,6 +4,7 @@
 #include "Mature.h"
 #include "Kid.h"
 #include "Nest.h"
+#include "Egg.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
@@ -28,12 +29,14 @@ private:
 	GameStates *state;
 	Nest *gniazdo;
 	sf::Vector2f ScreenSize;
-	int iloscMuch = 3;
+	int iloscMuch = 20;
 	std::vector<Mature> dorosli;
 	std::vector<Kid> dzieci;
+	std::vector<Egg> jaja;
 	bool isGameStarted;
 	int time = 0;
 	int countTime();
 	void evolution();
+	void cleanUp();
 };
 

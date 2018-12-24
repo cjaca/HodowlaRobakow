@@ -1,4 +1,6 @@
 #include "PlayState.h"
+#include <cstdlib>
+#include <ctime>
 
 PlayState::PlayState(sf::RenderWindow * window, GameStates * state)
 {
@@ -14,13 +16,17 @@ PlayState::~PlayState()
 
 void PlayState::Init()
 {
+
 	for (int i = 0; i < iloscMuch; i++) {
 		Mature *mature;
 		Kid *kid;
+		Egg *egg;
 		mature = new Mature(sf::Vector2f(rand() % 800, rand() % 600));
 		kid = new Kid(sf::Vector2f(rand() % 800, rand() % 600));
+		egg = new Egg(sf::Vector2f(rand() % 700, rand() % 500));
 		dorosli.push_back(*mature);
 		dzieci.push_back(*kid);
+		jaja.push_back(*egg);
 
 
 	}
@@ -74,6 +80,7 @@ void PlayState::HandleInput()
 void PlayState::Update()
 {
 	evolution(); //sprawdzanie ewolucji malej muchy
+	//cleanUp(); //sprzatanie doniesionych jaj
 	if(dorosli.size()>0){
 		for (int i = 0; i < dorosli.size(); i++) {
 			dorosli[i].updateMove(*dorosli[i].getSprite()); //poruszanie doroslymi
@@ -87,6 +94,17 @@ void PlayState::Update()
 					{
 						dorosli[j].kolizja(*dzieci[k].getSprite());
 					}
+					for (int l = 0; l < jaja.size(); l++)
+					{
+						dorosli[j].collisionWithEgg(*jaja[l].getSprite());
+						while (dorosli[j].collisionWithEgg(*jaja[l].getSprite()))
+						{	
+							if (jaja[l].flaga == false) {
+								dorosli[j].collect(jaja[l]);
+							}
+							break;
+						}
+					}
 				}
 			}
 		}
@@ -96,16 +114,16 @@ void PlayState::Update()
 		for (int i = 0; i < dzieci.size(); i++) {
 			dzieci[i].updateMove(*dzieci[i].getSprite()); //poruszanie dziecmi
 			dzieci[i].setSize(); //zwiekszanie ich wieku
-			dzieci[i].kolizja(*gniazdo->getSprite()); //sprawdzanie kolizji dziecko-gniazdo
+			dzieci[i].kolizja(*gniazdo->getSprite(), true); //sprawdzanie kolizji dziecko-gniazdo
 
 
 
 			for (int j = 0; j < dzieci.size() - 1; j++) {
 				if (i != j) {
-					dzieci[i].kolizja(*dzieci[j].getSprite()); //sprawdzanie kolizji dziecko-dorosly
+					dzieci[i].kolizja(*dzieci[j].getSprite(), true); //sprawdzanie kolizji dziecko-dorosly
 					for (int k = 0; k < dorosli.size(); k++)
 					{
-						dzieci[j].kolizja(*dorosli[k].getSprite());
+						dzieci[j].kolizja(*dorosli[k].getSprite(), true);
 					}
 				}
 
@@ -125,6 +143,9 @@ void PlayState::Draw()
 	}
 	for (int i = 0; i < dzieci.size(); i++) {
 		dzieci[i].draw(*window);
+	}
+	for (int i = 0; i < jaja.size(); i++) {
+		jaja[i].draw(*window);
 	}
 
 	gniazdo->draw(*window);
@@ -165,6 +186,16 @@ void PlayState::evolution()
 
 			iks = 0;
 			igrek = 0;
+		}
+	}
+}
+
+void PlayState::cleanUp()
+{
+	for (int i = 0; i < jaja.size(); i++) {
+		if (jaja[i].doZniszczenia == true) {
+			//jaja[i].doZniszczenia = false;
+			jaja.erase(jaja.begin()+i);
 		}
 	}
 }

@@ -126,6 +126,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Egg.cpp" />
     <ClCompile Include="Kid.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainState.cpp" />
@@ -135,6 +136,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DEFINITIONS.h" />
+    <ClInclude Include="Egg.h" />
     <ClInclude Include="Kid.h" />
     <ClInclude Include="MainState.h" />
     <ClInclude Include="Mature.h" />

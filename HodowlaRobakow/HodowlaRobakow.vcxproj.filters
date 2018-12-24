@@ -51,6 +51,9 @@
     <ClCompile Include="Nest.cpp">
       <Filter>Pliki źródłowe\Nest</Filter>
     </ClCompile>
+    <ClCompile Include="Egg.cpp">
+      <Filter>Pliki źródłowe\Nest</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DEFINITIONS.h">
@@ -72,6 +75,9 @@
       <Filter>Pliki nagłówkowe\Flys</Filter>
     </ClInclude>
     <ClInclude Include="Nest.h">
+      <Filter>Pliki nagłówkowe\Nest</Filter>
+    </ClInclude>
+    <ClInclude Include="Egg.h">
       <Filter>Pliki nagłówkowe\Nest</Filter>
     </ClInclude>
   </ItemGroup>

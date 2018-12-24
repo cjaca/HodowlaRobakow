@@ -1,5 +1,6 @@
 #pragma once
 #include "Kid.h"
+#include "Egg.h"
 #include "DEFINITIONS.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
@@ -28,5 +29,8 @@ public:
 	void draw(sf::RenderTarget & target);
 	sf::Sprite *getSprite();
 	bool kolizja(sf::Sprite &target);
+	bool collisionWithEgg(sf::Sprite &target);
+	void collect(Egg & jajo);
+	void updateMatureMove(Egg & jajo);
 };
 
