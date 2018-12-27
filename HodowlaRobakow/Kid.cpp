@@ -99,6 +99,7 @@ bool Kid::updateMove(sf::Sprite &target)
 		//Change HpBar position with Fly
 		this->HpBar.setPosition(x - 10, y + 10);
 	}
+
 	if (instrukcja == 1)
 	{
 		if (licznik == 0) {
@@ -111,14 +112,14 @@ bool Kid::updateMove(sf::Sprite &target)
 			if (c == 0)
 			{
 				x = x - 1;
-				obiekt->getSprite()->setRotation(315.f);
+				
 				this->getSprite()->setRotation(315.f);
 				licznik++;
 			}
 			else
 			{
 				x = x + 1;
-				obiekt->getSprite()->setRotation(90.f);
+				
 				this->getSprite()->setRotation(90.f);
 				licznik++;
 			}
@@ -128,14 +129,14 @@ bool Kid::updateMove(sf::Sprite &target)
 			if (c == 0)
 			{
 				y = y - 1;
-				obiekt->getSprite()->setRotation(0.f);
+				
 				this->getSprite()->setRotation(0.f);
 				licznik++;
 			}
 			else
 			{
 				y = y + 1;
-				obiekt->getSprite()->setRotation(180.f);
+				
 				this->getSprite()->setRotation(180.f);
 				licznik++;
 			}
@@ -158,27 +159,26 @@ bool Kid::updateMove(sf::Sprite &target)
 			c = 0;
 			y = SCREEN_HEIGHT;
 		}
-		
+
 
 		//Change HpBar position with Fly
-		obiekt->setPosition(x, y);
 		target.setPosition(x, y);
 		this->HpBar.setPosition(x - 10, y + 10);
 		if (licznik == a) {
 			instrukcja -= 1;
 			licznik = 0;
-			wskaznik = false;
+			//wskaznik = false;
 			//obiekt->~Egg();
-			obiekt->doZniszczenia = true;
-			obiekt = nullptr;
 			a1 = 0;
 			b1 = 0;
 			c1 = 0;
 			x = 512;
 			y = 520;
-			target.setPosition(x, y);
+			this->isAsleep = true; //ustawia flage ze mucha spi i zeby jej nie ruszac
+			this->goSleep = this->size;
+			this->wakeUp = this->size + 300;
 		}
-		
+
 	}
 
 	if (instrukcja == 2)
@@ -192,14 +192,12 @@ bool Kid::updateMove(sf::Sprite &target)
 			if (c == 0)
 			{
 				x = x - 1;
-				obiekt->getSprite()->setRotation(315.f);
 				this->getSprite()->setRotation(315.f);
 				licznik++;
 			}
 			else
 			{
 				x = x + 1;
-				obiekt->getSprite()->setRotation(90.f);
 				this->getSprite()->setRotation(90.f);
 				licznik++;
 			}
@@ -209,14 +207,12 @@ bool Kid::updateMove(sf::Sprite &target)
 			if (c == 0)
 			{
 				y = y - 1;
-				obiekt->getSprite()->setRotation(0.f);
 				this->getSprite()->setRotation(0.f);
 				licznik++;
 			}
 			else
 			{
 				y = y + 1;
-				obiekt->getSprite()->setRotation(180.f);
 				this->getSprite()->setRotation(180.f);
 				licznik++;
 			}
@@ -239,10 +235,9 @@ bool Kid::updateMove(sf::Sprite &target)
 			c = 0;
 			y = SCREEN_HEIGHT;
 		}
-		
+
 
 		//Change HpBar position with Fly
-		obiekt->setPosition(x, y);
 		target.setPosition(x, y);
 		this->HpBar.setPosition(x - 10, y + 10);
 		if (licznik == a) {
@@ -251,15 +246,9 @@ bool Kid::updateMove(sf::Sprite &target)
 			a2 = 0;
 			b2 = 0;
 			c2 = 0;
-			//wskaznik = false;
-			//obiekt->~Egg();
-			//obiekt->doZniszczenia = true;
-			//obiekt = nullptr;
 		}
-		
-	}
 
-	
+	}
 	return false;
 }
 
@@ -275,9 +264,9 @@ sf::Vector2f Kid::getPosition()
 	return this->position;
 }
 
-bool Kid::kolizja(sf::Sprite &target, bool kolizyjny)
+bool Kid::kolizja(sf::Sprite &target)
 {
-	if (kolizyjny == true) {
+	if (this->wskaznik == true) {
 		if (target.getGlobalBounds().intersects(this->KidSprite.getGlobalBounds()))
 		{
 			std::cout << "JEB JEB muchy sie zderzyly" << std::endl;
@@ -327,4 +316,56 @@ void Kid::setMove(sf::Vector2f & target)
 {
 	float xtarget = target.x;
 	float ytarget = target.y;
+}
+
+void Kid::sleep(int time)
+{
+	int x, y;
+	float pozycjaMuchyX, pozycjaMuchyY;
+
+	//this->wskaznik = true; //ustawia flage musze ze jest zajeta i zeby wiedziala ze sie nie odbija od innych w tym momencie
+	this->wskaznik = false;
+	pozycjaMuchyX = this->getPosition().x;
+	pozycjaMuchyY = this->getPosition().y;
+
+	//wyznaczanie drogi do gniazda ktore zawsze jest w tym samym miejscu
+
+	wPoziomie = 512.f - pozycjaMuchyX;
+	wPionie = 384.f - pozycjaMuchyY;
+	if (instrukcja == 0) {
+		if (wPoziomie > 0) // ---->
+		{
+			this->a1 = wPoziomie;
+			this->b1 = 0;
+			this->c1 = 1;
+			this->instrukcja++;
+			this->licznik = 0;
+		}
+		if (wPoziomie < 0) // <-----
+		{
+			this->a1 = wPoziomie * (-1);
+			this->b1 = 0;
+			this->c1 = 0;
+			this->instrukcja++;
+			this->licznik = 0;
+		}
+		if (wPionie > 0) //  \/
+		{
+			this->a2 = wPionie;
+			this->b2 = 1;
+			this->c2 = 1;
+			this->instrukcja++;
+			this->licznik = 0;
+		}
+		if (wPionie < 0) //  ^
+		{
+			this->a2 = wPionie * (-1);
+			this->b2 = 1;
+			this->c2 = 0;
+			this->instrukcja++;
+			this->licznik = 0;
+		}
+	}
+
+
 }

@@ -18,7 +18,7 @@ public:
 	Egg(sf::Vector2f position);
 	~Egg();
 	void draw(sf::RenderTarget & target);
-	void updateMove(sf::Sprite &target);
+	void updateMove(int x, int y);
 	sf::Sprite *getSprite();
 	void setPosition(int x, int y);
 	bool flaga = false;

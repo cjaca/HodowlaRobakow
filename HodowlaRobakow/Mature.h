@@ -21,7 +21,7 @@ private:
 	sf::Vector2f position;
 	int loadTexture();
 	int size = 0;
-
+	Egg *obiekt;
 public:
 	
 	Mature(sf::Vector2f position);
@@ -31,6 +31,6 @@ public:
 	bool kolizja(sf::Sprite &target);
 	bool collisionWithEgg(sf::Sprite &target);
 	void collect(Egg & jajo);
-	void updateMatureMove(Egg & jajo);
+	bool updateMove(sf::Sprite &target);
 };
 

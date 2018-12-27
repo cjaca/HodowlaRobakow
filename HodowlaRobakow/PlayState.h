@@ -29,7 +29,7 @@ private:
 	GameStates *state;
 	Nest *gniazdo;
 	sf::Vector2f ScreenSize;
-	int iloscMuch = 20;
+	int iloscMuch = 0;
 	std::vector<Mature> dorosli;
 	std::vector<Kid> dzieci;
 	std::vector<Egg> jaja;
@@ -38,5 +38,6 @@ private:
 	int countTime();
 	void evolution();
 	void cleanUp();
+	void randomGen();
 };
 

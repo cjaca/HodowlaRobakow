@@ -28,9 +28,9 @@ void Egg::draw(sf::RenderTarget & target)
 	target.draw(this->EggSprite);
 }
 
-void Egg::updateMove(sf::Sprite & target)
+void Egg::updateMove(int x, int y)
 {
-
+	this->setPosition(x, y);
 }
 
 sf::Sprite * Egg::getSprite()

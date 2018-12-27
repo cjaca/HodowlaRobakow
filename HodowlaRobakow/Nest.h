@@ -10,8 +10,12 @@ class Nest
 private:
 	sf::Texture NestTexture;
 	sf::Sprite NestSprite;
+	sf::RectangleShape HpBar;
 	int loadTexture();
 	int level = 0;
+	int food = 0;
+	int garner = 0;
+
 
 public:
 	Nest();

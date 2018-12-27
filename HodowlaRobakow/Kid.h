@@ -26,7 +26,6 @@ protected:
 	float y;
 	int a, b, c, licznik, predkosc = 1, a1,b1,c1, a2, b2, c2;
 	int instrukcja = 0, wPoziomie = 0, wPionie = 0;
-	Egg *obiekt;
 public:
 	Kid(sf::Vector2f position = sf::Vector2f(rand() % 800, rand() % 600));
 	~Kid();
@@ -34,12 +33,15 @@ public:
 	bool updateMove(sf::Sprite &target);
 	sf::Sprite *getSprite();
 	sf::Vector2f getPosition();
-	bool kolizja(sf::Sprite &target, bool kolizyjny);
+	bool kolizja(sf::Sprite &target);
 	int getSize();
 	void setSize();
 	void evolution();
 	void hpBar();
 	void setMove(sf::Vector2f &target);
-	bool wskaznik = false;
+	bool wskaznik = true; //ustawia flage czy ma kolizjowac
+	bool isAsleep = false; //ustawia flage do spania
+	int goSleep, wakeUp;
+	void sleep(int time);
 };
 

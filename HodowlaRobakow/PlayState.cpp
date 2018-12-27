@@ -62,12 +62,6 @@ void PlayState::HandleInput()
 				}
 				else std::cout << "Nie ma juz much do usuniecia" << std::endl;
 				break;
-
-			case sf::Keyboard::C:
-
-				//dorosli[1].setMove(dorosli[1].getPosition());
-
-				break;
 			}
 		}
 	}
@@ -80,15 +74,20 @@ void PlayState::HandleInput()
 void PlayState::Update()
 {
 	evolution(); //sprawdzanie ewolucji malej muchy
+	//randomGen();
 	//cleanUp(); //sprzatanie doniesionych jaj
-	if(dorosli.size()>0){
-		for (int i = 0; i < dorosli.size(); i++) {
+	if(dorosli.size()>0)
+	{
+		for (int i = 0; i < dorosli.size(); i++) 
+		{
 			dorosli[i].updateMove(*dorosli[i].getSprite()); //poruszanie doroslymi
 			dorosli[i].setSize(); // zwiekszanie wieku doroslych 
 			dorosli[i].kolizja(*gniazdo->getSprite()); //sprawdzanie kolizji dorosly-gniazdo
 
-			for (int j = 0; j < dorosli.size() - 1; j++) {
-				if (i!=j) {
+			for (int j = 0; j < dorosli.size() - 1; j++) 
+			{
+				if (i!=j) 
+				{
 					dorosli[i].kolizja(*dorosli[j].getSprite()); //sprawdzanie kolizji dorosly-dziecko
 					for (int k = 0; k < dzieci.size(); k++)
 					{
@@ -110,23 +109,28 @@ void PlayState::Update()
 		}
 	}
 
-	if (dzieci.size() > 0) {
-		for (int i = 0; i < dzieci.size(); i++) {
-			dzieci[i].updateMove(*dzieci[i].getSprite()); //poruszanie dziecmi
+	if (dzieci.size() > 0) 
+	{
+		for (int i = 0; i < dzieci.size(); i++) 
+		{
 			dzieci[i].setSize(); //zwiekszanie ich wieku
-			dzieci[i].kolizja(*gniazdo->getSprite(), true); //sprawdzanie kolizji dziecko-gniazdo
+			if (dzieci[i].isAsleep == false) 
+			{
+				dzieci[i].updateMove(*dzieci[i].getSprite()); //poruszanie dziecmi
+				dzieci[i].kolizja(*gniazdo->getSprite()); //sprawdzanie kolizji dziecko-gniazdo
 
 
 
-			for (int j = 0; j < dzieci.size() - 1; j++) {
-				if (i != j) {
-					dzieci[i].kolizja(*dzieci[j].getSprite(), true); //sprawdzanie kolizji dziecko-dorosly
-					for (int k = 0; k < dorosli.size(); k++)
-					{
-						dzieci[j].kolizja(*dorosli[k].getSprite(), true);
+				for (int j = 0; j < dzieci.size() - 1; j++) {
+					if (i != j) {
+						dzieci[i].kolizja(*dzieci[j].getSprite()); //sprawdzanie kolizji dziecko-dorosly
+						for (int k = 0; k < dorosli.size(); k++)
+						{
+							dzieci[j].kolizja(*dorosli[k].getSprite());
+						}
 					}
-				}
 
+				}
 			}
 		}
 	}
@@ -159,8 +163,7 @@ int PlayState::IloscMuch()
 	int wynik;
 	iloscMuch = iloscDzieci + iloscDoroslych;
 	std::cout << iloscMuch << std::endl;
-	wynik = iloscMuch;
-	return wynik;
+	return iloscMuch;
 }
 
 int PlayState::countTime()
@@ -175,7 +178,20 @@ void PlayState::evolution()
 	float igrek = 0;
 
 	for (int i = 0; i < dzieci.size(); i++) {
-		if (dzieci[i].getSize() > 500) {
+
+
+		if (dzieci[i].getSize() % 1000 == 0 && dzieci[i].getSize() < 4001 && dzieci[i].getSize() > 1)
+		{
+			dzieci[i].sleep(time);
+		}
+
+		//check to wakeUp
+
+		if (dzieci[i].getSize() == dzieci[i].wakeUp)
+		{
+			dzieci[i].isAsleep = false;
+		}
+		if (dzieci[i].getSize() > 5000) {
 			iks = (dzieci[i].getPosition()).x;
 			igrek = (dzieci[i].getPosition()).y;
 
@@ -194,8 +210,18 @@ void PlayState::cleanUp()
 {
 	for (int i = 0; i < jaja.size(); i++) {
 		if (jaja[i].doZniszczenia == true) {
-			//jaja[i].doZniszczenia = false;
 			jaja.erase(jaja.begin()+i);
+			i--;
 		}
+	}
+}
+
+void PlayState::randomGen()
+{
+	if (time%300 == 0)
+	{
+		Egg *egg;
+		egg = new Egg(sf::Vector2f(rand() % 700, rand() % 500));
+		jaja.push_back(*egg);
 	}
 }
