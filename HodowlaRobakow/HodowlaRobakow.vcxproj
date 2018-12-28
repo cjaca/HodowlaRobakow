@@ -131,6 +131,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainState.cpp" />
     <ClCompile Include="Mature.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Nest.cpp" />
     <ClCompile Include="PlayState.cpp" />
   </ItemGroup>
@@ -140,6 +141,7 @@
     <ClInclude Include="Kid.h" />
     <ClInclude Include="MainState.h" />
     <ClInclude Include="Mature.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="Nest.h" />
     <ClInclude Include="PlayState.h" />
     <ClInclude Include="State.h" />

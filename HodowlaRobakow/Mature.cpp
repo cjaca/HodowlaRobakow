@@ -169,17 +169,17 @@ bool Mature::updateMove(sf::Sprite & target)
 			c = 1;
 			x = 0;
 		}
-		if (x > SCREEN_WIDTH) {
+		if (x > RESPAWN_WIDTH) {
 			c = 0;
-			x = SCREEN_WIDTH;
+			x = RESPAWN_WIDTH;
 		}
 		if (y < 0) {
 			c = 1;
 			y = 0;
 		}
-		if (y > SCREEN_HEIGHT) {
+		if (y > RESPAWN_HEIGHT) {
 			c = 0;
-			y = SCREEN_HEIGHT;
+			y = RESPAWN_HEIGHT;
 		}
 
 		// Rotate and draw the sprite
@@ -234,17 +234,17 @@ bool Mature::updateMove(sf::Sprite & target)
 			c = 1;
 			x = 0;
 		}
-		if (x > SCREEN_WIDTH) {
+		if (x > RESPAWN_WIDTH) {
 			c = 0;
-			x = SCREEN_WIDTH;
+			x = RESPAWN_WIDTH;
 		}
 		if (y < 0) {
 			c = 1;
 			y = 0;
 		}
-		if (y > SCREEN_HEIGHT) {
+		if (y > RESPAWN_HEIGHT) {
 			c = 0;
-			y = SCREEN_HEIGHT;
+			y = RESPAWN_HEIGHT;
 		}
 
 
@@ -314,17 +314,17 @@ bool Mature::updateMove(sf::Sprite & target)
 			c = 1;
 			x = 0;
 		}
-		if (x > SCREEN_WIDTH) {
+		if (x > RESPAWN_WIDTH) {
 			c = 0;
-			x = SCREEN_WIDTH;
+			x = RESPAWN_WIDTH;
 		}
 		if (y < 0) {
 			c = 1;
 			y = 0;
 		}
-		if (y > SCREEN_HEIGHT) {
+		if (y > RESPAWN_HEIGHT) {
 			c = 0;
-			y = SCREEN_HEIGHT;
+			y = RESPAWN_HEIGHT;
 		}
 
 

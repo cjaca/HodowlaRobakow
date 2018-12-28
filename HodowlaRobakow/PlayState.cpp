@@ -7,7 +7,6 @@ PlayState::PlayState(sf::RenderWindow * window, GameStates * state)
 	this->window = window;
 	this->state = state;
 	this->isGameStarted = false;
-
 }
 
 PlayState::~PlayState()
@@ -30,8 +29,9 @@ void PlayState::Init()
 
 
 	}
-
+	menu = new Menu();
 	gniazdo = new Nest();
+
 }
 
 void PlayState::HandleInput()
@@ -73,6 +73,7 @@ void PlayState::HandleInput()
 
 void PlayState::Update()
 {
+	menu->showTimer(this->time);
 	evolution(); //sprawdzanie ewolucji malej muchy
 	//randomGen();
 	//cleanUp(); //sprzatanie doniesionych jaj
@@ -136,6 +137,7 @@ void PlayState::Update()
 	}
 		countTime();
 		
+		
 }
 
 void PlayState::Draw()
@@ -153,6 +155,7 @@ void PlayState::Draw()
 	}
 
 	gniazdo->draw(*window);
+	menu->draw(*window);
 
 }
 

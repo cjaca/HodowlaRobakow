@@ -1,14 +1,10 @@
 #include "Nest.h"
 
-
-
-
-
 Nest::Nest()
 {
 	loadTexture();
 	NestSprite.setOrigin(50, 50);
-	NestSprite.setPosition(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+	NestSprite.setPosition(RESPAWN_WIDTH / 2, RESPAWN_HEIGHT / 2);
 
 
 }
