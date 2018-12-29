@@ -39,47 +39,16 @@ sf::Sprite *Mature::getSprite()
 }
 
 
-bool Mature::kolizja(sf::Sprite &target)
-{
-	if (this->wskaznik == false) {
-		if (target.getGlobalBounds().intersects(this->AntSprite.getGlobalBounds()))
-		{
-			std::cout << "JEB JEB muchy sie zderzyly" << std::endl;
-			if (c == 0) {
-				this->c = rand() % 2;
-			}
-			else this->c = rand() % 2;
-			return true;
-		}
-		return false;
-	}
-}
-
-bool Mature::collisionWithEgg(sf::Sprite &target)
-{
-	if (instrukcja == 0 ) {
-		if (target.getGlobalBounds().intersects(this->AntSprite.getGlobalBounds()))
-		{
-			std::cout << "JEB JEB muchy z jajem sie zderzyla" << std::endl;
-			if (c == 0) {
-				this->c = rand() % 2;
-			}
-			else this->c = rand() % 2;
-			return true;
-		}
-	}
-	return false;
-}
-
 void Mature::collect(Egg &jajo)
 {
 
 	obiekt = &jajo;
 	obiekt->flaga = true; //ustawia flage obiektowi jajo ze jest transportowany
+	this->flagaKolizja = false;
 	int x, y;
 	float pozycjaMuchyX, pozycjaMuchyY;
 	
-	this->wskaznik = true; //ustawia flage musze ze jest zajeta i zeby wiedziala ze sie nie odbija od innych w tym momencie
+	 //ustawia flage musze ze jest zajeta i zeby wiedziala ze sie nie odbija od innych w tym momencie
 	
 	pozycjaMuchyX = this->getPosition().x;
 	pozycjaMuchyY = this->getPosition().y;
@@ -255,7 +224,7 @@ bool Mature::updateMove(sf::Sprite & target)
 		if (licznik == a) {
 			instrukcja -= 1;
 			licznik = 0;
-			wskaznik = false;
+			flagaKolizja = true;
 			obiekt->doZniszczenia = true;
 			obiekt = nullptr;
 			a1 = 0;

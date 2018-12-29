@@ -28,8 +28,6 @@ public:
 	~Mature();
 	void draw(sf::RenderTarget & target);
 	sf::Sprite *getSprite();
-	bool kolizja(sf::Sprite &target);
-	bool collisionWithEgg(sf::Sprite &target);
 	void collect(Egg & jajo);
 	bool updateMove(sf::Sprite &target);
 };

@@ -6,6 +6,7 @@
 #include "Nest.h"
 #include "Egg.h"
 #include "Menu.h"
+#include "Collision.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
@@ -31,8 +32,9 @@ private:
 	GameStates *state;
 	Nest *gniazdo;
 	Menu *menu;
+	Collision collision;
 	sf::Vector2f ScreenSize;
-	int iloscMuch = 0;
+	int iloscMuch = 5;
 	std::vector<Mature> dorosli;
 	std::vector<Kid> dzieci;
 	std::vector<Egg> jaja;

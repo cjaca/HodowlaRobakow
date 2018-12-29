@@ -264,22 +264,12 @@ sf::Vector2f Kid::getPosition()
 	return this->position;
 }
 
-bool Kid::kolizja(sf::Sprite &target)
+void Kid::kolizja()
 {
-	if (this->wskaznik == true) {
-		if (target.getGlobalBounds().intersects(this->KidSprite.getGlobalBounds()))
-		{
-			std::cout << "JEB JEB muchy sie zderzyly" << std::endl;
-			if (c == 0) {
-				this->c = rand() % 2;
-			}
-			else this->c = rand() % 2;
-			return true;
-		}
+	if (c == 0) {
+		this->c = rand() % 2;
 	}
-
-
-	return false;
+	else this->c = rand() % 2;
 }
 
 int Kid::getSize()
@@ -324,7 +314,7 @@ void Kid::sleep(int time)
 	float pozycjaMuchyX, pozycjaMuchyY;
 
 	//this->wskaznik = true; //ustawia flage musze ze jest zajeta i zeby wiedziala ze sie nie odbija od innych w tym momencie
-	this->wskaznik = false;
+	this->flagaKolizja = false;
 	pozycjaMuchyX = this->getPosition().x;
 	pozycjaMuchyY = this->getPosition().y;
 

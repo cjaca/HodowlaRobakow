@@ -41,9 +41,7 @@ void Mrowka::updateMove(sf::RenderTarget & target, sf::Event &event)
 	if (licznik == a) {
 		a = rand() % 100 + 1; //ilosc pol do przejscia
 		b = rand() % 2; //okresla x(horyzontalnie) = 0 lub y (pionowo) = 1
-		std::cout << b << std::endl;
 		c = rand() % 2; //okresla kierunek 0 to minus(w lewo, w dol), 1 to plus(w prawo, do gory)
-		std::cout << c << std::endl;
 		//predkosc = rand() % 3 + 1;
 		licznik = 0;
 	}

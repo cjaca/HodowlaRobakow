@@ -24,6 +24,20 @@ Menu::Menu()
 	czasSymulacji.setOrigin(sf::Vector2f(50, 10));
 	czasSymulacji.setPosition(sf::Vector2f(1180, 730));
 	czasSymulacji.setString("Czas symulacji");
+
+	showTotalFlyText.setFont(Trebu);
+	showTotalFlyText.setCharacterSize(10);
+	showTotalFlyText.setFillColor(sf::Color::White);
+	showTotalFlyText.setOrigin(sf::Vector2f(50, 10));
+	showTotalFlyText.setPosition(sf::Vector2f(1180, 330));
+	showTotalFlyText.setString("Ilosc wszystkich much");
+
+	showTotalFlyNumber.setFont(Trebu);
+	showTotalFlyNumber.setCharacterSize(10);
+	showTotalFlyNumber.setFillColor(sf::Color::White);
+	showTotalFlyNumber.setOrigin(sf::Vector2f(50, 10));
+	showTotalFlyNumber.setPosition(sf::Vector2f(1180, 350));
+	
 }
 
 
@@ -37,6 +51,8 @@ void Menu::draw(sf::RenderWindow & target)
 	target.draw(mainMenuBar); //musi byc pierwsze bo zakrywa cala reszte
 	target.draw(czasSymulacji);
 	target.draw(timeElapsed);
+	target.draw(showTotalFlyText);
+	target.draw(showTotalFlyNumber);
 }
 
 void Menu::showTimer(int k)
@@ -53,5 +69,11 @@ void Menu::showTimer(int k)
 		timeElapsed.setString(m + " m," + s + " s");
 	}
 	
+}
+
+void Menu::showTotalFly(int k)
+{
+	std::string s = std::to_string(k);
+	showTotalFlyNumber.setString(s);
 }
 

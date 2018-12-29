@@ -33,13 +33,13 @@ public:
 	bool updateMove(sf::Sprite &target);
 	sf::Sprite *getSprite();
 	sf::Vector2f getPosition();
-	bool kolizja(sf::Sprite &target);
+	void kolizja();
 	int getSize();
 	void setSize();
 	void evolution();
 	void hpBar();
 	void setMove(sf::Vector2f &target);
-	bool wskaznik = true; //ustawia flage czy ma kolizjowac
+	bool flagaKolizja = true; //ustawia flage czy ma kolizjowac
 	bool isAsleep = false; //ustawia flage do spania
 	int goSleep, wakeUp;
 	void sleep(int time);

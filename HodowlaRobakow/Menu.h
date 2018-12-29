@@ -14,7 +14,7 @@ public:
 
 	void showTimer(int k );
 
-	void showTotalFly();
+	void showTotalFly(int k);
 	void showKidFly();
 	void showMatureFly();
 	void showOldFly();
@@ -30,7 +30,7 @@ private:
 	sf::Clock clock;
 	sf::Time elapsed;
 	sf::Font Trebu;
-	sf::Text timeElapsed, czasSymulacji;
+	sf::Text timeElapsed, czasSymulacji, showTotalFlyText, showTotalFlyNumber;
 	sf::RectangleShape mainMenuBar;
 	//TODO: Add edition fields for attributes of simulation etc.
 };

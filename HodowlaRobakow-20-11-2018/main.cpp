@@ -10,7 +10,7 @@ int main()
 {
 	sf::RenderWindow Window;
 	Window.create(sf::VideoMode(800, 600), "Hodowla Robakow", sf::Style::Default);
-	Window.setFramerateLimit(60);
+	Window.setFramerateLimit(30);
 	/*Mrowka *mrowka;
 	mrowka = new Mrowka(sf::Vector2f(100.f, 100.f));
 
@@ -20,7 +20,7 @@ int main()
 	Mrowka *krowa;
 	krowa = new Mrowka(sf::Vector2f(300.f, 300.f));*/
 
-	int iloscMuch = 10;
+	int iloscMuch = 600;
 	std::vector<Mrowka> mrowki;
 	//mrowki.reserve(mrowka);
 
