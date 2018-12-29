@@ -10,14 +10,12 @@ public:
 
 	void draw(sf::RenderWindow &target);
 
-	
-
 	void showTimer(int k );
 
 	void showTotalFly(int k);
-	void showKidFly();
-	void showMatureFly();
-	void showOldFly();
+	void showKidFly(int k);
+	void showMatureFly(int k);
+	void showOldFly(int k);
 
 	void addKidFly();
 	void addMatureFly();
@@ -30,7 +28,7 @@ private:
 	sf::Clock clock;
 	sf::Time elapsed;
 	sf::Font Trebu;
-	sf::Text timeElapsed, czasSymulacji, showTotalFlyText, showTotalFlyNumber;
+	sf::Text timeElapsed, czasSymulacji, showTotalFlyText, showTotalFlyNumber, showKidFlyText, showKidFlyNumber, showMatureFlyText, showMatureFlyNumber;
 	sf::RectangleShape mainMenuBar;
 	//TODO: Add edition fields for attributes of simulation etc.
 };

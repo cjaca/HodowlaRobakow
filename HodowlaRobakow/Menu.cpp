@@ -23,21 +23,33 @@ Menu::Menu()
 	czasSymulacji.setFillColor(sf::Color::White);
 	czasSymulacji.setOrigin(sf::Vector2f(50, 10));
 	czasSymulacji.setPosition(sf::Vector2f(1180, 730));
-	czasSymulacji.setString("Czas symulacji");
+	czasSymulacji.setString("Czas symulacji: ");
 
 	showTotalFlyText.setFont(Trebu);
 	showTotalFlyText.setCharacterSize(10);
 	showTotalFlyText.setFillColor(sf::Color::White);
 	showTotalFlyText.setOrigin(sf::Vector2f(50, 10));
 	showTotalFlyText.setPosition(sf::Vector2f(1180, 330));
-	showTotalFlyText.setString("Ilosc wszystkich much");
+	showTotalFlyText.setString("Ilosc wszystkich much: ");
 
 	showTotalFlyNumber.setFont(Trebu);
 	showTotalFlyNumber.setCharacterSize(10);
 	showTotalFlyNumber.setFillColor(sf::Color::White);
 	showTotalFlyNumber.setOrigin(sf::Vector2f(50, 10));
 	showTotalFlyNumber.setPosition(sf::Vector2f(1180, 350));
+
+	showKidFlyText.setFont(Trebu);
+	showKidFlyText.setCharacterSize(10);
+	showKidFlyText.setFillColor(sf::Color::White);
+	showKidFlyText.setOrigin(sf::Vector2f(50, 10));
+	showKidFlyText.setPosition(sf::Vector2f(1180, 370));
+	showKidFlyText.setString("Ilosc młodych much: ");
 	
+	showTotalKidNumber.setFont(Trebu);
+	showTotalKidNumber.setCharacterSize(10);
+	showTotalKidNumber.setFillColor(sf::Color::White);
+	showTotalKidNumber.setOrigin(sf::Vector2f(50, 10));
+	showTotalKidNumber.setPosition(sf::Vector2f(1180, 390));
 }
 
 
@@ -77,3 +89,8 @@ void Menu::showTotalFly(int k)
 	showTotalFlyNumber.setString(s);
 }
 
+void Menu::showKidFly(int k)
+{
+	std::string s = std::to_string(k);
+	showKidFlyNumber.setString(s);
+}
