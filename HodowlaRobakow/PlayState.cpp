@@ -1,6 +1,7 @@
 #include "PlayState.h"
 #include <cstdlib>
 #include <ctime>
+#include <time.h>
 
 PlayState::PlayState(sf::RenderWindow * window, GameStates * state)
 {
@@ -15,8 +16,10 @@ PlayState::~PlayState()
 
 void PlayState::Init()
 {
+	srand(time(NULL));
 
-	for (int i = 0; i < iloscMuch; i++) {
+	for (int i = 0; i < iloscMuch; i++) 
+	{
 		Mature *mature;
 		Kid *kid;
 		Egg *egg;
@@ -26,8 +29,6 @@ void PlayState::Init()
 		dorosli.push_back(*mature);
 		dzieci.push_back(*kid);
 		jaja.push_back(*egg);
-
-
 	}
 	menu = new Menu();
 	gniazdo = new Nest();
@@ -74,8 +75,10 @@ void PlayState::HandleInput()
 
 void PlayState::Update()
 {
-	menu->showTimer(this->time);
+	menu->showTimer(this->dt);
 	menu->showTotalFly(IloscMuch());
+	menu->showKidFly(dzieci.size());
+	menu->showMatureFly(dorosli.size());
 	evolution(); //sprawdzanie ewolucji malej muchy
 	//randomGen();
 	//cleanUp(); //sprzatanie doniesionych jaj
@@ -191,8 +194,8 @@ int PlayState::IloscMuch()
 
 int PlayState::countTime()
 {
-	time++;
-	return time;
+	dt++;
+	return dt;
 }
 
 void PlayState::evolution()
@@ -205,7 +208,7 @@ void PlayState::evolution()
 
 		if (dzieci[i].getSize() % 1000 == 0 && dzieci[i].getSize() < 4001 && dzieci[i].getSize() > 1)
 		{
-			dzieci[i].sleep(time);
+			dzieci[i].sleep(dt);
 		}
 
 		//check to wakeUp
@@ -241,7 +244,7 @@ void PlayState::cleanUp()
 
 void PlayState::randomGen()
 {
-	if (time%300 == 0)
+	if (dt%300 == 0)
 	{
 		Egg *egg;
 		egg = new Egg(sf::Vector2f(rand() % 700, rand() % 500));

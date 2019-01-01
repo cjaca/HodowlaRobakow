@@ -45,6 +45,6 @@ private:
 	void cleanUp();
 	void randomGen();
 protected:
-	int time = 0;
+	int dt = 0;
 };
 

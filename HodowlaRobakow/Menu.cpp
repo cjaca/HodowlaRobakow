@@ -16,40 +16,53 @@ Menu::Menu()
 	timeElapsed.setCharacterSize(18);
 	timeElapsed.setFillColor(sf::Color::White);
 	timeElapsed.setOrigin(sf::Vector2f(50, 10));
-	timeElapsed.setPosition(sf::Vector2f(1180, 750));
+	timeElapsed.setPosition(sf::Vector2f(1150, 750));
 
 	czasSymulacji.setFont(Trebu);
 	czasSymulacji.setCharacterSize(10);
 	czasSymulacji.setFillColor(sf::Color::White);
 	czasSymulacji.setOrigin(sf::Vector2f(50, 10));
-	czasSymulacji.setPosition(sf::Vector2f(1180, 730));
+	czasSymulacji.setPosition(sf::Vector2f(1100, 730));
 	czasSymulacji.setString("Czas symulacji: ");
 
 	showTotalFlyText.setFont(Trebu);
 	showTotalFlyText.setCharacterSize(10);
 	showTotalFlyText.setFillColor(sf::Color::White);
 	showTotalFlyText.setOrigin(sf::Vector2f(50, 10));
-	showTotalFlyText.setPosition(sf::Vector2f(1180, 330));
+	showTotalFlyText.setPosition(sf::Vector2f(1100, 330));
 	showTotalFlyText.setString("Ilosc wszystkich much: ");
 
 	showTotalFlyNumber.setFont(Trebu);
 	showTotalFlyNumber.setCharacterSize(10);
 	showTotalFlyNumber.setFillColor(sf::Color::White);
 	showTotalFlyNumber.setOrigin(sf::Vector2f(50, 10));
-	showTotalFlyNumber.setPosition(sf::Vector2f(1180, 350));
+	showTotalFlyNumber.setPosition(sf::Vector2f(1100, 350));
 
 	showKidFlyText.setFont(Trebu);
 	showKidFlyText.setCharacterSize(10);
 	showKidFlyText.setFillColor(sf::Color::White);
 	showKidFlyText.setOrigin(sf::Vector2f(50, 10));
-	showKidFlyText.setPosition(sf::Vector2f(1180, 370));
-	showKidFlyText.setString("Ilosc młodych much: ");
+	showKidFlyText.setPosition(sf::Vector2f(1100, 370));
+	showKidFlyText.setString("Ilosc mlodych much: ");
 	
-	showTotalKidNumber.setFont(Trebu);
-	showTotalKidNumber.setCharacterSize(10);
-	showTotalKidNumber.setFillColor(sf::Color::White);
-	showTotalKidNumber.setOrigin(sf::Vector2f(50, 10));
-	showTotalKidNumber.setPosition(sf::Vector2f(1180, 390));
+	showKidFlyNumber.setFont(Trebu);
+	showKidFlyNumber.setCharacterSize(10);
+	showKidFlyNumber.setFillColor(sf::Color::White);
+	showKidFlyNumber.setOrigin(sf::Vector2f(50, 10));
+	showKidFlyNumber.setPosition(sf::Vector2f(1100, 390));
+
+	showMatureFlyText.setFont(Trebu);
+	showMatureFlyText.setCharacterSize(10);
+	showMatureFlyText.setFillColor(sf::Color::White);
+	showMatureFlyText.setOrigin(sf::Vector2f(50, 10));
+	showMatureFlyText.setPosition(sf::Vector2f(1100, 410));
+	showMatureFlyText.setString("Ilosc doroslych much: ");
+
+	showMatureFlyNumber.setFont(Trebu);
+	showMatureFlyNumber.setCharacterSize(10);
+	showMatureFlyNumber.setFillColor(sf::Color::White);
+	showMatureFlyNumber.setOrigin(sf::Vector2f(50, 10));
+	showMatureFlyNumber.setPosition(sf::Vector2f(1100, 430));
 }
 
 
@@ -65,6 +78,10 @@ void Menu::draw(sf::RenderWindow & target)
 	target.draw(timeElapsed);
 	target.draw(showTotalFlyText);
 	target.draw(showTotalFlyNumber);
+	target.draw(showKidFlyText);
+	target.draw(showKidFlyNumber);
+	target.draw(showMatureFlyText);
+	target.draw(showMatureFlyNumber);
 }
 
 void Menu::showTimer(int k)
@@ -93,4 +110,10 @@ void Menu::showKidFly(int k)
 {
 	std::string s = std::to_string(k);
 	showKidFlyNumber.setString(s);
+}
+
+void Menu::showMatureFly(int k)
+{
+	std::string s = std::to_string(k);
+	showMatureFlyNumber.setString(s);
 }
