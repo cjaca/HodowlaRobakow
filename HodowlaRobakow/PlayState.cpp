@@ -18,7 +18,7 @@ void PlayState::Init()
 {
 	srand(time(NULL));
 
-	for (int i = 0; i < iloscMuch; i++) 
+	for (int i = 0; i < iloscMuch; i++)
 	{
 		Mature *mature;
 		Kid *kid;
@@ -32,7 +32,7 @@ void PlayState::Init()
 	}
 	menu = new Menu();
 	gniazdo = new Nest();
-	
+
 
 }
 
@@ -80,11 +80,11 @@ void PlayState::Update()
 	menu->showKidFly(dzieci.size());
 	menu->showMatureFly(dorosli.size());
 	evolution(); //sprawdzanie ewolucji malej muchy
-	//randomGen();
+	randomGen();
 	//cleanUp(); //sprzatanie doniesionych jaj
-	if(dorosli.size()>0)
+	if (dorosli.size() > 0)
 	{
-		for (int i = 0; i < dorosli.size(); i++) 
+		for (int i = 0; i < dorosli.size(); i++)
 		{
 			if (dorosli[i].updateMove(*dorosli[i].getSprite()) == 1) //poruszanie doroslymi, jezeli zostala zwrocona jedynka, to dodaje do gniazda jedzenie (bo zostalo odniesione jajko)
 			{
@@ -116,7 +116,7 @@ void PlayState::Update()
 						if (jaja[l].flaga == false) {
 							dorosli[i].collect();
 							jaja.erase(jaja.begin() + l);
-							l-=l;
+							l -= l;
 						}
 						break;
 					}
@@ -136,20 +136,20 @@ void PlayState::Update()
 		}
 	}
 
-	if (dzieci.size() > 0) 
+	if (dzieci.size() > 0)
 	{
-		for (int i = 0; i < dzieci.size(); i++) 
+		for (int i = 0; i < dzieci.size(); i++)
 		{
 			dzieci[i].setSize(); //zwiekszanie ich wieku
-			if (dzieci[i].isAsleep == false) 
+			if (dzieci[i].isAsleep == false)
 			{
 				dzieci[i].updateMove(*dzieci[i].getSprite()); //poruszanie dziecmi
 
-				if (dzieci[i].flagaKolizja == true) 
+				if (dzieci[i].flagaKolizja == true)
 				{
 					for (int j = 0; j < dzieci.size() - 1; j++)
 					{
-						if (i != j) 
+						if (i != j)
 						{
 							if (collision.CheckCollision(*dzieci[i].getSprite(), *dzieci[j].getSprite()) == true) // kolizja dzieci-dzieci
 							{
@@ -165,9 +165,18 @@ void PlayState::Update()
 			}
 		}
 	}
-		countTime();
-		
-		
+	for (int i = 0; i < jaja.size(); i++)
+	{
+		if (jaja[i].getSize() == 900)
+		{
+			jaja.erase(jaja.begin() + i);
+			i--;
+		}
+		else jaja[i].setSize(); //increase egg size by 1 on every update of the simulation
+	}
+	countTime();
+
+
 }
 
 void PlayState::Draw()
@@ -241,7 +250,7 @@ void PlayState::cleanUp()
 {
 	for (int i = 0; i < jaja.size(); i++) {
 		if (jaja[i].doZniszczenia == true) {
-			jaja.erase(jaja.begin()+i);
+			jaja.erase(jaja.begin() + i);
 			i--;
 		}
 	}
@@ -249,7 +258,7 @@ void PlayState::cleanUp()
 
 void PlayState::randomGen()
 {
-	if (dt%300 == 0)
+	if (dt % 300 == 0)
 	{
 		Egg *egg;
 		egg = new Egg(sf::Vector2f(rand() % 700, rand() % 500));
