@@ -39,11 +39,14 @@ sf::Sprite *Mature::getSprite()
 }
 
 
-void Mature::collect(Egg &jajo)
+void Mature::collect()
 {
+	if (!AntTexture.loadFromFile("img/fly-egg.png"))
+	{
+		std::cout << "nie mozna zaladowac obrazka :( \n" << std::endl;
+	}
+	AntSprite.setTexture(AntTexture);
 
-	obiekt = &jajo;
-	obiekt->flaga = true; //ustawia flage obiektowi jajo ze jest transportowany
 	this->flagaKolizja = false;
 	int x, y;
 	float pozycjaMuchyX, pozycjaMuchyY;
@@ -93,7 +96,7 @@ void Mature::collect(Egg &jajo)
 	}
 }
 
-bool Mature::updateMove(sf::Sprite & target)
+int Mature::updateMove(sf::Sprite & target)
 {
 	if (instrukcja == 0) {
 		if (licznik == a) {
@@ -168,14 +171,12 @@ bool Mature::updateMove(sf::Sprite & target)
 			if (c == 0)
 			{
 				x = x - 1;
-				obiekt->getSprite()->setRotation(315.f);
 				this->getSprite()->setRotation(315.f);
 				licznik++;
 			}
 			else
 			{
 				x = x + 1;
-				obiekt->getSprite()->setRotation(90.f);
 				this->getSprite()->setRotation(90.f);
 				licznik++;
 			}
@@ -185,14 +186,12 @@ bool Mature::updateMove(sf::Sprite & target)
 			if (c == 0)
 			{
 				y = y - 1;
-				obiekt->getSprite()->setRotation(0.f);
 				this->getSprite()->setRotation(0.f);
 				licznik++;
 			}
 			else
 			{
 				y = y + 1;
-				obiekt->getSprite()->setRotation(180.f);
 				this->getSprite()->setRotation(180.f);
 				licznik++;
 			}
@@ -218,21 +217,20 @@ bool Mature::updateMove(sf::Sprite & target)
 
 
 		//Change HpBar position with Fly
-		obiekt->updateMove(x, y);
 		target.setPosition(x, y);
 		this->HpBar.setPosition(x - 10, y + 10);
 		if (licznik == a) {
 			instrukcja -= 1;
 			licznik = 0;
 			flagaKolizja = true;
-			obiekt->doZniszczenia = true;
-			obiekt = nullptr;
 			a1 = 0;
 			b1 = 0;
 			c1 = 0;
 			x = 512;
 			y = 520;
 			target.setPosition(x, y);
+			loadTexture();
+			return 1; // kod nr 1 - powiadamia ze jajko zostalo zwrocone do bazy i ma zwiekszyc ilosc zarcia dla much.
 		}
 
 	}
@@ -248,14 +246,12 @@ bool Mature::updateMove(sf::Sprite & target)
 			if (c == 0)
 			{
 				x = x - 1;
-				obiekt->getSprite()->setRotation(315.f);
 				this->getSprite()->setRotation(315.f);
 				licznik++;
 			}
 			else
 			{
 				x = x + 1;
-				obiekt->getSprite()->setRotation(90.f);
 				this->getSprite()->setRotation(90.f);
 				licznik++;
 			}
@@ -265,14 +261,12 @@ bool Mature::updateMove(sf::Sprite & target)
 			if (c == 0)
 			{
 				y = y - 1;
-				obiekt->getSprite()->setRotation(0.f);
 				this->getSprite()->setRotation(0.f);
 				licznik++;
 			}
 			else
 			{
 				y = y + 1;
-				obiekt->getSprite()->setRotation(180.f);
 				this->getSprite()->setRotation(180.f);
 				licznik++;
 			}
@@ -298,7 +292,6 @@ bool Mature::updateMove(sf::Sprite & target)
 
 
 		//Change HpBar position with Fly
-		obiekt->updateMove(x, y);
 		target.setPosition(x, y);
 		this->HpBar.setPosition(x - 10, y + 10);
 		if (licznik == a) {
@@ -310,7 +303,6 @@ bool Mature::updateMove(sf::Sprite & target)
 		}
 
 	}
-	return false;
 }
 
 

@@ -39,11 +39,11 @@ private:
 	std::vector<Kid> dzieci;
 	std::vector<Egg> jaja;
 	bool isGameStarted;
-
 	int countTime();
 	void evolution();
 	void cleanUp();
 	void randomGen();
+	int totalEggCount = 0;
 protected:
 	int dt = 0;
 };

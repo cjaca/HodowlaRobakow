@@ -15,20 +15,18 @@ class Mature : public Kid
 {
 
 private:
-
 	sf::Texture AntTexture;
 	sf::Sprite AntSprite;
 	sf::Vector2f position;
 	int loadTexture();
 	int size = 0;
-	Egg *obiekt;
 public:
 	
 	Mature(sf::Vector2f position);
 	~Mature();
 	void draw(sf::RenderTarget & target);
 	sf::Sprite *getSprite();
-	void collect(Egg & jajo);
-	bool updateMove(sf::Sprite &target);
+	void collect();
+	int updateMove(sf::Sprite &target);
 };
 

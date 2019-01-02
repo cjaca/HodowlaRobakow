@@ -20,6 +20,7 @@ private:
 public:
 	Nest();
 	~Nest();
+	void nestFood(int n);
 	void draw(sf::RenderTarget & target);
 	sf::Sprite *getSprite();
 };

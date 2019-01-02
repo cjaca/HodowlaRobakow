@@ -86,7 +86,10 @@ void PlayState::Update()
 	{
 		for (int i = 0; i < dorosli.size(); i++) 
 		{
-			dorosli[i].updateMove(*dorosli[i].getSprite()); //poruszanie doroslymi
+			if (dorosli[i].updateMove(*dorosli[i].getSprite()) == 1) //poruszanie doroslymi, jezeli zostala zwrocona jedynka, to dodaje do gniazda jedzenie (bo zostalo odniesione jajko)
+			{
+				gniazdo->nestFood(30);
+			}
 			dorosli[i].setSize(); // zwiekszanie wieku doroslych 
 
 			if (dorosli[i].flagaKolizja == true)
@@ -111,7 +114,9 @@ void PlayState::Update()
 					if (collision.CheckCollision(*dorosli[i].getSprite(), *jaja[l].getSprite()) == true)
 					{
 						if (jaja[l].flaga == false) {
-							dorosli[i].collect(jaja[l]);
+							dorosli[i].collect();
+							jaja.erase(jaja.begin() + l);
+							l-=l;
 						}
 						break;
 					}

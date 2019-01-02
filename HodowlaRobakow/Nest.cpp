@@ -14,6 +14,11 @@ Nest::~Nest()
 {
 }
 
+void Nest::nestFood(int n)
+{
+	food = food + n;
+}
+
 void Nest::draw(sf::RenderTarget & target)
 {
 	target.draw(this->NestSprite);
