@@ -30,7 +30,7 @@ public:
 	Kid(sf::Vector2f position = sf::Vector2f(rand() % 800, rand() % 600));
 	~Kid();
 	void draw(sf::RenderTarget & target);
-	bool updateMove(sf::Sprite &target);
+	int updateMove(sf::Sprite &target);
 	sf::Sprite *getSprite();
 	sf::Vector2f getPosition();
 	void kolizja();
@@ -38,7 +38,7 @@ public:
 	void setSize();
 	void evolution();
 	void hpBar();
-	void setMove(sf::Vector2f &target);
+	void setPosition(sf::Vector2f position);
 	bool flagaKolizja = true; //ustawia flage czy ma kolizjowac
 	bool isAsleep = false; //ustawia flage do spania
 	int goSleep, wakeUp;

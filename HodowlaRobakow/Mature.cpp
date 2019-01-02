@@ -47,12 +47,9 @@ void Mature::collect()
 	}
 	AntSprite.setTexture(AntTexture);
 
-	this->flagaKolizja = false;
 	int x, y;
 	float pozycjaMuchyX, pozycjaMuchyY;
-	
-	 //ustawia flage musze ze jest zajeta i zeby wiedziala ze sie nie odbija od innych w tym momencie
-	
+	this->flagaKolizja = false; 	 //ustawia flage musze ze jest zajeta i zeby wiedziala ze sie nie odbija od innych w tym momencie	
 	pozycjaMuchyX = this->getPosition().x;
 	pozycjaMuchyY = this->getPosition().y;
 

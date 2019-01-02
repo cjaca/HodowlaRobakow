@@ -22,13 +22,16 @@ public:
 	void addOldFly();
 	void addEgg();
 
-	void showNestAttributes();
+	void showNestAttributes(int k);
 
 private:
 	sf::Clock clock;
 	sf::Time elapsed;
 	sf::Font Trebu;
-	sf::Text timeElapsed, czasSymulacji, showTotalFlyText, showTotalFlyNumber, showKidFlyText, showKidFlyNumber, showMatureFlyText, showMatureFlyNumber;
+	sf::Text timeElapsed, czasSymulacji, showTotalFlyText, 
+		showTotalFlyNumber, showKidFlyText, showKidFlyNumber, 
+		showMatureFlyText, showMatureFlyNumber, 
+		showNestFoodText, showNestFoodNumber;
 	sf::RectangleShape mainMenuBar;
 	//TODO: Add edition fields for attributes of simulation etc.
 };

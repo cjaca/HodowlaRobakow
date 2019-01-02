@@ -14,9 +14,14 @@ Nest::~Nest()
 {
 }
 
-void Nest::nestFood(int n)
+void Nest::setNestFood(int n)
 {
 	food = food + n;
+}
+
+int Nest::getNestFood()
+{
+	return food;
 }
 
 void Nest::draw(sf::RenderTarget & target)

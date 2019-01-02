@@ -12,18 +12,19 @@ Menu::Menu()
 	{
 		std::cout << "Missing Trebuchet font\n" << std::endl;
 	}
-	timeElapsed.setFont(Trebu);
-	timeElapsed.setCharacterSize(18);
-	timeElapsed.setFillColor(sf::Color::White);
-	timeElapsed.setOrigin(sf::Vector2f(50, 10));
-	timeElapsed.setPosition(sf::Vector2f(1150, 750));
 
-	czasSymulacji.setFont(Trebu);
-	czasSymulacji.setCharacterSize(10);
-	czasSymulacji.setFillColor(sf::Color::White);
-	czasSymulacji.setOrigin(sf::Vector2f(50, 10));
-	czasSymulacji.setPosition(sf::Vector2f(1100, 730));
-	czasSymulacji.setString("Czas symulacji: ");
+	showNestFoodText.setFont(Trebu);
+	showNestFoodText.setCharacterSize(10);
+	showNestFoodText.setFillColor(sf::Color::White);
+	showNestFoodText.setOrigin(sf::Vector2f(50, 10));
+	showNestFoodText.setPosition(sf::Vector2f(1100, 290));
+	showNestFoodText.setString("Ilosc jedzenia w gniezdzie: ");
+
+	showNestFoodNumber.setFont(Trebu);
+	showNestFoodNumber.setCharacterSize(10);
+	showNestFoodNumber.setFillColor(sf::Color::Yellow);
+	showNestFoodNumber.setOrigin(sf::Vector2f(50, 10));
+	showNestFoodNumber.setPosition(sf::Vector2f(1100, 310));
 
 	showTotalFlyText.setFont(Trebu);
 	showTotalFlyText.setCharacterSize(10);
@@ -34,7 +35,7 @@ Menu::Menu()
 
 	showTotalFlyNumber.setFont(Trebu);
 	showTotalFlyNumber.setCharacterSize(10);
-	showTotalFlyNumber.setFillColor(sf::Color::White);
+	showTotalFlyNumber.setFillColor(sf::Color::Yellow);
 	showTotalFlyNumber.setOrigin(sf::Vector2f(50, 10));
 	showTotalFlyNumber.setPosition(sf::Vector2f(1100, 350));
 
@@ -47,7 +48,7 @@ Menu::Menu()
 	
 	showKidFlyNumber.setFont(Trebu);
 	showKidFlyNumber.setCharacterSize(10);
-	showKidFlyNumber.setFillColor(sf::Color::White);
+	showKidFlyNumber.setFillColor(sf::Color::Yellow);
 	showKidFlyNumber.setOrigin(sf::Vector2f(50, 10));
 	showKidFlyNumber.setPosition(sf::Vector2f(1100, 390));
 
@@ -60,9 +61,22 @@ Menu::Menu()
 
 	showMatureFlyNumber.setFont(Trebu);
 	showMatureFlyNumber.setCharacterSize(10);
-	showMatureFlyNumber.setFillColor(sf::Color::White);
+	showMatureFlyNumber.setFillColor(sf::Color::Yellow);
 	showMatureFlyNumber.setOrigin(sf::Vector2f(50, 10));
 	showMatureFlyNumber.setPosition(sf::Vector2f(1100, 430));
+
+	czasSymulacji.setFont(Trebu);
+	czasSymulacji.setCharacterSize(10);
+	czasSymulacji.setFillColor(sf::Color::White);
+	czasSymulacji.setOrigin(sf::Vector2f(50, 10));
+	czasSymulacji.setPosition(sf::Vector2f(1100, 730));
+	czasSymulacji.setString("Czas symulacji: ");
+
+	timeElapsed.setFont(Trebu);
+	timeElapsed.setCharacterSize(18);
+	timeElapsed.setFillColor(sf::Color::Green);
+	timeElapsed.setOrigin(sf::Vector2f(50, 10));
+	timeElapsed.setPosition(sf::Vector2f(1150, 750));
 }
 
 
@@ -82,6 +96,8 @@ void Menu::draw(sf::RenderWindow & target)
 	target.draw(showKidFlyNumber);
 	target.draw(showMatureFlyText);
 	target.draw(showMatureFlyNumber);
+	target.draw(showNestFoodText);
+	target.draw(showNestFoodNumber);
 }
 
 void Menu::showTimer(int k)
@@ -116,4 +132,10 @@ void Menu::showMatureFly(int k)
 {
 	std::string s = std::to_string(k);
 	showMatureFlyNumber.setString(s);
+}
+
+void Menu::showNestAttributes(int k)
+{
+	std::string s = std::to_string(k);
+	showNestFoodNumber.setString(s);
 }

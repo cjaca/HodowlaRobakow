@@ -79,6 +79,7 @@ void PlayState::Update()
 	menu->showTotalFly(IloscMuch());
 	menu->showKidFly(dzieci.size());
 	menu->showMatureFly(dorosli.size());
+	menu->showNestAttributes(gniazdo->getNestFood());
 	evolution(); //sprawdzanie ewolucji malej muchy
 	randomGen();
 	//cleanUp(); //sprzatanie doniesionych jaj
@@ -88,12 +89,10 @@ void PlayState::Update()
 		{
 			if (dorosli[i].updateMove(*dorosli[i].getSprite()) == 1) //poruszanie doroslymi, jezeli zostala zwrocona jedynka, to dodaje do gniazda jedzenie (bo zostalo odniesione jajko)
 			{
-				gniazdo->nestFood(30);
+				gniazdo->setNestFood(30);
 			}
 			dorosli[i].setSize(); // zwiekszanie wieku doroslych 
 
-			if (dorosli[i].flagaKolizja == true)
-			{
 				//dorosli[i].kolizja(*gniazdo->getSprite()); //sprawdzanie kolizji dorosly-gniazdo
 				if (collision.CheckCollision(*dorosli[i].getSprite(), *gniazdo->getSprite()) == true) // kolizja dorosly gniazdo
 				{
@@ -133,7 +132,6 @@ void PlayState::Update()
 					}
 				}
 			}
-		}
 	}
 
 	if (dzieci.size() > 0)
@@ -220,16 +218,17 @@ void PlayState::evolution()
 	for (int i = 0; i < dzieci.size(); i++) {
 
 
-		if (dzieci[i].getSize() % 1000 == 0 && dzieci[i].getSize() < 4001 && dzieci[i].getSize() > 1)
+		if (dzieci[i].getSize() % 900 == 0 && dzieci[i].getSize() < 4001 && dzieci[i].getSize() > 1)
 		{
 			dzieci[i].sleep(dt);
 		}
 
 		//check to wakeUp
 
-		if (dzieci[i].getSize() == dzieci[i].wakeUp)
+		if (dzieci[i].getSize() == dzieci[i].wakeUp) //wybudza dzieci ze snu XD
 		{
 			dzieci[i].isAsleep = false;
+			dzieci[i].setPosition(sf::Vector2f(512,520)); // ustawia muche w podanym miejscu po snie
 		}
 		if (dzieci[i].getSize() > 5000) {
 			iks = (dzieci[i].getPosition()).x;
