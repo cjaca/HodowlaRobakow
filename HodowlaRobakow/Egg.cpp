@@ -21,7 +21,6 @@ Egg::Egg(sf::Vector2f position)
 
 Egg::~Egg()
 {
-	//std::cout << "dupa" << std::endl;
 }
 
 int Egg::loadTexture()

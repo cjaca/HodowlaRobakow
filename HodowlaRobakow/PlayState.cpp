@@ -95,18 +95,18 @@ void PlayState::Update()
 	menu->showNestAttributes(gniazdo->getNestFood());
 	evolution(); //sprawdzanie ewolucji malej muchy
 	randomGen();
-	//cleanUp(); //sprzatanie doniesionych jaj
+	cleanUp(); //sprzatanie zdechlych much
 	if (dorosli.size() > 0)
 	{
 		for (int i = 0; i < dorosli.size(); i++)
 		{
+			dorosli[i].setSize(); // zwiekszanie wieku doroslych 
+
 			if (dorosli[i].updateMove(*dorosli[i].getSprite()) == 1) //poruszanie doroslymi, jezeli zostala zwrocona jedynka, to dodaje do gniazda jedzenie (bo zostalo odniesione jajko)
 			{
 				gniazdo->setNestFood(30);
 			}
-			dorosli[i].setSize(); // zwiekszanie wieku doroslych 
-
-				//dorosli[i].kolizja(*gniazdo->getSprite()); //sprawdzanie kolizji dorosly-gniazdo
+			
 				if (collision.CheckCollision(*dorosli[i].getSprite(), *gniazdo->getSprite()) == true) // kolizja dorosly gniazdo
 				{
 					dorosli[i].kolizja();
@@ -143,6 +143,16 @@ void PlayState::Update()
 								l -= l;
 							}
 							break;
+						}
+
+						if (dorosli[i].flagaKolizja == false && dorosli[i].goToEgg == true)
+						{
+							std::cout << "mucha zrezygnowala z pojscia po jajko i wziela pierwsze po drodze" << std::endl;
+							dorosli[i].instrukcja = 0;
+							dorosli[i].goToEgg = false;
+							dorosli[i].collect();
+							jaja.erase(jaja.begin() + l);
+							l -= l;
 						}
 
 					}
@@ -253,7 +263,12 @@ void PlayState::evolution()
 	for (int i = 0; i < dzieci.size(); i++) {
 
 
-		if (dzieci[i].getSize() % 900 == 0 && dzieci[i].getSize() < 4301 && dzieci[i].getSize() > 1)
+		//if (dzieci[i].getSize() % 900 == 0 && dzieci[i].getSize() < 4301 && dzieci[i].getSize() > 1)
+		//{
+		//	dzieci[i].sleep(dt);
+		//}
+
+		if (dzieci[i].life <= 30 && dzieci[i].flagaKolizja == true)
 		{
 			dzieci[i].sleep(dt);
 		}
@@ -262,10 +277,16 @@ void PlayState::evolution()
 
 		if (dzieci[i].getSize() == dzieci[i].wakeUp) //wybudza dzieci ze snu XD
 		{
+			dzieci[i].life = 100;
 			dzieci[i].isAsleep = false;
+			dzieci[i].flagaKolizja = true;
 			dzieci[i].setPosition(sf::Vector2f(512,520)); // ustawia muche w podanym miejscu po snie
 		}
-		if (dzieci[i].getSize() > 5000) {
+
+
+
+		if (dzieci[i].getSize() > 3600) //ewolucja muchy
+		{
 			iks = (dzieci[i].getPosition()).x;
 			igrek = (dzieci[i].getPosition()).y;
 
@@ -282,9 +303,12 @@ void PlayState::evolution()
 
 void PlayState::cleanUp()
 {
-	for (int i = 0; i < jaja.size(); i++) {
-		if (jaja[i].doZniszczenia == true) {
-			jaja.erase(jaja.begin() + i);
+
+	for (int i = 0; i < dzieci.size(); i++)
+	{
+		if (dzieci[i].isDead == true)
+		{
+			dzieci.erase(dzieci.begin() + i);
 			i--;
 		}
 	}

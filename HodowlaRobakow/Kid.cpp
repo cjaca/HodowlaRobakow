@@ -111,13 +111,13 @@ int Kid::updateMove(sf::Sprite & target)
 		if (b == 0) {
 			if (c == 0)
 			{
-				x = x - 1;
+				x = x - predkosc;
 				this->getSprite()->setRotation(315.f);
 				licznik++;
 			}
 			else
 			{
-				x = x + 1;
+				x = x + predkosc;
 				this->getSprite()->setRotation(90.f);
 				licznik++;
 			}
@@ -126,13 +126,13 @@ int Kid::updateMove(sf::Sprite & target)
 		{
 			if (c == 0)
 			{
-				y = y - 1;
+				y = y - predkosc;
 				this->getSprite()->setRotation(0.f);
 				licznik++;
 			}
 			else
 			{
-				y = y + 1;
+				y = y + predkosc;
 				this->getSprite()->setRotation(180.f);
 				licznik++;
 			}
@@ -160,17 +160,14 @@ int Kid::updateMove(sf::Sprite & target)
 		//Change HpBar position with Fly
 		target.setPosition(x, y);
 		this->HpBar.setPosition(x - 10, y + 10);
-		if (licznik == a) {
+		if (getPosition().x > 500 && getPosition().x < 530 && getPosition().y > 375 && getPosition().y < 385) {
 			instrukcja -= 1;
-			//licznik = 0;
-			flagaKolizja = true;
+			licznik = a;
 			a1 = 0;
 			b1 = 0;
 			c1 = 0;
 			x = 512;
 			y = 520;
-			//x = 600; //zapobiega zacinaniu sie muchy po respawnie, prawdopodobnie dlatego ze nie ma jeszcze ogarnietej funkcji gdy x lub y jest w polowie
-			//y = 600;
 			this->isAsleep = true; //ustawia flage ze mucha spi i zeby jej nie ruszac
 			this->goSleep = this->size;
 			this->wakeUp = this->size + 300;
@@ -189,13 +186,13 @@ int Kid::updateMove(sf::Sprite & target)
 		if (b == 0) {
 			if (c == 0)
 			{
-				x = x - 1;
+				x = x - predkosc;
 				this->getSprite()->setRotation(315.f);
 				licznik++;
 			}
 			else
 			{
-				x = x + 1;
+				x = x + predkosc;
 				this->getSprite()->setRotation(90.f);
 				licznik++;
 			}
@@ -204,13 +201,13 @@ int Kid::updateMove(sf::Sprite & target)
 		{
 			if (c == 0)
 			{
-				y = y - 1;
+				y = y - predkosc;
 				this->getSprite()->setRotation(0.f);
 				licznik++;
 			}
 			else
 			{
-				y = y + 1;
+				y = y + predkosc;
 				this->getSprite()->setRotation(180.f);
 				licznik++;
 			}
@@ -238,7 +235,7 @@ int Kid::updateMove(sf::Sprite & target)
 		//Change HpBar position with Fly
 		target.setPosition(x, y);
 		this->HpBar.setPosition(x - 10, y + 10);
-		if (licznik == a) {
+		if (getPosition().y > 375 && getPosition().y < 385) {
 			instrukcja -= 1;
 			licznik = 0;
 			a2 = 0;
@@ -289,17 +286,25 @@ void Kid::setSize()
 {
 	int rozmiarPaskaHP;
 	//set size of Fly
-	this->size = this->size+1;
-	//change color of HpBar
-	int kolor = 0.5*size;
-	if (size < 500) {
-		rozmiarPaskaHP = 0.04*size;
+	size = size+1;
+	if (isAsleep == false)
+	{
+		life = life - 0.22;
+	}
+	if (life <= 0)
+	{
+		isDead = true;
+	}
+	
+	int kolorG = 2.55 * life;
+	if (life <= 100 ) {
+		rozmiarPaskaHP = life/5;
 	}
 	else {
-		rozmiarPaskaHP = (0.04*size) - 20;
+		rozmiarPaskaHP = (0.01*life) - 20;
 	}
-	HpBar.setFillColor(sf::Color(kolor, 250-kolor, 0));
-	HpBar.setSize(sf::Vector2f(20-rozmiarPaskaHP, 4));
+	HpBar.setFillColor(sf::Color(255, kolorG, 0));
+	HpBar.setSize(sf::Vector2f(rozmiarPaskaHP, 4));
 }
 
 void Kid::hpBar()
