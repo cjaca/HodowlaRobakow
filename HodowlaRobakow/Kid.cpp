@@ -387,6 +387,7 @@ int Kid::updateMove(sf::Sprite & target)
 			this->isAsleep = true; //ustawia flage ze mucha spi i zeby jej nie ruszac
 			this->goSleep = this->size;
 			this->wakeUp = this->size + 300;
+			collectedInfo = false;
 		}
 
 	}
@@ -484,6 +485,12 @@ void Kid::kolizja()
 		else this->c = rand() % 2;
 	}
 
+}
+
+void Kid::gatherInfo(sf::Vector2f position)
+{
+	this->collectedInfo = true;
+	this->eggPosition = position;
 }
 
 int Kid::getSize()

@@ -33,7 +33,10 @@ public:
 	int updateMove(sf::Sprite &target);
 	sf::Sprite *getSprite();
 	sf::Vector2f getPosition();
+	sf::Vector2f eggPosition;
+	bool collectedInfo = false;
 	void kolizja();
+	void gatherInfo(sf::Vector2f position);
 	int getSize();
 	void setSize();
 	void evolution();

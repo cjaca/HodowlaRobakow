@@ -21,6 +21,7 @@ Egg::Egg(sf::Vector2f position)
 
 Egg::~Egg()
 {
+	//std::cout << "dupa" << std::endl;
 }
 
 int Egg::loadTexture()
@@ -52,6 +53,11 @@ sf::Sprite * Egg::getSprite()
 void Egg::setPosition(int x, int y)
 {
 	this->EggSprite.setPosition(x, y);
+}
+
+sf::Vector2f Egg::getPosition()
+{
+	return this->position;
 }
 
 int Egg::getSize()

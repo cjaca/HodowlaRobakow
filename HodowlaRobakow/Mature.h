@@ -20,6 +20,7 @@ private:
 	sf::Vector2f position;
 	int loadTexture();
 	int size = 0;
+	bool goToEgg = false;
 public:
 	
 	Mature(sf::Vector2f position);
@@ -27,6 +28,7 @@ public:
 	void draw(sf::RenderTarget & target);
 	sf::Sprite *getSprite();
 	void collect();
+	void goGetIt(sf::Vector2f position);
 	int updateMove(sf::Sprite &target);
 };
 

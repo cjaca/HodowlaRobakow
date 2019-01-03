@@ -53,7 +53,7 @@ void PlayState::HandleInput()
 			case sf::Keyboard::Space:
 				std::cout << "Dodano kid muche" << std::endl;
 				Kid *kid;
-				kid = new Kid(sf::Vector2f(rand() % SCREEN_WIDTH, rand() % SCREEN_HEIGHT));
+				kid = new Kid(sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
 				dzieci.push_back(*kid);
 				break;
 			case sf::Keyboard::X:
@@ -63,6 +63,19 @@ void PlayState::HandleInput()
 					std::cout << dorosli.size() << std::endl;
 				}
 				else std::cout << "Nie ma juz much do usuniecia" << std::endl;
+				break;
+			case sf::Keyboard::E:
+				std::cout << "Dodano jajko" << std::endl;
+				Egg *egg;
+				egg = new Egg(sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
+				jaja.push_back(*egg);
+				break;
+			case sf::Keyboard::D:
+				if (jaja.size() > 0) {
+					std::cout << "usunieto jajo" << std::endl;
+					jaja.erase(jaja.begin());
+				}
+				else std::cout << "Nie ma juz jaj do usuniecia" << std::endl;
 				break;
 			}
 		}
@@ -103,8 +116,18 @@ void PlayState::Update()
 				{
 					if (collision.CheckCollision(*dorosli[i].getSprite(), *dzieci[k].getSprite()) == true)
 					{
-						dorosli[i].kolizja();
-						dzieci[k].kolizja();
+						if (dzieci[k].collectedInfo == true && dorosli[i].flagaKolizja == true)
+						{
+ 							dorosli[i].goGetIt(dzieci[k].eggPosition);
+							dzieci[k].collectedInfo = false;
+							dzieci[k].kolizja();
+						}
+						else 
+						{
+							dorosli[i].kolizja();
+							dzieci[k].kolizja();
+						}
+
 					}
 				}
 
@@ -112,12 +135,16 @@ void PlayState::Update()
 				{
 					if (collision.CheckCollision(*dorosli[i].getSprite(), *jaja[l].getSprite()) == true)
 					{
-						if (jaja[l].flaga == false) {
-							dorosli[i].collect();
-							jaja.erase(jaja.begin() + l);
-							l -= l;
+						if (dorosli[i].flagaKolizja == true)
+						{
+							if (jaja[l].flaga == false) {
+								dorosli[i].collect();
+								jaja.erase(jaja.begin() + l);
+								l -= l;
+							}
+							break;
 						}
-						break;
+
 					}
 				}
 
@@ -158,6 +185,14 @@ void PlayState::Update()
 					if (collision.CheckCollision(*dzieci[i].getSprite(), *gniazdo->getSprite()) == true) // kolizja dziecko-gniazdo
 					{
 						dzieci[i].kolizja();
+					}
+					for (int j = 0; j < jaja.size(); j++)
+					{
+						if (collision.CheckCollision(*dzieci[i].getSprite(), *jaja[j].getSprite()) == true) // kolizja dziecko-gniazdo
+						{
+							dzieci[i].gatherInfo(jaja[j].getPosition());
+							dzieci[i].kolizja();
+						}
 					}
 				}
 			}
@@ -218,7 +253,7 @@ void PlayState::evolution()
 	for (int i = 0; i < dzieci.size(); i++) {
 
 
-		if (dzieci[i].getSize() % 900 == 0 && dzieci[i].getSize() < 4001 && dzieci[i].getSize() > 1)
+		if (dzieci[i].getSize() % 900 == 0 && dzieci[i].getSize() < 4301 && dzieci[i].getSize() > 1)
 		{
 			dzieci[i].sleep(dt);
 		}

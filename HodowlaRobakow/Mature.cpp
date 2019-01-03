@@ -90,6 +90,84 @@ void Mature::collect()
 			this->instrukcja++;
 			this->licznik = 0;
 		}
+		if (wPoziomie == 0)
+		{
+			this->a1 = a2;
+			this->b1 = b2;
+			this->c1 = c2;
+			this->licznik = 0;
+		}
+		if (wPionie == 0)
+		{
+			this->a2 = a1;
+			this->b2 = b1;
+			this->c2 = c1;
+			this->licznik = 0;
+		}
+	}
+}
+
+void Mature::goGetIt(sf::Vector2f position)
+{
+	int x, y;
+	float pozycjaMuchyX, pozycjaMuchyY;
+	this->flagaKolizja = false; 	 //ustawia flage musze ze jest zajeta i zeby wiedziala ze sie nie odbija od innych w tym momencie	
+	this->goToEgg = true;
+	pozycjaMuchyX = this->getPosition().x;
+	pozycjaMuchyY = this->getPosition().y;
+	
+	//wyznaczanie drogi do gniazda ktore zawsze jest w tym samym miejscu
+
+	wPoziomie = position.x - pozycjaMuchyX;
+	wPionie = position.y - pozycjaMuchyY;
+	std::cout << "Mucha dostala info ze jajko jest na pozycji "<< position.x<< " "<< position.y << std::endl;
+	if (instrukcja == 0) {
+		if (wPoziomie > 0) // ---->
+		{
+			this->a1 = wPoziomie;
+			this->b1 = 0;
+			this->c1 = 1;
+			this->instrukcja++;
+			this->licznik = 0;
+		}
+		if (wPoziomie < 0) // <-----
+		{
+			this->a1 = wPoziomie * (-1);
+			this->b1 = 0;
+			this->c1 = 0;
+			this->instrukcja++;
+			this->licznik = 0;
+		}
+		if (wPionie > 0) //  \/
+		{
+			this->a2 = wPionie;
+			this->b2 = 1;
+			this->c2 = 1;
+			this->instrukcja++;
+			this->licznik = 0;
+		}
+		if (wPionie < 0) //  ^
+		{
+			this->a2 = wPionie * (-1);
+			this->b2 = 1;
+			this->c2 = 0;
+			this->instrukcja++;
+			this->licznik = 0;
+		}
+		if (wPoziomie == 0)
+		{
+			this->a1 = a2;
+			this->b1 = b2;
+			this->c1 = c2;
+			this->licznik = 0;
+		}
+		if (wPionie == 0)
+		{
+			this->a2 = a1;
+			this->b2 = b1;
+			this->c2 = c1;
+			this->licznik = 0;
+		}
 	}
 }
 
@@ -223,11 +301,20 @@ int Mature::updateMove(sf::Sprite & target)
 			a1 = 0;
 			b1 = 0;
 			c1 = 0;
-			x = 512;
-			y = 520;
-			target.setPosition(x, y);
-			loadTexture();
-			return 1; // kod nr 1 - powiadamia ze jajko zostalo zwrocone do bazy i ma zwiekszyc ilosc zarcia dla much.
+			if (goToEgg == false)
+			{
+				x = 512;
+				y = 520;
+				target.setPosition(x, y);
+				loadTexture();
+				return 1; // kod nr 1 - powiadamia ze jajko zostalo zwrocone do bazy i ma zwiekszyc ilosc zarcia dla much.
+			}
+			else if (goToEgg == true)
+			{
+				std::cout << "powinienem teraz podniesc jajko " << std::endl;
+				goToEgg = false;
+			}
+
 		}
 
 	}

@@ -22,6 +22,7 @@ public:
 	void updateMove(int x, int y);
 	sf::Sprite *getSprite();
 	void setPosition(int x, int y);
+	sf::Vector2f getPosition();
 	int getSize();
 	void setSize(); // increase size by 1
 	bool flaga = false;
