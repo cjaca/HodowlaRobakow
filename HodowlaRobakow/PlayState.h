@@ -34,7 +34,7 @@ private:
 	Menu *menu;
 	Collision collision;
 	sf::Vector2f ScreenSize;
-	int iloscMuch = 5;
+	int iloscMuch = 10;
 	std::vector<Mature> dorosli;
 	std::vector<Kid> dzieci;
 	std::vector<Egg> jaja;

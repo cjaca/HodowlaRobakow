@@ -12,16 +12,19 @@ private:
 	sf::Sprite NestSprite;
 	sf::RectangleShape HpBar;
 	int loadTexture();
-	int level = 0; //poziom
-	int food = 0; //jedzenie
+	int level = 1; //poziom
+	int food = 50; //jedzenie
+	int foodCapacity = 500;
 	int garner = 0; //zagroda
-
+	int garnerCapacity = 50;
 
 public:
 	Nest();
 	~Nest();
 	void setNestFood(int n);
 	int getNestFood();
+	void setGarner(int n);
+	int getGarner(); //kazda mucha zajmuje wiecej miejsca w zagrodzie
 	void draw(sf::RenderTarget & target);
 	sf::Sprite *getSprite();
 };

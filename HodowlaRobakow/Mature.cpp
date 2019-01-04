@@ -5,6 +5,7 @@
 
 Mature::Mature(sf::Vector2f position)
 {
+	life = 200;
 	this->position = position;
 	x = position.x;
 	y = position.y;
@@ -38,6 +39,30 @@ sf::Sprite *Mature::getSprite()
 	return &this->AntSprite;
 }
 
+void Mature::setSize() //TODO: Ogarnac setSize aby byl wspolny dla wszystkich, tak na prawde to zmienia sie tylko zaleznosci od life
+{
+	int rozmiarPaskaHP;
+	//set size of Fly
+	this->size = this->size + 1;
+	if (isAsleep == false)
+	{
+		life = life - 0.22;
+	}
+	if (life <= 0)
+	{
+		isDead = true;
+	}
+
+	int kolorG = 2.55 * life;
+	if (life <= 200) {
+		rozmiarPaskaHP = life / 10;
+	}
+	else {
+		rozmiarPaskaHP = (0.005*life) - 20;
+	}
+	HpBar.setFillColor(sf::Color(255, kolorG, 0));
+	HpBar.setSize(sf::Vector2f(rozmiarPaskaHP, 4));
+}
 
 void Mature::collect()
 {
@@ -55,6 +80,7 @@ void Mature::collect()
 
 	//wyznaczanie drogi do gniazda ktore zawsze jest w tym samym miejscu
 
+	//TODO: zrobic z tego oddzieln¹ metodê w klasie bazowej \/
 	wPoziomie = 512.f - pozycjaMuchyX;
 	wPionie = 384.f - pozycjaMuchyY;
 	if (instrukcja == 0) {
@@ -245,13 +271,13 @@ int Mature::updateMove(sf::Sprite & target)
 		if (b == 0) {
 			if (c == 0)
 			{
-				x = x - 1;
+				x = x - 2;
 				this->getSprite()->setRotation(315.f);
 				licznik++;
 			}
 			else
 			{
-				x = x + 1;
+				x = x + 2;
 				this->getSprite()->setRotation(90.f);
 				licznik++;
 			}
@@ -260,13 +286,13 @@ int Mature::updateMove(sf::Sprite & target)
 		{
 			if (c == 0)
 			{
-				y = y - 1;
+				y = y - 2;
 				this->getSprite()->setRotation(0.f);
 				licznik++;
 			}
 			else
 			{
-				y = y + 1;
+				y = y + 2;
 				this->getSprite()->setRotation(180.f);
 				licznik++;
 			}
@@ -294,15 +320,15 @@ int Mature::updateMove(sf::Sprite & target)
 		//Change HpBar position with Fly
 		target.setPosition(x, y);
 		this->HpBar.setPosition(x - 10, y + 10);
-		if (licznik == a) {
+		if (getPosition().x > 500 && getPosition().x < 530 && getPosition().y > 375 && getPosition().y < 385) {
 			instrukcja -= 1;
-			licznik = 0;
-			flagaKolizja = true;
+			
 			a1 = 0;
 			b1 = 0;
 			c1 = 0;
-			if (goToEgg == false)
+			if (goToEgg == false && goToSleep == false)
 			{
+				flagaKolizja = true;
 				x = 512;
 				y = 520;
 				target.setPosition(x, y);
@@ -311,8 +337,19 @@ int Mature::updateMove(sf::Sprite & target)
 			}
 			else if (goToEgg == true)
 			{
+				flagaKolizja = true;
 				std::cout << "powinienem teraz podniesc jajko " << std::endl;
 				goToEgg = false;
+			}
+			else if (goToSleep == true)
+			{
+				x = 512;
+				y = 520;
+				this->goToSleep = false;
+				this->isAsleep = true; //ustawia flage ze mucha spi i zeby jej nie ruszac
+				this->goSleep = size;
+				this->wakeUp = size + 300;
+				collectedInfo = false;
 			}
 
 		}
@@ -329,13 +366,13 @@ int Mature::updateMove(sf::Sprite & target)
 		if (b == 0) {
 			if (c == 0)
 			{
-				x = x - 1;
+				x = x - 2;
 				this->getSprite()->setRotation(315.f);
 				licznik++;
 			}
 			else
 			{
-				x = x + 1;
+				x = x + 2;
 				this->getSprite()->setRotation(90.f);
 				licznik++;
 			}
@@ -344,13 +381,13 @@ int Mature::updateMove(sf::Sprite & target)
 		{
 			if (c == 0)
 			{
-				y = y - 1;
+				y = y - 2;
 				this->getSprite()->setRotation(0.f);
 				licznik++;
 			}
 			else
 			{
-				y = y + 1;
+				y = y + 2;
 				this->getSprite()->setRotation(180.f);
 				licznik++;
 			}
@@ -378,7 +415,7 @@ int Mature::updateMove(sf::Sprite & target)
 		//Change HpBar position with Fly
 		target.setPosition(x, y);
 		this->HpBar.setPosition(x - 10, y + 10);
-		if (licznik == a) {
+		if (getPosition().y > 375 && getPosition().y < 385) {
 			instrukcja -= 1;
 			licznik = 0;
 			a2 = 0;

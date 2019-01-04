@@ -102,11 +102,14 @@ void PlayState::Update()
 		{
 			dorosli[i].setSize(); // zwiekszanie wieku doroslych 
 
-			if (dorosli[i].updateMove(*dorosli[i].getSprite()) == 1) //poruszanie doroslymi, jezeli zostala zwrocona jedynka, to dodaje do gniazda jedzenie (bo zostalo odniesione jajko)
+			if (dorosli[i].isAsleep == false)
 			{
-				gniazdo->setNestFood(30);
-			}
-			
+
+				if (dorosli[i].updateMove(*dorosli[i].getSprite()) == 1) //poruszanie doroslymi, jezeli zostala zwrocona jedynka, to dodaje do gniazda jedzenie (bo zostalo odniesione jajko)
+				{
+					gniazdo->setNestFood(30);
+				}
+
 				if (collision.CheckCollision(*dorosli[i].getSprite(), *gniazdo->getSprite()) == true) // kolizja dorosly gniazdo
 				{
 					dorosli[i].kolizja();
@@ -118,11 +121,11 @@ void PlayState::Update()
 					{
 						if (dzieci[k].collectedInfo == true && dorosli[i].flagaKolizja == true)
 						{
- 							dorosli[i].goGetIt(dzieci[k].eggPosition);
+							dorosli[i].goGetIt(dzieci[k].eggPosition);
 							dzieci[k].collectedInfo = false;
 							dzieci[k].kolizja();
 						}
-						else 
+						else
 						{
 							dorosli[i].kolizja();
 							dzieci[k].kolizja();
@@ -169,6 +172,7 @@ void PlayState::Update()
 					}
 				}
 			}
+		}
 	}
 
 	if (dzieci.size() > 0)
@@ -262,13 +266,7 @@ void PlayState::evolution()
 
 	for (int i = 0; i < dzieci.size(); i++) {
 
-
-		//if (dzieci[i].getSize() % 900 == 0 && dzieci[i].getSize() < 4301 && dzieci[i].getSize() > 1)
-		//{
-		//	dzieci[i].sleep(dt);
-		//}
-
-		if (dzieci[i].life <= 30 && dzieci[i].flagaKolizja == true)
+		if (dzieci[i].life <= 31 && dzieci[i].flagaKolizja == true)
 		{
 			dzieci[i].sleep(dt);
 		}
@@ -277,15 +275,19 @@ void PlayState::evolution()
 
 		if (dzieci[i].getSize() == dzieci[i].wakeUp) //wybudza dzieci ze snu XD
 		{
-			dzieci[i].life = 100;
-			dzieci[i].isAsleep = false;
-			dzieci[i].flagaKolizja = true;
+			if (gniazdo->getNestFood() >= 10)
+			{
+				gniazdo->setNestFood(-10);
+				dzieci[i].life = 100; //ustawienie zycia na 100
+			}
+
+			dzieci[i].isAsleep = false; //zdjecie flagi ze mucha spi
+			dzieci[i].flagaKolizja = true; //nadanie flagi ze mucha musi sie juz odbijac od otoczenia
 			dzieci[i].setPosition(sf::Vector2f(512,520)); // ustawia muche w podanym miejscu po snie
 		}
 
 
-
-		if (dzieci[i].getSize() > 3600) //ewolucja muchy
+		if (dzieci[i].getSize() > 1800) //ewolucja muchy mlodej
 		{
 			iks = (dzieci[i].getPosition()).x;
 			igrek = (dzieci[i].getPosition()).y;
@@ -297,6 +299,27 @@ void PlayState::evolution()
 
 			iks = 0;
 			igrek = 0;
+		}
+	}
+
+	for (int i = 0; i < dorosli.size(); i++)
+	{
+		if (dorosli[i].life <= 60 && dorosli[i].flagaKolizja == true)
+		{
+			dorosli[i].goToSleep = true;
+			dorosli[i].sleep(dt);
+		}
+		if (dorosli[i].getSize() == dorosli[i].wakeUp)
+		{
+			if (gniazdo->getNestFood() >= 20)
+			{
+				gniazdo->setNestFood(-20);
+				dorosli[i].life = 200;
+			}
+
+			dorosli[i].isAsleep = false; //zdjecie flagi ze mucha spi
+			dorosli[i].flagaKolizja = true; //nadanie flagi ze mucha musi sie juz odbijac od otoczenia
+			dorosli[i].setPosition(sf::Vector2f(512, 520)); // ustawia muche w podanym miejscu po snie
 		}
 	}
 }
@@ -312,11 +335,20 @@ void PlayState::cleanUp()
 			i--;
 		}
 	}
+
+	for (int i = 0; i < dorosli.size(); i++)
+	{
+		if (dorosli[i].isDead == true)
+		{
+			dorosli.erase(dorosli.begin() + i);
+			i--;
+		}
+	}
 }
 
 void PlayState::randomGen()
 {
-	if (dt % 300 == 0)
+	if (dt % 90 == 0)
 	{
 		Egg *egg;
 		egg = new Egg(sf::Vector2f(rand() % 700, rand() % 500));

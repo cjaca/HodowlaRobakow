@@ -16,7 +16,7 @@ private:
 	sf::Sprite KidSprite;
 	
 	int loadTexture();
-	int size=0;
+	
 
 
 protected:
@@ -26,6 +26,7 @@ protected:
 	float y;
 	int a, b, c, licznik, predkosc = 1, a1,b1,c1, a2, b2, c2;
 	int wPoziomie = 0, wPionie = 0;
+	int size = 0;
 public:
 	Kid(sf::Vector2f position = sf::Vector2f(rand() % 800, rand() % 600));
 	~Kid();

@@ -19,7 +19,7 @@ private:
 	sf::Sprite AntSprite;
 	sf::Vector2f position;
 	int loadTexture();
-	int size = 0;
+
 	
 public:
 	Mature(sf::Vector2f position);
@@ -28,7 +28,9 @@ public:
 	sf::Sprite *getSprite();
 	void collect();
 	void goGetIt(sf::Vector2f position);
+	void setSize();
 	int updateMove(sf::Sprite &target);
 	bool goToEgg = false;
+	bool goToSleep = false;
 };
 

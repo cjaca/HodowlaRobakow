@@ -279,7 +279,7 @@ void Kid::gatherInfo(sf::Vector2f position)
 
 int Kid::getSize()
 {
-	return size;
+	return this->size;
 }
 
 void Kid::setSize()
