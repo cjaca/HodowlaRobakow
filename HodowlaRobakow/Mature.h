@@ -16,7 +16,7 @@ class Mature : public Kid
 
 private:
 	sf::Texture AntTexture;
-	sf::Sprite AntSprite;
+	sf::Sprite sprite;
 	sf::Vector2f position;
 	int loadTexture();
 

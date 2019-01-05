@@ -6,17 +6,17 @@ Coin::Coin(sf::Vector2f position)
 {
 	this->position = position;
 	loadTexture();
-	sprite.setOrigin(16, 16);
+	sprite.setOrigin(12, 12);
 	sprite.setPosition(position);
 	if (!Trebu.loadFromFile("font/TrebuchetMS.ttf"))
 	{
 		std::cout << "Missing Trebuchet font\n" << std::endl;
 	}
 	timeLeftToAutoDestroy.setFont(Trebu);
-	timeLeftToAutoDestroy.setCharacterSize(12);
+	timeLeftToAutoDestroy.setCharacterSize(10);
 	timeLeftToAutoDestroy.setFillColor(sf::Color::Black);
-	timeLeftToAutoDestroy.setOrigin(6, 6);
-	timeLeftToAutoDestroy.setPosition(position);
+	timeLeftToAutoDestroy.setOrigin(5, 5);
+	timeLeftToAutoDestroy.setPosition(position.x-1,position.y);
 }
 
 

@@ -8,8 +8,8 @@ Kid::Kid(sf::Vector2f position)
 	x = position.x;
 	y = position.y;
 	loadTexture();
-	KidSprite.setOrigin(8,8);
-	KidSprite.setPosition(position);
+	sprite.setOrigin(8,8);
+	sprite.setPosition(position);
 	a = 0;
 	b = 0;
 	c = 0;
@@ -24,7 +24,7 @@ Kid::~Kid()
 
 void Kid::draw(sf::RenderTarget & target)
 {
-	target.draw(this->KidSprite);
+	target.draw(this->sprite);
 	target.draw(HpBar);
 }
 
@@ -32,7 +32,7 @@ int Kid::loadTexture()
 {
 	if (!KidTexture.loadFromFile("img/kid.png"))
 		return -1;
-	KidSprite.setTexture(KidTexture);
+	sprite.setTexture(KidTexture);
 	return 0;
 }
 
@@ -249,7 +249,7 @@ int Kid::updateMove(sf::Sprite & target)
 
 sf::Sprite *Kid::getSprite()
 {
-	return &this->KidSprite;
+	return &this->sprite;
 }
 
 sf::Vector2f Kid::getPosition()
@@ -317,7 +317,7 @@ void Kid::hpBar()
 
 void Kid::setPosition(sf::Vector2f target)
 {
-	this->KidSprite.setPosition(target);
+	this->sprite.setPosition(target);
 }
 
 

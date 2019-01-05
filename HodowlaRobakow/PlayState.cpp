@@ -163,7 +163,13 @@ void PlayState::Update()
 
 					}
 				}
-
+				for (int j = 0; j < kasa.size(); j++)
+				{
+					if (collision.CheckCollision(*dorosli[i].getSprite(), *kasa[j].getSprite()) == true)
+					{
+						dorosli[i].kolizja();
+					}
+				}
 				for (int j = 0; j < dorosli.size() - 1; j++)
 				{
 					if (i != j)
@@ -205,9 +211,16 @@ void PlayState::Update()
 					}
 					for (int j = 0; j < jaja.size(); j++)
 					{
-						if (collision.CheckCollision(*dzieci[i].getSprite(), *jaja[j].getSprite()) == true) // kolizja dziecko-gniazdo
+						if (collision.CheckCollision(*dzieci[i].getSprite(), *jaja[j].getSprite()) == true) // kolizja dziecko-jajo zbieranie informacji
 						{
 							dzieci[i].gatherInfo(jaja[j].getPosition());
+							dzieci[i].kolizja();
+						}
+					}
+					for (int j = 0; j < kasa.size(); j++)
+					{
+						if (collision.CheckCollision(*dzieci[i].getSprite(), *kasa[j].getSprite()) == true)
+						{
 							dzieci[i].kolizja();
 						}
 					}
@@ -225,7 +238,15 @@ void PlayState::Update()
 		else jaja[i].setSize(); //increase egg size by 1 on every update of the simulation
 	}
 	countTime();
-
+	for (int i = 0; i < kasa.size(); i++)
+	{
+		if (kasa[i].getSize() == 900)
+		{
+			kasa.erase(kasa.begin() + i);
+			i--;
+		}
+		else kasa[i].setSize();
+	}
 
 }
 

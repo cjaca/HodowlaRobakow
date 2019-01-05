@@ -12,7 +12,7 @@ class Kid
 
 private:
 	sf::Texture KidTexture;
-	sf::Sprite KidSprite;
+	sf::Sprite sprite;
 	int loadTexture();
 
 protected:

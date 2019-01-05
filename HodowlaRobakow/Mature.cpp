@@ -10,8 +10,8 @@ Mature::Mature(sf::Vector2f position)
 	x = position.x;
 	y = position.y;
 	loadTexture();
-	AntSprite.setOrigin(12,12);
-	AntSprite.setPosition(position);
+	sprite.setOrigin(12,12);
+	sprite.setPosition(position);
 	hpBar();
 }
 
@@ -21,7 +21,7 @@ Mature::~Mature()
 
 void Mature::draw(sf::RenderTarget & target)
 {
-	target.draw(this->AntSprite);
+	target.draw(this->sprite);
 	target.draw(this->HpBar);
 }
 
@@ -29,14 +29,14 @@ int Mature::loadTexture()
 {
 	if (!AntTexture.loadFromFile("img/fly.png"))
 		return -1;
-	AntSprite.setTexture(AntTexture);
+	sprite.setTexture(AntTexture);
 	return 0;
 }
 
 
 sf::Sprite *Mature::getSprite()
 {
-	return &this->AntSprite;
+	return &this->sprite;
 }
 
 void Mature::setSize() //TODO: Ogarnac setSize aby byl wspolny dla wszystkich, tak na prawde to zmienia sie tylko zaleznosci od life
@@ -70,7 +70,7 @@ void Mature::collect()
 	{
 		std::cout << "nie mozna zaladowac obrazka :( \n" << std::endl;
 	}
-	AntSprite.setTexture(AntTexture);
+	sprite.setTexture(AntTexture);
 
 	int x, y;
 	float pozycjaMuchyX, pozycjaMuchyY;
