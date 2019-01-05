@@ -6,8 +6,8 @@ Egg::Egg(sf::Vector2f position)
 {
 	this->position = position;
 	loadTexture();
-	EggSprite.setOrigin(16, 16);
-	EggSprite.setPosition(position);
+	sprite.setOrigin(16, 16);
+	sprite.setPosition(position);
 	if (!Trebu.loadFromFile("font/TrebuchetMS.ttf"))
 	{
 		std::cout << "Missing Trebuchet font\n" << std::endl;
@@ -27,31 +27,27 @@ int Egg::loadTexture()
 {
 	if (!EggTexture.loadFromFile("img/egg.png"))
 		return -1;
-	EggSprite.setTexture(EggTexture);
+	sprite.setTexture(EggTexture);
 	return 0;
 }
 
 void Egg::draw(sf::RenderTarget & target)
 {
 	timeLeft();
-	target.draw(this->EggSprite);
-	target.draw(this->timeLeftToAutoDestroy);
+	target.draw(sprite);
+	target.draw(timeLeftToAutoDestroy);
 }
 
-void Egg::updateMove(int x, int y)
-{
-	this->setPosition(x, y);
-}
 
 sf::Sprite * Egg::getSprite()
 {
 
-	return &this->EggSprite;
+	return &this->sprite;
 }
 
 void Egg::setPosition(int x, int y)
 {
-	this->EggSprite.setPosition(x, y);
+	this->sprite.setPosition(x, y);
 }
 
 sf::Vector2f Egg::getPosition()

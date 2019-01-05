@@ -11,13 +11,9 @@ class Kid
 {
 
 private:
-
 	sf::Texture KidTexture;
 	sf::Sprite KidSprite;
-	
 	int loadTexture();
-	
-
 
 protected:
 	sf::RectangleShape HpBar;

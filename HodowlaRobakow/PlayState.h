@@ -6,6 +6,7 @@
 #include "Nest.h"
 #include "Egg.h"
 #include "Menu.h"
+#include "Coin.h"
 #include "Collision.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
@@ -38,6 +39,7 @@ private:
 	std::vector<Mature> dorosli;
 	std::vector<Kid> dzieci;
 	std::vector<Egg> jaja;
+	std::vector<Coin> kasa;
 	bool isGameStarted;
 	int countTime();
 	void evolution();

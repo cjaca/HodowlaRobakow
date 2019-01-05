@@ -23,12 +23,15 @@ void PlayState::Init()
 		Mature *mature;
 		Kid *kid;
 		Egg *egg;
+		Coin *coin;
 		mature = new Mature(sf::Vector2f(rand() % 800, rand() % 600));
 		kid = new Kid(sf::Vector2f(rand() % 800, rand() % 600));
 		egg = new Egg(sf::Vector2f(rand() % 700, rand() % 500));
+		coin = new Coin(sf::Vector2f(rand() % 700, rand() % 500));
 		dorosli.push_back(*mature);
 		dzieci.push_back(*kid);
 		jaja.push_back(*egg);
+		kasa.push_back(*coin);
 	}
 	menu = new Menu();
 	gniazdo = new Nest();
@@ -238,6 +241,9 @@ void PlayState::Draw()
 	}
 	for (int i = 0; i < jaja.size(); i++) {
 		jaja[i].draw(*window);
+	}
+	for (int i = 0; i < kasa.size(); i++) {
+		kasa[i].draw(*window);
 	}
 
 	gniazdo->draw(*window);
