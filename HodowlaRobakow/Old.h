@@ -1,10 +1,19 @@
 #pragma once
-#include "Kid.h"
-class Old :
-	public Kid
+#include "Mature.h"
+class Old: public Mature
 {
+private:
+	sf::Texture OldTexture;
+	sf::Sprite sprite;
+	sf::Vector2f position;
+	int loadTexture();
+
 public:
-	Old();
+	Old(sf::Vector2f position = sf::Vector2f(rand() % 800, rand() % 600));
 	~Old();
+	void draw(sf::RenderTarget & target);
+	sf::Sprite *getSprite();
+	void setSize();
+	int updateMove(sf::Sprite &target);
 };
 

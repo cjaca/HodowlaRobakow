@@ -3,6 +3,7 @@
 #include "DEFINITIONS.h"
 #include "Mature.h"
 #include "Kid.h"
+#include "Old.h"
 #include "Nest.h"
 #include "Egg.h"
 #include "Menu.h"
@@ -35,9 +36,10 @@ private:
 	Menu *menu;
 	Collision collision;
 	sf::Vector2f ScreenSize;
-	int iloscMuch = 10;
-	std::vector<Mature> dorosli;
+	int iloscMuch = 5;
 	std::vector<Kid> dzieci;
+	std::vector<Mature> dorosli;
+	std::vector<Old> stare;
 	std::vector<Egg> jaja;
 	std::vector<Coin> kasa;
 	bool isGameStarted;

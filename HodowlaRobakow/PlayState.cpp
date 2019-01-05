@@ -24,14 +24,17 @@ void PlayState::Init()
 		Kid *kid;
 		Egg *egg;
 		Coin *coin;
-		mature = new Mature(sf::Vector2f(rand() % 800, rand() % 600));
-		kid = new Kid(sf::Vector2f(rand() % 800, rand() % 600));
-		egg = new Egg(sf::Vector2f(rand() % 700, rand() % 500));
-		coin = new Coin(sf::Vector2f(rand() % 700, rand() % 500));
+		Old *old;
+		mature = new Mature(sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
+		kid = new Kid(sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
+		egg = new Egg(sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
+		coin = new Coin(sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
+		old = new Old(sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
 		dorosli.push_back(*mature);
 		dzieci.push_back(*kid);
 		jaja.push_back(*egg);
 		kasa.push_back(*coin);
+		stare.push_back(*old);
 	}
 	menu = new Menu();
 	gniazdo = new Nest();
@@ -143,14 +146,14 @@ void PlayState::Update()
 					{
 						if (dorosli[i].flagaKolizja == true)
 						{
-							if (jaja[l].flaga == false) {
+							if (jaja[l].flaga == false) 
+							{
 								dorosli[i].collect();
 								jaja.erase(jaja.begin() + l);
 								l -= l;
 							}
 							break;
 						}
-
 						if (dorosli[i].flagaKolizja == false && dorosli[i].goToEgg == true)
 						{
 							std::cout << "mucha zrezygnowala z pojscia po jajko i wziela pierwsze po drodze" << std::endl;
@@ -223,11 +226,72 @@ void PlayState::Update()
 						{
 							dzieci[i].kolizja();
 						}
+						
 					}
 				}
 			}
 		}
 	}
+
+	if (stare.size() > 0)
+	{
+		for (int i = 0; i < stare.size(); i++)
+		{
+			stare[i].setSize();
+				if (stare[i].isAsleep == false)
+				{
+					stare[i].updateMove(*stare[i].getSprite());
+					if (stare[i].flagaKolizja == true)
+					{
+						for (int j = 0; j < stare.size() - 1; j++)
+						{
+							if (i != j)
+							{
+								if (collision.CheckCollision(*stare[i].getSprite(), *stare[j].getSprite()) == true)
+								{
+									stare[i].kolizja();
+								}
+							}
+						}
+						if (collision.CheckCollision(*stare[i].getSprite(), *gniazdo->getSprite()) == true) // kolizja stary-gniazdo
+						{
+							stare[i].kolizja();
+						}
+						for (int j = 0; j < jaja.size(); j++)
+						{
+							if (collision.CheckCollision(*stare[i].getSprite(), *jaja[j].getSprite()) == true) // kolizja stary-jajo zbieranie informacji
+							{
+								//dzieci[i].gatherInfo(jaja[j].getPosition());
+								stare[i].kolizja();
+							}
+						}
+						for (int j = 0; j < kasa.size(); j++)
+						{
+							if (collision.CheckCollision(*stare[i].getSprite(), *kasa[j].getSprite()) == true)
+							{
+								if (dorosli[i].flagaKolizja == true)
+								{
+									stare[i].collect();
+									kasa.erase(kasa.begin() + j);
+									j -= j;
+								}
+								break;
+								if (stare[i].flagaKolizja == false && stare[i].goToEgg == true)
+								{
+									std::cout << "mucha zrezygnowala z pojscia po $$$ i wziela pierwsze po drodze" << std::endl;
+									stare[i].instrukcja = 0;
+									stare[i].goToEgg = false;
+									stare[i].collect();
+									kasa.erase(kasa.begin() + j);
+									j -= j;
+								}
+							}
+						}
+					}
+				}
+		}
+	}
+
 	for (int i = 0; i < jaja.size(); i++)
 	{
 		if (jaja[i].getSize() == 900)
@@ -252,10 +316,13 @@ void PlayState::Update()
 
 void PlayState::Draw()
 {
-	if (dorosli.size() > 0) {
-		for (int i = 0; i < dorosli.size(); i++) {
-			dorosli[i].draw(*window);
-		}
+	for (int i = 0; i < stare.size(); i++)
+	{
+		stare[i].draw(*window);
+	}
+	for (int i = 0; i < dorosli.size(); i++) 
+	{
+		dorosli[i].draw(*window);
 	}
 	for (int i = 0; i < dzieci.size(); i++) {
 		dzieci[i].draw(*window);
@@ -349,6 +416,27 @@ void PlayState::evolution()
 			dorosli[i].setPosition(sf::Vector2f(512, 520)); // ustawia muche w podanym miejscu po snie
 		}
 	}
+
+	for (int i = 0; i < stare.size(); i++)
+	{
+		if (stare[i].life <= 90 && stare[i].flagaKolizja == true)
+		{
+			stare[i].goToSleep = true;
+			stare[i].sleep(dt);
+		}
+		if (stare[i].getSize() == stare[i].wakeUp)
+		{
+			if (gniazdo->getNestFood() >= 15)
+			{
+				gniazdo->setNestFood(-15);
+				dorosli[i].life = 300;
+			}
+
+			stare[i].isAsleep = false; //zdjecie flagi ze mucha spi
+			stare[i].flagaKolizja = true; //nadanie flagi ze mucha musi sie juz odbijac od otoczenia
+			stare[i].setPosition(sf::Vector2f(512, 520)); // ustawia muche w podanym miejscu po snie
+		}
+	}
 }
 
 void PlayState::cleanUp()
@@ -371,14 +459,26 @@ void PlayState::cleanUp()
 			i--;
 		}
 	}
+
+	for (int i = 0; i < stare.size(); i++)
+	{
+		if (stare[i].isDead == true)
+		{
+			stare.erase(stare.begin() + i);
+			i--;
+		}
+	}
 }
 
 void PlayState::randomGen()
 {
-	if (dt % 90 == 0)
+	if (dorosli.size() > 0)
 	{
-		Egg *egg;
-		egg = new Egg(sf::Vector2f(rand() % 700, rand() % 500));
-		jaja.push_back(*egg);
+		if (dt % 90 == 0)
+		{
+			Egg *egg;
+			egg = new Egg(sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
+			jaja.push_back(*egg);
+		}
 	}
 }

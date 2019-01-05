@@ -27,7 +27,7 @@ void Mature::draw(sf::RenderTarget & target)
 
 int Mature::loadTexture()
 {
-	if (!AntTexture.loadFromFile("img/fly.png"))
+	if (!AntTexture.loadFromFile("img/fly-mature.png"))
 		return -1;
 	sprite.setTexture(AntTexture);
 	return 0;
@@ -135,7 +135,7 @@ void Mature::collect()
 
 void Mature::goGetIt(sf::Vector2f position)
 {
-	int x, y;
+	//int x, y;
 	float pozycjaMuchyX, pozycjaMuchyY;
 	this->flagaKolizja = false; 	 //ustawia flage musze ze jest zajeta i zeby wiedziala ze sie nie odbija od innych w tym momencie	
 	this->goToEgg = true;
@@ -212,7 +212,7 @@ int Mature::updateMove(sf::Sprite & target)
 			if (c == 0)
 			{
 				x = x - predkosc;
-				target.setRotation(315.f);
+				target.setRotation(270.f);
 			}
 			else
 			{
@@ -272,7 +272,7 @@ int Mature::updateMove(sf::Sprite & target)
 			if (c == 0)
 			{
 				x = x - 2;
-				this->getSprite()->setRotation(315.f);
+				this->getSprite()->setRotation(270.f);
 				licznik++;
 			}
 			else
@@ -367,7 +367,7 @@ int Mature::updateMove(sf::Sprite & target)
 			if (c == 0)
 			{
 				x = x - 2;
-				this->getSprite()->setRotation(315.f);
+				this->getSprite()->setRotation(270.f);
 				licznik++;
 			}
 			else

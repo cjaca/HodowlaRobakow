@@ -24,7 +24,7 @@ Kid::~Kid()
 
 void Kid::draw(sf::RenderTarget & target)
 {
-	target.draw(this->sprite);
+	target.draw(sprite);
 	target.draw(HpBar);
 }
 
@@ -52,7 +52,7 @@ int Kid::updateMove(sf::Sprite & target)
 			if (c == 0)
 			{
 				x = x - predkosc;
-				target.setRotation(315.f);
+				target.setRotation(270.f);
 			}
 			else
 			{
@@ -112,7 +112,7 @@ int Kid::updateMove(sf::Sprite & target)
 			if (c == 0)
 			{
 				x = x - predkosc;
-				this->getSprite()->setRotation(315.f);
+				this->getSprite()->setRotation(270.f);
 				licznik++;
 			}
 			else
@@ -187,7 +187,7 @@ int Kid::updateMove(sf::Sprite & target)
 			if (c == 0)
 			{
 				x = x - predkosc;
-				this->getSprite()->setRotation(315.f);
+				this->getSprite()->setRotation(270.f);
 				licznik++;
 			}
 			else
