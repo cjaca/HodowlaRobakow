@@ -5,13 +5,14 @@
 #include <SFML/Window.hpp>
 #include <iostream>
 #include <vector>
+#include "AssetManager.h"
 class Nest
 {
 private:
 	sf::Texture NestTexture;
 	sf::Sprite NestSprite;
 	sf::RectangleShape HpBar;
-	int loadTexture();
+	int loadTexture(AssetManager & assets);
 	int level = 1; //poziom
 	int food = 50; //jedzenie
 	int foodCapacity = 500;
@@ -19,7 +20,7 @@ private:
 	int garnerCapacity = 50;
 
 public:
-	Nest();
+	Nest(AssetManager &assets);
 	~Nest();
 	void setNestFood(int n);
 	int getNestFood();

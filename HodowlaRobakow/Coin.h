@@ -11,8 +11,9 @@ class Coin : public Egg
 	sf::Texture coinTexture;
 	//sf::Sprite sprite;
 	int loadTexture();
+
 public:
-	Coin(sf::Vector2f position);
+	Coin(AssetManager &assets, sf::Vector2f position);
 	~Coin();
 };
 

@@ -2,17 +2,14 @@
 #include <string>
 
 
-Coin::Coin(sf::Vector2f position)
+Coin::Coin(AssetManager &assets, sf::Vector2f position): Egg(assets)
 {
+	manager = &assets;
 	this->position = position;
 	loadTexture();
 	sprite.setOrigin(12, 12);
 	sprite.setPosition(position);
-	if (!Trebu.loadFromFile("font/TrebuchetMS.ttf"))
-	{
-		std::cout << "Missing Trebuchet font\n" << std::endl;
-	}
-	timeLeftToAutoDestroy.setFont(Trebu);
+	timeLeftToAutoDestroy.setFont(manager->GetFont("trebu"));
 	timeLeftToAutoDestroy.setCharacterSize(10);
 	timeLeftToAutoDestroy.setFillColor(sf::Color::Black);
 	timeLeftToAutoDestroy.setOrigin(5, 5);
@@ -28,8 +25,6 @@ Coin::~Coin()
 
 int Coin::loadTexture()
 {
-	if (!coinTexture.loadFromFile("img/coin.png"))
-		return -1;
-	sprite.setTexture(coinTexture);
+	sprite.setTexture(manager->GetTexture("coin"));
 	return 0;
 }

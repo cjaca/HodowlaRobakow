@@ -2,17 +2,14 @@
 #include <string>
 
 
-Egg::Egg(sf::Vector2f position)
+Egg::Egg(AssetManager &assets, sf::Vector2f position)
 {
+	manager = &assets;
 	this->position = position;
 	loadTexture();
 	sprite.setOrigin(16, 16);
 	sprite.setPosition(position);
-	if (!Trebu.loadFromFile("font/TrebuchetMS.ttf"))
-	{
-		std::cout << "Missing Trebuchet font\n" << std::endl;
-	}
-	timeLeftToAutoDestroy.setFont(Trebu);
+	timeLeftToAutoDestroy.setFont(manager->GetFont("trebu"));
 	timeLeftToAutoDestroy.setCharacterSize(12);
 	timeLeftToAutoDestroy.setFillColor(sf::Color::Black);
 	timeLeftToAutoDestroy.setOrigin(6, 6);
@@ -25,9 +22,7 @@ Egg::~Egg()
 
 int Egg::loadTexture()
 {
-	if (!EggTexture.loadFromFile("img/egg.png"))
-		return -1;
-	sprite.setTexture(EggTexture);
+	sprite.setTexture(manager->GetTexture("egg"));
 	return 0;
 }
 

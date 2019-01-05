@@ -3,8 +3,9 @@
 #define SPRITE_SPEED	1
 
 
-Mature::Mature(sf::Vector2f position)
+Mature::Mature(AssetManager &assets, sf::Vector2f position): Kid(assets)
 {
+	manager = &assets;
 	life = 200;
 	this->position = position;
 	x = position.x;
@@ -27,9 +28,7 @@ void Mature::draw(sf::RenderTarget & target)
 
 int Mature::loadTexture()
 {
-	if (!AntTexture.loadFromFile("img/fly-mature.png"))
-		return -1;
-	sprite.setTexture(AntTexture);
+	sprite.setTexture(manager->GetTexture("fly-mature"));
 	return 0;
 }
 
@@ -66,11 +65,7 @@ void Mature::setSize() //TODO: Ogarnac setSize aby byl wspolny dla wszystkich, t
 
 void Mature::collect()
 {
-	if (!AntTexture.loadFromFile("img/fly-egg.png"))
-	{
-		std::cout << "nie mozna zaladowac obrazka :( \n" << std::endl;
-	}
-	sprite.setTexture(AntTexture);
+	//sprite.setTexture(manager->GetTexture("fly-egg"));
 
 	int x, y;
 	float pozycjaMuchyX, pozycjaMuchyY;
@@ -425,5 +420,6 @@ int Mature::updateMove(sf::Sprite & target)
 
 	}
 }
+
 
 

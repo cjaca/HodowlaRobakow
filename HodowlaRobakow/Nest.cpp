@@ -1,8 +1,8 @@
 #include "Nest.h"
 
-Nest::Nest()
+Nest::Nest(AssetManager & assets)
 {
-	loadTexture();
+	loadTexture(assets);
 	NestSprite.setOrigin(50, 50);
 	NestSprite.setPosition(RESPAWN_WIDTH / 2, RESPAWN_HEIGHT / 2);
 
@@ -34,10 +34,10 @@ sf::Sprite * Nest::getSprite()
 	return &this->NestSprite;
 }
 
-int Nest::loadTexture()
+int Nest::loadTexture(AssetManager &assets)
 {
 	if (!NestTexture.loadFromFile("img/nest.png"))
 		return -1;
-	NestSprite.setTexture(NestTexture);
+	NestSprite.setTexture(assets.GetTexture("nest"));
 	return 0;
 }

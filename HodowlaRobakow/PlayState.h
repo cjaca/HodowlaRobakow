@@ -1,6 +1,7 @@
 #pragma once
 #include "State.h"
 #include "DEFINITIONS.h"
+#include "AssetManager.h"
 #include "Mature.h"
 #include "Kid.h"
 #include "Old.h"
@@ -14,6 +15,7 @@
 #include <SFML/Window.hpp>
 #include <iostream>
 #include <vector>
+#include <memory>
 
 
 class PlayState : public State
@@ -27,7 +29,9 @@ public:
 	void Update();
 	void Draw();
 	
+	
 private:
+	AssetManager *assets;
 	friend class Menu;
 	int IloscMuch();
 	sf::RenderWindow *window;
@@ -36,7 +40,7 @@ private:
 	Menu *menu;
 	Collision collision;
 	sf::Vector2f ScreenSize;
-	int iloscMuch = 5;
+	int iloscMuch = 1000;
 	std::vector<Kid> dzieci;
 	std::vector<Mature> dorosli;
 	std::vector<Old> stare;

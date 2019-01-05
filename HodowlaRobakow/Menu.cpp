@@ -2,77 +2,75 @@
 #include <string>
 
 
-Menu::Menu()
+Menu::Menu(AssetManager &assets)
 {
+	manager = &assets;
+	
 	mainMenuBar.setSize(sf::Vector2f(200, 768));
 	mainMenuBar.setOrigin(sf::Vector2f(100, 384));
 	mainMenuBar.setPosition(sf::Vector2f(1124, 384));
 	mainMenuBar.setFillColor(sf::Color::Black);
-	if (!Trebu.loadFromFile("font/TrebuchetMS.ttf"))
-	{
-		std::cout << "Missing Trebuchet font\n" << std::endl;
-	}
 
-	showNestFoodText.setFont(Trebu);
+	showNestFoodText.setFont(manager->GetFont("trebu"));;
 	showNestFoodText.setCharacterSize(10);
 	showNestFoodText.setFillColor(sf::Color::White);
 	showNestFoodText.setOrigin(sf::Vector2f(50, 10));
 	showNestFoodText.setPosition(sf::Vector2f(1100, 290));
 	showNestFoodText.setString("Ilosc jedzenia w gniezdzie: ");
 
-	showNestFoodNumber.setFont(Trebu);
+	showNestFoodNumber.setFont(manager->GetFont("trebu"));
 	showNestFoodNumber.setCharacterSize(10);
 	showNestFoodNumber.setFillColor(sf::Color::Yellow);
 	showNestFoodNumber.setOrigin(sf::Vector2f(50, 10));
 	showNestFoodNumber.setPosition(sf::Vector2f(1100, 310));
 
-	showTotalFlyText.setFont(Trebu);
+	showTotalFlyText.setFont(manager->GetFont("trebu"));
 	showTotalFlyText.setCharacterSize(10);
 	showTotalFlyText.setFillColor(sf::Color::White);
 	showTotalFlyText.setOrigin(sf::Vector2f(50, 10));
 	showTotalFlyText.setPosition(sf::Vector2f(1100, 330));
 	showTotalFlyText.setString("Ilosc wszystkich much: ");
 
-	showTotalFlyNumber.setFont(Trebu);
+	showTotalFlyNumber.setFont(manager->GetFont("trebu"));
 	showTotalFlyNumber.setCharacterSize(10);
 	showTotalFlyNumber.setFillColor(sf::Color::Yellow);
 	showTotalFlyNumber.setOrigin(sf::Vector2f(50, 10));
 	showTotalFlyNumber.setPosition(sf::Vector2f(1100, 350));
 
-	showKidFlyText.setFont(Trebu);
+	showKidFlyText.setFont(manager->GetFont("trebu"));
 	showKidFlyText.setCharacterSize(10);
 	showKidFlyText.setFillColor(sf::Color::White);
 	showKidFlyText.setOrigin(sf::Vector2f(50, 10));
 	showKidFlyText.setPosition(sf::Vector2f(1100, 370));
 	showKidFlyText.setString("Ilosc mlodych much: ");
 	
-	showKidFlyNumber.setFont(Trebu);
+	showKidFlyNumber.setFont(manager->GetFont("trebu"));
 	showKidFlyNumber.setCharacterSize(10);
 	showKidFlyNumber.setFillColor(sf::Color::Yellow);
 	showKidFlyNumber.setOrigin(sf::Vector2f(50, 10));
 	showKidFlyNumber.setPosition(sf::Vector2f(1100, 390));
 
-	showMatureFlyText.setFont(Trebu);
+	showMatureFlyText.setFont(manager->GetFont("trebu"));
 	showMatureFlyText.setCharacterSize(10);
 	showMatureFlyText.setFillColor(sf::Color::White);
 	showMatureFlyText.setOrigin(sf::Vector2f(50, 10));
 	showMatureFlyText.setPosition(sf::Vector2f(1100, 410));
 	showMatureFlyText.setString("Ilosc doroslych much: ");
 
-	showMatureFlyNumber.setFont(Trebu);
+	showMatureFlyNumber.setFont(manager->GetFont("trebu"));
 	showMatureFlyNumber.setCharacterSize(10);
 	showMatureFlyNumber.setFillColor(sf::Color::Yellow);
 	showMatureFlyNumber.setOrigin(sf::Vector2f(50, 10));
 	showMatureFlyNumber.setPosition(sf::Vector2f(1100, 430));
 
-	czasSymulacji.setFont(Trebu);
+	czasSymulacji.setFont(manager->GetFont("trebu"));
 	czasSymulacji.setCharacterSize(10);
 	czasSymulacji.setFillColor(sf::Color::White);
 	czasSymulacji.setOrigin(sf::Vector2f(50, 10));
 	czasSymulacji.setPosition(sf::Vector2f(1100, 730));
 	czasSymulacji.setString("Czas symulacji: ");
 
-	timeElapsed.setFont(Trebu);
+	timeElapsed.setFont(manager->GetFont("trebu"));
 	timeElapsed.setCharacterSize(18);
 	timeElapsed.setFillColor(sf::Color::Green);
 	timeElapsed.setOrigin(sf::Vector2f(50, 10));

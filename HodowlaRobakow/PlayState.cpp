@@ -8,6 +8,7 @@ PlayState::PlayState(sf::RenderWindow * window, GameStates * state)
 	this->window = window;
 	this->state = state;
 	this->isGameStarted = false;
+	
 }
 
 PlayState::~PlayState()
@@ -16,8 +17,17 @@ PlayState::~PlayState()
 
 void PlayState::Init()
 {
+	assets = new AssetManager();
+	
 	srand(time(NULL));
-
+	assets->LoadTexture("kid", KIDFLY_FILEPATH);
+	assets->LoadTexture("fly-mature", MATUREFLY_FILEPATH);
+	assets->LoadTexture("fly-egg", MATUREFLYEGG_FILEPATH);
+	assets->LoadTexture("fly-old", OLDFLY_FILEPATH);
+	assets->LoadTexture("nest", NEST_FILEPATH);
+	assets->LoadTexture("egg", EGG_FILEPATH);
+	assets->LoadTexture("coin", COIN_FILEPATH);
+	assets->LoadFont("trebu", TREBU_FILEPATH);
 	for (int i = 0; i < iloscMuch; i++)
 	{
 		Mature *mature;
@@ -25,20 +35,21 @@ void PlayState::Init()
 		Egg *egg;
 		Coin *coin;
 		Old *old;
-		mature = new Mature(sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
-		kid = new Kid(sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
-		egg = new Egg(sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
-		coin = new Coin(sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
-		old = new Old(sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
+		mature = new Mature(*assets,sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
+		kid = new Kid(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
+		egg = new Egg(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
+		coin = new Coin(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
+		old = new Old(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
 		dorosli.push_back(*mature);
 		dzieci.push_back(*kid);
 		jaja.push_back(*egg);
 		kasa.push_back(*coin);
 		stare.push_back(*old);
 	}
-	menu = new Menu();
-	gniazdo = new Nest();
+	menu = new Menu(*assets);
+	gniazdo = new Nest(*assets);
 
+	
 
 }
 
@@ -59,7 +70,7 @@ void PlayState::HandleInput()
 			case sf::Keyboard::Space:
 				std::cout << "Dodano kid muche" << std::endl;
 				Kid *kid;
-				kid = new Kid(sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
+				kid = new Kid(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
 				dzieci.push_back(*kid);
 				break;
 			case sf::Keyboard::X:
@@ -73,7 +84,7 @@ void PlayState::HandleInput()
 			case sf::Keyboard::E:
 				std::cout << "Dodano jajko" << std::endl;
 				Egg *egg;
-				egg = new Egg(sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
+				egg = new Egg(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
 				jaja.push_back(*egg);
 				break;
 			case sf::Keyboard::D:
@@ -113,7 +124,7 @@ void PlayState::Update()
 
 				if (dorosli[i].updateMove(*dorosli[i].getSprite()) == 1) //poruszanie doroslymi, jezeli zostala zwrocona jedynka, to dodaje do gniazda jedzenie (bo zostalo odniesione jajko)
 				{
-					gniazdo->setNestFood(30);
+					gniazdo->setNestFood(50);
 				}
 
 				if (collision.CheckCollision(*dorosli[i].getSprite(), *gniazdo->getSprite()) == true) // kolizja dorosly gniazdo
@@ -387,7 +398,7 @@ void PlayState::evolution()
 			igrek = (dzieci[i].getPosition()).y;
 
 			Mature *mature;
-			mature = new Mature(sf::Vector2f(iks, igrek));
+			mature = new Mature(*assets,sf::Vector2f(iks, igrek));
 			dorosli.push_back(*mature);
 			dzieci.erase(dzieci.begin() + i);
 
@@ -477,7 +488,7 @@ void PlayState::randomGen()
 		if (dt % 90 == 0)
 		{
 			Egg *egg;
-			egg = new Egg(sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
+			egg = new Egg(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
 			jaja.push_back(*egg);
 		}
 	}

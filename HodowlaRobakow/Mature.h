@@ -21,7 +21,7 @@ private:
 	int loadTexture();
 
 public:
-	Mature(sf::Vector2f position = sf::Vector2f(rand() % 800, rand() % 600));
+	Mature(AssetManager &assets, sf::Vector2f position = sf::Vector2f(rand() % 800, rand() % 600));
 	~Mature();
 	void draw(sf::RenderTarget & target);
 	sf::Sprite *getSprite();
@@ -31,5 +31,6 @@ public:
 	int updateMove(sf::Sprite &target);
 	bool goToEgg = false;
 	bool goToSleep = false;
+
 };
 

@@ -1,8 +1,9 @@
 #include "Old.h"
 
 
-Old::Old(sf::Vector2f position)
+Old::Old(AssetManager &assets, sf::Vector2f position):Mature(assets)
 {
+	manager = &assets;
 	life = 300;
 	this->position = position;
 	x = position.x;
@@ -286,8 +287,6 @@ int Old::updateMove(sf::Sprite & target)
 
 int Old::loadTexture()
 {
-	if (!OldTexture.loadFromFile("img/fly-old.png"))
-		return -1;
-	sprite.setTexture(OldTexture);
+	sprite.setTexture(manager->GetTexture("fly-old"));
 	return 0;
 }

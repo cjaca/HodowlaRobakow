@@ -2,8 +2,9 @@
 
 
 
-Kid::Kid(sf::Vector2f position)
+Kid::Kid(AssetManager &assets, sf::Vector2f position)
 {
+	manager = &assets;
 	this->position = position;
 	x = position.x;
 	y = position.y;
@@ -30,9 +31,7 @@ void Kid::draw(sf::RenderTarget & target)
 
 int Kid::loadTexture()
 {
-	if (!KidTexture.loadFromFile("img/kid.png"))
-		return -1;
-	sprite.setTexture(KidTexture);
+	sprite.setTexture(manager->GetTexture("kid"));
 	return 0;
 }
 

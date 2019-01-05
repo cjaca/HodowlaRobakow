@@ -1,6 +1,7 @@
 #pragma once
 #include "DEFINITIONS.h"
 #include "Egg.h"
+#include "AssetManager.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
@@ -16,6 +17,8 @@ private:
 	int loadTexture();
 
 protected:
+	
+	AssetManager *manager;
 	sf::RectangleShape HpBar;
 	sf::Vector2f position;
 	float x;
@@ -24,7 +27,7 @@ protected:
 	int wPoziomie = 0, wPionie = 0;
 	int size = 0;
 public:
-	Kid(sf::Vector2f position = sf::Vector2f(rand() % 800, rand() % 600));
+	Kid(AssetManager &assets, sf::Vector2f position = sf::Vector2f(rand() % 800, rand() % 600));
 	~Kid();
 	void draw(sf::RenderTarget & target);
 	int updateMove(sf::Sprite &target);
