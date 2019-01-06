@@ -112,6 +112,7 @@ void PlayState::Update()
 	menu->showMatureFly(dorosli.size());
 	menu->showOldFly(stare.size());
 	menu->showNestAttributes(gniazdo->getNestFood());
+	menu->showNestMoney(gniazdo->getMoney());
 	evolution(); //sprawdzanie ewolucji malej muchy
 	randomGen();
 	cleanUp(); //sprzatanie zdechlych much
@@ -126,7 +127,7 @@ void PlayState::Update()
 
 				if (dorosli[i].updateMove(*dorosli[i].getSprite()) == 1) //poruszanie doroslymi, jezeli zostala zwrocona jedynka, to dodaje do gniazda jedzenie (bo zostalo odniesione jajko)
 				{
-					gniazdo->setNestFood(50);
+					gniazdo->setNestFood(200);
 				}
 
 				if (collision.CheckCollision(*dorosli[i].getSprite(), *gniazdo->getSprite()) == true) // kolizja dorosly gniazdo
@@ -451,7 +452,7 @@ void PlayState::Update()
 
 			if (stare[i].updateMove(*stare[i].getSprite()) == 1) //poruszanie doroslymi, jezeli zostala zwrocona jedynka, to dodaje do gniazda jedzenie (bo zostalo odniesione jajko)
 			{
-				gniazdo->setNestFood(50);
+				gniazdo->setMoney(1);
 			}
 
 			if (collision.CheckCollision(*stare[i].getSprite(), *gniazdo->getSprite()) == true) // kolizja dorosly gniazdo
@@ -479,7 +480,7 @@ void PlayState::Update()
 
 
 
-			for (int l = 0; l < kasa.size(); l++) //kolizja dorosly - kasa
+			for (int l = 0; l < kasa.size(); l++) //kolizja stary - kasa
 			{
 				if (collision.CheckCollision(*stare[i].getSprite(), *kasa[l].getSprite()) == true)
 				{
@@ -496,7 +497,8 @@ void PlayState::Update()
 					}
 					if (stare[i].flagaKolizja == false && stare[i].goToEgg == true)
 					{
-						//std::cout << "mucha zrezygnowala z pojscia po jajko i wziela pierwsze po drodze" << std::endl;
+						std::cout << "mucha zrezygnowala z pojscia po COIN i wziela pierwsze po drodze" << std::endl;
+						stare[i].loadCoinTexture();
 						stare[i].instrukcja = 0;
 						stare[i].goToEgg = false;
 						stare[i].collect();
@@ -598,7 +600,7 @@ void PlayState::evolution()
 
 	for (int i = 0; i < dorosli.size(); i++)
 	{
-		if (dorosli[i].life <= 60 && dorosli[i].flagaKolizja == true)
+		if (dorosli[i].life <= 50 && dorosli[i].flagaKolizja == true)
 		{
 			dorosli[i].goToSleep = true;
 			dorosli[i].sleep(dt);
@@ -615,16 +617,29 @@ void PlayState::evolution()
 			dorosli[i].flagaKolizja = true; //nadanie flagi ze mucha musi sie juz odbijac od otoczenia
 			dorosli[i].setPosition(sf::Vector2f(512, 520)); // ustawia muche w podanym miejscu po snie
 		}
+		if (dorosli[i].getSize() > 3600) //ewolucja muchy MATURE
+		{
+			iks = (dorosli[i].getPosition()).x;
+			igrek = (dorosli[i].getPosition()).y;
+
+			Old *old;
+			old = new Old(*assets, sf::Vector2f(iks, igrek));
+			stare.push_back(*old);
+			dorosli.erase(dorosli.begin() + i);
+
+			iks = 0;
+			igrek = 0;
+		}
 	}
 
 	for (int i = 0; i < stare.size(); i++)
 	{
-		if (stare[i].life <= 90 && stare[i].flagaKolizja == true)
+		if (stare[i].life <= 80 && stare[i].flagaKolizja == true)
 		{
 			stare[i].goToSleep = true;
 			stare[i].sleep(dt);
 		}
-		if (stare[i].getSize() == stare[i].wakeUp)
+		if (stare[i].getSize() == stare[i].wakeUp && stare[i].givingBirth == false)
 		{
 			if (gniazdo->getNestFood() >= 15)
 			{
@@ -635,6 +650,36 @@ void PlayState::evolution()
 			stare[i].isAsleep = false; //zdjecie flagi ze mucha spi
 			stare[i].flagaKolizja = true; //nadanie flagi ze mucha musi sie juz odbijac od otoczenia
 			stare[i].setPosition(sf::Vector2f(512, 520)); // ustawia muche w podanym miejscu po snie
+		}
+
+		if (stare[i].getSize() % 1800 == 0 && stare[i].getSize() > 0 && stare[i].givingBirth == false)
+		{
+			float x = stare[i].getPosition().x;
+			float y = stare[i].getPosition().y;
+			stare[i].givingBirth = true;
+			stare[i].isAsleep = true;
+			stare[i].flagaKolizja = false;
+			stare[i].wakeUp = stare[i].getSize() + 150;
+			for (i = 0; i < 5; i++)
+			{
+				Kid *kid;
+				kid = new Kid(*assets, sf::Vector2f(x+rand()%5,y+rand()%5));
+				dzieci.push_back(*kid);
+			}
+		}
+		if (stare[i].getSize() == stare[i].wakeUp && stare[i].givingBirth == true)
+		{
+			if (stare[i].carryItem == false)
+			{
+				stare[i].flagaKolizja = true; //nadanie flagi ze mucha musi sie juz odbijac od otoczenia
+			}
+			stare[i].givingBirth = false;
+			stare[i].isAsleep = false; //zdjecie flagi ze mucha spi
+			
+		}
+		if (stare[i].getSize() > 5400) //smierc najstarszej muchy!
+		{
+			stare.erase(stare.begin() + i);
 		}
 	}
 }

@@ -165,8 +165,7 @@ int Kid::updateMove(sf::Sprite & target)
 			a1 = 0;
 			b1 = 0;
 			c1 = 0;
-			x = 512;
-			y = 520;
+			randRespawnPosition();
 			this->isAsleep = true; //ustawia flage ze mucha spi i zeby jej nie ruszac
 			this->goSleep = this->size;
 			this->wakeUp = this->size + 300;
@@ -256,6 +255,31 @@ sf::Vector2f Kid::getPosition()
 	position.x = x;
 	position.y = y;
 	return this->position;
+}
+
+void Kid::randRespawnPosition()
+{
+	int i = rand() % 5;
+	if (i == 0)
+	{
+		x = 602;
+		y = 314;
+	}
+	if (i == 1)
+	{
+		x = 602;
+		y = 474;
+	}
+	if (i == 2)
+	{
+		x = 422;
+		y = 474;
+	}
+	if (i == 3)
+	{
+		x = 422;
+		y = 314;
+	}
 }
 
 void Kid::kolizja()

@@ -70,6 +70,7 @@ void Mature::collect()
 	int x, y;
 	float pozycjaMuchyX, pozycjaMuchyY;
 	this->flagaKolizja = false; 	 //ustawia flage musze ze jest zajeta i zeby wiedziala ze sie nie odbija od innych w tym momencie	
+	carryItem = true;
 	pozycjaMuchyX = this->getPosition().x;
 	pozycjaMuchyY = this->getPosition().y;
 
@@ -321,11 +322,11 @@ int Mature::updateMove(sf::Sprite & target)
 			a1 = 0;
 			b1 = 0;
 			c1 = 0;
-			if (goToEgg == false && goToSleep == false)
+			if (goToEgg == false && goToSleep == false && carryItem == true)
 			{
+				carryItem = false;
 				flagaKolizja = true;
-				x = 512;
-				y = 520;
+				randRespawnPosition();
 				target.setPosition(x, y);
 				loadTexture();
 				return 1; // kod nr 1 - powiadamia ze jajko zostalo zwrocone do bazy i ma zwiekszyc ilosc zarcia dla much.
@@ -336,10 +337,9 @@ int Mature::updateMove(sf::Sprite & target)
 				//std::cout << "powinienem teraz podniesc jajko " << std::endl;
 				goToEgg = false;
 			}
-			else if (goToSleep == true)
+			if (goToSleep == true)
 			{
-				x = 512;
-				y = 520;
+				randRespawnPosition();
 				this->goToSleep = false;
 				this->isAsleep = true; //ustawia flage ze mucha spi i zeby jej nie ruszac
 				this->goSleep = size;

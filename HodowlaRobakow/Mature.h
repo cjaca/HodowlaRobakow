@@ -31,6 +31,7 @@ public:
 	int updateMove(sf::Sprite &target);
 	bool goToEgg = false;
 	bool goToSleep = false; 
+	bool carryItem = false;
 
 };
 

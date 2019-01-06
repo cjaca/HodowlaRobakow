@@ -34,6 +34,7 @@ public:
 	sf::Sprite *getSprite();
 	sf::Vector2f getPosition();
 	sf::Vector2f itemPosition;
+	void randRespawnPosition();
 	void kolizja();
 	void gatherInfo(sf::Vector2f position);
 	int getSize();

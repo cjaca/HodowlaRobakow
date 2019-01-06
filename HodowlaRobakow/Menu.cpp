@@ -11,6 +11,19 @@ Menu::Menu(AssetManager &assets)
 	mainMenuBar.setPosition(sf::Vector2f(1124, 384));
 	mainMenuBar.setFillColor(sf::Color::Black);
 
+	showNestMoneyText.setFont(manager->GetFont("trebu"));;
+	showNestMoneyText.setCharacterSize(10);
+	showNestMoneyText.setFillColor(sf::Color::White);
+	showNestMoneyText.setOrigin(sf::Vector2f(50, 10));
+	showNestMoneyText.setPosition(sf::Vector2f(1100, 250));
+	showNestMoneyText.setString("Ilosc monet: ");
+
+	showNestMoneyNumber.setFont(manager->GetFont("trebu"));
+	showNestMoneyNumber.setCharacterSize(10);
+	showNestMoneyNumber.setFillColor(sf::Color::Yellow);
+	showNestMoneyNumber.setOrigin(sf::Vector2f(50, 10));
+	showNestMoneyNumber.setPosition(sf::Vector2f(1100, 270));
+
 	showNestFoodText.setFont(manager->GetFont("trebu"));;
 	showNestFoodText.setCharacterSize(10);
 	showNestFoodText.setFillColor(sf::Color::White);
@@ -111,6 +124,8 @@ void Menu::draw(sf::RenderWindow & target)
 	target.draw(showOldFlyNumber);
 	target.draw(showNestFoodText);
 	target.draw(showNestFoodNumber);
+	target.draw(showNestMoneyText);
+	target.draw(showNestMoneyNumber);
 }
 
 void Menu::showTimer(int k)
@@ -157,4 +172,10 @@ void Menu::showNestAttributes(int k)
 {
 	std::string s = std::to_string(k);
 	showNestFoodNumber.setString(s);
+}
+
+void Menu::showNestMoney(int k)
+{
+	std::string s = std::to_string(k);
+	showNestMoneyNumber.setString(s);
 }

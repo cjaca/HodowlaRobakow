@@ -27,6 +27,8 @@ public:
 	int getNestFood();
 	void setGarner(int n);
 	int getGarner(); //kazda mucha zajmuje wiecej miejsca w zagrodzie
+	void setMoney(int n);
+	int getMoney();
 	void draw(sf::RenderTarget & target);
 	sf::Sprite *getSprite();
 };

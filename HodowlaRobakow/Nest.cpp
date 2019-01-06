@@ -5,8 +5,6 @@ Nest::Nest(AssetManager & assets)
 	loadTexture(assets);
 	NestSprite.setOrigin(50, 50);
 	NestSprite.setPosition(RESPAWN_WIDTH / 2, RESPAWN_HEIGHT / 2);
-
-
 }
 
 
@@ -22,6 +20,16 @@ void Nest::setNestFood(int n)
 int Nest::getNestFood()
 {
 	return food;
+}
+
+void Nest::setMoney(int n)
+{
+	money = money + n;
+}
+
+int Nest::getMoney()
+{
+	return money;
 }
 
 void Nest::draw(sf::RenderTarget & target)

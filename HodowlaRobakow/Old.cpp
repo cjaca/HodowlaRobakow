@@ -178,16 +178,17 @@ int Old::updateMove(sf::Sprite & target)
 		//Change HpBar position with Fly
 		target.setPosition(x, y);
 		this->HpBar.setPosition(x - 10, y + 10);
-		if (getPosition().x > 490 && getPosition().x < 540 && getPosition().y > 365 && getPosition().y < 395) {
+
+		if (getPosition().x > 510 && getPosition().x < 520 && getPosition().y > 375 && getPosition().y < 385) {
 			instrukcja -= 1;
 			a1 = 0;
 			b1 = 0;
 			c1 = 0;
-			if (goToEgg == false && goToSleep == false)
+			if (goToEgg == false && goToSleep == false && carryItem == true)
 			{
+				carryItem = false;
 				flagaKolizja = true;
-				x = 512;
-				y = 520;
+				randRespawnPosition();
 				target.setPosition(x, y);
 				loadTexture();
 				return 1; // kod nr 1 - powiadamia ze jajko zostalo zwrocone do bazy i ma zwiekszyc ilosc zarcia dla much.
@@ -198,10 +199,9 @@ int Old::updateMove(sf::Sprite & target)
 				//std::cout << "powinienem teraz podniesc $$$ " << std::endl;
 				goToEgg = false;
 			}
-			else if (goToSleep == true)
+			if (goToSleep == true)
 			{
-				x = 512;
-				y = 520;
+				randRespawnPosition();
 				this->goToSleep = false;
 				this->isAsleep = true; //ustawia flage ze mucha spi i zeby jej nie ruszac
 				this->goSleep = size;

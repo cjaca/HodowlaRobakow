@@ -24,6 +24,7 @@ public:
 	void addEgg();
 
 	void showNestAttributes(int k);
+	void showNestMoney(int k);
 
 private:
 	AssetManager *manager;
@@ -34,7 +35,8 @@ private:
 		showTotalFlyNumber, showKidFlyText, showKidFlyNumber,
 		showMatureFlyText, showMatureFlyNumber,
 		showNestFoodText, showNestFoodNumber,
-		showOldFlyText, showOldFlyNumber;
+		showOldFlyText, showOldFlyNumber,
+		showNestMoneyText, showNestMoneyNumber;
 	sf::RectangleShape mainMenuBar;
 	//TODO: Add edition fields for attributes of simulation etc.
 };
