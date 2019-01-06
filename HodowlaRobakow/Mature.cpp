@@ -65,7 +65,7 @@ void Mature::setSize() //TODO: Ogarnac setSize aby byl wspolny dla wszystkich, t
 
 void Mature::collect()
 {
-	//sprite.setTexture(manager->GetTexture("fly-egg"));
+	sprite.setTexture(manager->GetTexture("fly-egg"));
 
 	int x, y;
 	float pozycjaMuchyX, pozycjaMuchyY;
@@ -141,7 +141,7 @@ void Mature::goGetIt(sf::Vector2f position)
 
 	wPoziomie = position.x - pozycjaMuchyX;
 	wPionie = position.y - pozycjaMuchyY;
-	std::cout << "Mucha dostala info ze jajko jest na pozycji "<< position.x<< " "<< position.y << std::endl;
+	//std::cout << "Mucha dostala info ze jajko jest na pozycji "<< position.x<< " "<< position.y << std::endl;
 	if (instrukcja == 0) {
 		if (wPoziomie > 0) // ---->
 		{
@@ -333,7 +333,7 @@ int Mature::updateMove(sf::Sprite & target)
 			else if (goToEgg == true)
 			{
 				flagaKolizja = true;
-				std::cout << "powinienem teraz podniesc jajko " << std::endl;
+				//std::cout << "powinienem teraz podniesc jajko " << std::endl;
 				goToEgg = false;
 			}
 			else if (goToSleep == true)

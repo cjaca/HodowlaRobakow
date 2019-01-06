@@ -10,6 +10,7 @@
 #define MATUREFLY_FILEPATH "img/fly-mature.png"
 #define MATUREFLYEGG_FILEPATH "img/fly-egg.png"
 #define OLDFLY_FILEPATH "img/fly-old.png"
+#define FLYCOIN_FILEPATH "img/fly-coin.png"
 #define NEST_FILEPATH "img/nest.png"
 
 #define EGG_FILEPATH "img/egg.png"

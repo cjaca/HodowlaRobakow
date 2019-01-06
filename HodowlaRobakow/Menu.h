@@ -30,10 +30,11 @@ private:
 	sf::Clock clock;
 	sf::Time elapsed;
 	//sf::Font Trebu;
-	sf::Text timeElapsed, czasSymulacji, showTotalFlyText, 
-		showTotalFlyNumber, showKidFlyText, showKidFlyNumber, 
-		showMatureFlyText, showMatureFlyNumber, 
-		showNestFoodText, showNestFoodNumber;
+	sf::Text timeElapsed, czasSymulacji, showTotalFlyText,
+		showTotalFlyNumber, showKidFlyText, showKidFlyNumber,
+		showMatureFlyText, showMatureFlyNumber,
+		showNestFoodText, showNestFoodNumber,
+		showOldFlyText, showOldFlyNumber;
 	sf::RectangleShape mainMenuBar;
 	//TODO: Add edition fields for attributes of simulation etc.
 };

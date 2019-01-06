@@ -273,7 +273,7 @@ void Kid::kolizja()
 void Kid::gatherInfo(sf::Vector2f position)
 {
 	this->collectedInfo = true;
-	this->eggPosition = position;
+	this->itemPosition = position;
 }
 
 int Kid::getSize()

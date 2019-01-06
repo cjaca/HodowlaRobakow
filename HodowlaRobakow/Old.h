@@ -15,5 +15,7 @@ public:
 	sf::Sprite *getSprite();
 	void setSize();
 	int updateMove(sf::Sprite &target);
+	void loadCoinTexture();
+	void goGetIt(sf::Vector2f position);
 };
 

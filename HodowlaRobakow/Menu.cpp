@@ -63,6 +63,19 @@ Menu::Menu(AssetManager &assets)
 	showMatureFlyNumber.setOrigin(sf::Vector2f(50, 10));
 	showMatureFlyNumber.setPosition(sf::Vector2f(1100, 430));
 
+	showOldFlyText.setFont(manager->GetFont("trebu"));
+	showOldFlyText.setCharacterSize(10);
+	showOldFlyText.setFillColor(sf::Color::White);
+	showOldFlyText.setOrigin(sf::Vector2f(50, 10));
+	showOldFlyText.setPosition(sf::Vector2f(1100, 450));
+	showOldFlyText.setString("Ilosc starszych much: ");
+
+	showOldFlyNumber.setFont(manager->GetFont("trebu"));
+	showOldFlyNumber.setCharacterSize(10);
+	showOldFlyNumber.setFillColor(sf::Color::Yellow);
+	showOldFlyNumber.setOrigin(sf::Vector2f(50, 10));
+	showOldFlyNumber.setPosition(sf::Vector2f(1100, 470));
+
 	czasSymulacji.setFont(manager->GetFont("trebu"));
 	czasSymulacji.setCharacterSize(10);
 	czasSymulacji.setFillColor(sf::Color::White);
@@ -94,6 +107,8 @@ void Menu::draw(sf::RenderWindow & target)
 	target.draw(showKidFlyNumber);
 	target.draw(showMatureFlyText);
 	target.draw(showMatureFlyNumber);
+	target.draw(showOldFlyText);
+	target.draw(showOldFlyNumber);
 	target.draw(showNestFoodText);
 	target.draw(showNestFoodNumber);
 }
@@ -130,6 +145,12 @@ void Menu::showMatureFly(int k)
 {
 	std::string s = std::to_string(k);
 	showMatureFlyNumber.setString(s);
+}
+
+void Menu::showOldFly(int k)
+{
+	std::string s = std::to_string(k);
+	showOldFlyNumber.setString(s);
 }
 
 void Menu::showNestAttributes(int k)

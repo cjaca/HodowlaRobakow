@@ -178,9 +178,8 @@ int Old::updateMove(sf::Sprite & target)
 		//Change HpBar position with Fly
 		target.setPosition(x, y);
 		this->HpBar.setPosition(x - 10, y + 10);
-		if (getPosition().x > 500 && getPosition().x < 530 && getPosition().y > 375 && getPosition().y < 385) {
+		if (getPosition().x > 490 && getPosition().x < 540 && getPosition().y > 365 && getPosition().y < 395) {
 			instrukcja -= 1;
-
 			a1 = 0;
 			b1 = 0;
 			c1 = 0;
@@ -196,7 +195,7 @@ int Old::updateMove(sf::Sprite & target)
 			else if (goToEgg == true)
 			{
 				flagaKolizja = true;
-				std::cout << "powinienem teraz podniesc jajko " << std::endl;
+				//std::cout << "powinienem teraz podniesc $$$ " << std::endl;
 				goToEgg = false;
 			}
 			else if (goToSleep == true)
@@ -284,9 +283,77 @@ int Old::updateMove(sf::Sprite & target)
 	}
 }
 
-
 int Old::loadTexture()
 {
 	sprite.setTexture(manager->GetTexture("fly-old"));
 	return 0;
+}
+
+void Old::loadCoinTexture()
+{
+	sprite.setTexture(manager->GetTexture("fly-coin"));
+}
+
+void Old::goGetIt(sf::Vector2f position)
+{
+	//int x, y;
+	float pozycjaMuchyX, pozycjaMuchyY;
+	this->flagaKolizja = false; 	 //ustawia flage musze ze jest zajeta i zeby wiedziala ze sie nie odbija od innych w tym momencie	
+	this->goToEgg = true;
+	pozycjaMuchyX = this->getPosition().x;
+	pozycjaMuchyY = this->getPosition().y;
+
+	//wyznaczanie drogi do gniazda ktore zawsze jest w tym samym miejscu
+
+	wPoziomie = position.x - pozycjaMuchyX;
+	wPionie = position.y - pozycjaMuchyY;
+	//std::cout << "Mucha dostala info ze jajko jest na pozycji "<< position.x<< " "<< position.y << std::endl;
+	if (instrukcja == 0) {
+		if (wPoziomie > 0) // ---->
+		{
+			this->a1 = wPoziomie;
+			this->b1 = 0;
+			this->c1 = 1;
+			this->instrukcja++;
+			this->licznik = 0;
+		}
+		if (wPoziomie < 0) // <-----
+		{
+			this->a1 = wPoziomie * (-1);
+			this->b1 = 0;
+			this->c1 = 0;
+			this->instrukcja++;
+			this->licznik = 0;
+		}
+		if (wPionie > 0) //  \/
+		{
+			this->a2 = wPionie;
+			this->b2 = 1;
+			this->c2 = 1;
+			this->instrukcja++;
+			this->licznik = 0;
+		}
+		if (wPionie < 0) //  ^
+		{
+			this->a2 = wPionie * (-1);
+			this->b2 = 1;
+			this->c2 = 0;
+			this->instrukcja++;
+			this->licznik = 0;
+		}
+		if (wPoziomie == 0)
+		{
+			this->a1 = a2;
+			this->b1 = b2;
+			this->c1 = c2;
+			this->licznik = 0;
+		}
+		if (wPionie == 0)
+		{
+			this->a2 = a1;
+			this->b2 = b1;
+			this->c2 = c1;
+			this->licznik = 0;
+		}
+	}
 }

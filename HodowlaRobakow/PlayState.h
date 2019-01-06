@@ -33,14 +33,13 @@ public:
 private:
 	AssetManager *assets;
 	friend class Menu;
-	int IloscMuch();
 	sf::RenderWindow *window;
 	GameStates *state;
 	Nest *gniazdo;
 	Menu *menu;
 	Collision collision;
 	sf::Vector2f ScreenSize;
-	int iloscMuch = 1000;
+	int iloscMuch = 105;
 	std::vector<Kid> dzieci;
 	std::vector<Mature> dorosli;
 	std::vector<Old> stare;

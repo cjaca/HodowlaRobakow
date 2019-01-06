@@ -18,6 +18,7 @@ private:
 	int foodCapacity = 500;
 	int garner = 0; //zagroda
 	int garnerCapacity = 50;
+	int money = 0;
 
 public:
 	Nest(AssetManager &assets);
