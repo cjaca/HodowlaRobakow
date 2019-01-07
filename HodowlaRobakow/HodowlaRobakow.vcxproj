@@ -130,7 +130,6 @@
     <ClCompile Include="Coin.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Egg.cpp" />
-    <ClCompile Include="Input.cpp" />
     <ClCompile Include="Kid.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainState.cpp" />
@@ -146,7 +145,6 @@
     <ClInclude Include="Collision.h" />
     <ClInclude Include="DEFINITIONS.h" />
     <ClInclude Include="Egg.h" />
-    <ClInclude Include="Input.h" />
     <ClInclude Include="Kid.h" />
     <ClInclude Include="MainState.h" />
     <ClInclude Include="Mature.h" />
