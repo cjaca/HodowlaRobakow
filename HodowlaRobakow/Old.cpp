@@ -30,14 +30,14 @@ sf::Sprite * Old::getSprite()
 	return &this->sprite;
 }
 
-void Old::setSize()
+void Old::setSize(float k)
 {
 	int rozmiarPaskaHP;
 	//set size of Fly
 	this->size = this->size + 1;
 	if (isAsleep == false)
 	{
-		life = life - 0.22;
+		life = life - k;
 	}
 	if (life <= 0)
 	{

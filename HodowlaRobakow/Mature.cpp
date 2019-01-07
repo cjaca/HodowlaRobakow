@@ -38,14 +38,14 @@ sf::Sprite *Mature::getSprite()
 	return &this->sprite;
 }
 
-void Mature::setSize() //TODO: Ogarnac setSize aby byl wspolny dla wszystkich, tak na prawde to zmienia sie tylko zaleznosci od life
+void Mature::setSize(float k) //TODO: Ogarnac setSize aby byl wspolny dla wszystkich, tak na prawde to zmienia sie tylko zaleznosci od life
 {
 	int rozmiarPaskaHP;
 	//set size of Fly
 	this->size = this->size + 1;
 	if (isAsleep == false)
 	{
-		life = life - 0.22;
+		life = life - k;
 	}
 	if (life <= 0)
 	{

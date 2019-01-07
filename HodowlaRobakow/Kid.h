@@ -38,7 +38,7 @@ public:
 	void kolizja();
 	void gatherInfo(sf::Vector2f position);
 	int getSize();
-	void setSize();
+	void setSize(float k);
 	void hpBar();
 	void setPosition(sf::Vector2f position);
 	bool flagaKolizja = true; //ustawia flage czy ma kolizjowac

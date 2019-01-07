@@ -21,6 +21,7 @@
 class PlayState : public State
 {
 public:
+
 	PlayState(sf::RenderWindow *window , GameStates *state);
 	~PlayState();
 
@@ -39,7 +40,7 @@ private:
 	Menu *menu;
 	Collision collision;
 	sf::Vector2f ScreenSize;
-	int iloscMuch = 75;
+	int iloscMuch = 80;
 	std::vector<Kid> dzieci;
 	std::vector<Mature> dorosli;
 	std::vector<Old> stare;
@@ -51,6 +52,10 @@ private:
 	void cleanUp();
 	void randomGen();
 	int totalEggCount = 0;
+	int kidAmmount = 5;
+	float kidDPS = 0.22;
+	float matureDPS = 0.22;
+	float oldDPS = 0.22;
 protected:
 	int dt = 0;
 };

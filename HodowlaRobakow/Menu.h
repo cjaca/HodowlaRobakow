@@ -17,15 +17,13 @@ public:
 	void showKidFly(int k);
 	void showMatureFly(int k);
 	void showOldFly(int k);
-
-	void addKidFly();
-	void addMatureFly();
-	void addOldFly();
-	void addEgg();
-
+	void showKidRespAmmount(int k);
 	void showNestAttributes(int k);
 	void showNestMoney(int k);
-
+	void showKidDps(float k);
+	void showMatureDps(float k);
+	void showOldDps(float k);
+	sf::Sprite *getSprite(int k);
 private:
 	AssetManager *manager;
 	sf::Clock clock;
@@ -36,8 +34,22 @@ private:
 		showMatureFlyText, showMatureFlyNumber,
 		showNestFoodText, showNestFoodNumber,
 		showOldFlyText, showOldFlyNumber,
-		showNestMoneyText, showNestMoneyNumber;
+		showNestMoneyText, showNestMoneyNumber,
+		showKidRespText, showKidRespNumber,
+		showKidDpsText, showKidDpsNumber,
+		showMatureDpsText, showMatureDpsNumber,
+		showOldDpsText, showOldDpsNumber;
 	sf::RectangleShape mainMenuBar;
+	sf::Sprite plusSpriteKid, minusSpriteKid,
+		plusSpriteMature, minusSpriteMature,
+		plusSpriteOld, minusSpriteOld,
+		plusSpriteNestFood, minusSpriteNestFood,
+		plusSpriteNestMoney, minusSpriteNestMoney,
+		plusSpriteKidResp, minusSpriteKidResp,
+		plusKidDps, minusKidDps,
+		plusMatureDps, minusMatureDps,
+		plusOldDps, minusOldDps;
+	
 	//TODO: Add edition fields for attributes of simulation etc.
 };
 

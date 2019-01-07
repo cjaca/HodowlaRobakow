@@ -305,14 +305,14 @@ int Kid::getSize()
 	return this->size;
 }
 
-void Kid::setSize()
+void Kid::setSize(float k)
 {
 	int rozmiarPaskaHP;
 	//set size of Fly
 	size = size+1;
 	if (isAsleep == false)
 	{
-		life = life - 0.22;
+		life = life - k;
 	}
 	if (life <= 0)
 	{

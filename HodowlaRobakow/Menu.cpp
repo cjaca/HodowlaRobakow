@@ -18,6 +18,14 @@ Menu::Menu(AssetManager &assets)
 	showNestMoneyText.setPosition(sf::Vector2f(1100, 250));
 	showNestMoneyText.setString("Ilosc monet: ");
 
+	plusSpriteNestMoney.setTexture(manager->GetTexture("plus"));
+	plusSpriteNestMoney.setOrigin(1, 1);
+	plusSpriteNestMoney.setPosition(sf::Vector2f(1190, 245));
+
+	minusSpriteNestMoney.setTexture(manager->GetTexture("minus"));
+	minusSpriteNestMoney.setOrigin(1, 1);
+	minusSpriteNestMoney.setPosition(sf::Vector2f(1210, 245));
+
 	showNestMoneyNumber.setFont(manager->GetFont("trebu"));
 	showNestMoneyNumber.setCharacterSize(10);
 	showNestMoneyNumber.setFillColor(sf::Color::Yellow);
@@ -30,6 +38,14 @@ Menu::Menu(AssetManager &assets)
 	showNestFoodText.setOrigin(sf::Vector2f(50, 10));
 	showNestFoodText.setPosition(sf::Vector2f(1100, 290));
 	showNestFoodText.setString("Ilosc jedzenia w gniezdzie: ");
+
+	plusSpriteNestFood.setTexture(manager->GetTexture("plus"));
+	plusSpriteNestFood.setOrigin(1, 1);
+	plusSpriteNestFood.setPosition(sf::Vector2f(1190, 285));
+
+	minusSpriteNestFood.setTexture(manager->GetTexture("minus"));
+	minusSpriteNestFood.setOrigin(1, 1);
+	minusSpriteNestFood.setPosition(sf::Vector2f(1210, 285));
 
 	showNestFoodNumber.setFont(manager->GetFont("trebu"));
 	showNestFoodNumber.setCharacterSize(10);
@@ -56,6 +72,14 @@ Menu::Menu(AssetManager &assets)
 	showKidFlyText.setOrigin(sf::Vector2f(50, 10));
 	showKidFlyText.setPosition(sf::Vector2f(1100, 370));
 	showKidFlyText.setString("Ilosc mlodych much: ");
+
+	plusSpriteKid.setTexture(manager->GetTexture("plus"));
+	plusSpriteKid.setOrigin(1, 1);
+	plusSpriteKid.setPosition(sf::Vector2f(1190, 365));
+
+	minusSpriteKid.setTexture(manager->GetTexture("minus"));
+	minusSpriteKid.setOrigin(1, 1);
+	minusSpriteKid.setPosition(sf::Vector2f(1210, 365));
 	
 	showKidFlyNumber.setFont(manager->GetFont("trebu"));
 	showKidFlyNumber.setCharacterSize(10);
@@ -70,6 +94,14 @@ Menu::Menu(AssetManager &assets)
 	showMatureFlyText.setPosition(sf::Vector2f(1100, 410));
 	showMatureFlyText.setString("Ilosc doroslych much: ");
 
+	plusSpriteMature.setTexture(manager->GetTexture("plus"));
+	plusSpriteMature.setOrigin(1, 1);
+	plusSpriteMature.setPosition(sf::Vector2f(1190, 405));
+
+	minusSpriteMature.setTexture(manager->GetTexture("minus"));
+	minusSpriteMature.setOrigin(1, 1);
+	minusSpriteMature.setPosition(sf::Vector2f(1210, 405));
+
 	showMatureFlyNumber.setFont(manager->GetFont("trebu"));
 	showMatureFlyNumber.setCharacterSize(10);
 	showMatureFlyNumber.setFillColor(sf::Color::Yellow);
@@ -83,12 +115,104 @@ Menu::Menu(AssetManager &assets)
 	showOldFlyText.setPosition(sf::Vector2f(1100, 450));
 	showOldFlyText.setString("Ilosc starszych much: ");
 
+	plusSpriteOld.setTexture(manager->GetTexture("plus"));
+	plusSpriteOld.setOrigin(1, 1);
+	plusSpriteOld.setPosition(sf::Vector2f(1190, 445));
+
+	minusSpriteOld.setTexture(manager->GetTexture("minus"));
+	minusSpriteOld.setOrigin(1, 1);
+	minusSpriteOld.setPosition(sf::Vector2f(1210, 445));
+
 	showOldFlyNumber.setFont(manager->GetFont("trebu"));
 	showOldFlyNumber.setCharacterSize(10);
 	showOldFlyNumber.setFillColor(sf::Color::Yellow);
 	showOldFlyNumber.setOrigin(sf::Vector2f(50, 10));
 	showOldFlyNumber.setPosition(sf::Vector2f(1100, 470));
+	////////
+	showKidRespText.setFont(manager->GetFont("trebu"));
+	showKidRespText.setCharacterSize(10);
+	showKidRespText.setFillColor(sf::Color::White);
+	showKidRespText.setOrigin(sf::Vector2f(50, 10));
+	showKidRespText.setPosition(sf::Vector2f(1100, 490));
+	showKidRespText.setString("Ilosc much z jednego legu: ");
 
+	plusSpriteKidResp.setTexture(manager->GetTexture("plus"));
+	plusSpriteKidResp.setOrigin(1, 1);
+	plusSpriteKidResp.setPosition(sf::Vector2f(1190, 485));
+
+	minusSpriteKidResp.setTexture(manager->GetTexture("minus"));
+	minusSpriteKidResp.setOrigin(1, 1);
+	minusSpriteKidResp.setPosition(sf::Vector2f(1210, 485));
+
+	showKidRespNumber.setFont(manager->GetFont("trebu"));
+	showKidRespNumber.setCharacterSize(10);
+	showKidRespNumber.setFillColor(sf::Color::Yellow);
+	showKidRespNumber.setOrigin(sf::Vector2f(50, 10));
+	showKidRespNumber.setPosition(sf::Vector2f(1100, 510));
+	//
+	showKidDpsText.setFont(manager->GetFont("trebu"));
+	showKidDpsText.setCharacterSize(10);
+	showKidDpsText.setFillColor(sf::Color::White);
+	showKidDpsText.setOrigin(sf::Vector2f(50, 10));
+	showKidDpsText.setPosition(sf::Vector2f(1100, 530));
+	showKidDpsText.setString("Nieodpornosc na glod mlodej: ");
+
+	plusKidDps.setTexture(manager->GetTexture("plus"));
+	plusKidDps.setOrigin(1, 1);
+	plusKidDps.setPosition(sf::Vector2f(1190, 525));
+
+	minusKidDps.setTexture(manager->GetTexture("minus"));
+	minusKidDps.setOrigin(1, 1);
+	minusKidDps.setPosition(sf::Vector2f(1210, 525));
+
+	showKidDpsNumber.setFont(manager->GetFont("trebu"));
+	showKidDpsNumber.setCharacterSize(10);
+	showKidDpsNumber.setFillColor(sf::Color::Yellow);
+	showKidDpsNumber.setOrigin(sf::Vector2f(50, 10));
+	showKidDpsNumber.setPosition(sf::Vector2f(1100, 550));
+	////
+	showMatureDpsText.setFont(manager->GetFont("trebu"));
+	showMatureDpsText.setCharacterSize(10);
+	showMatureDpsText.setFillColor(sf::Color::White);
+	showMatureDpsText.setOrigin(sf::Vector2f(50, 10));
+	showMatureDpsText.setPosition(sf::Vector2f(1100, 570));
+	showMatureDpsText.setString("Nieodpornosc na glod doroslej:");
+
+	plusMatureDps.setTexture(manager->GetTexture("plus"));
+	plusMatureDps.setOrigin(1, 1);
+	plusMatureDps.setPosition(sf::Vector2f(1190, 565));
+
+	minusMatureDps.setTexture(manager->GetTexture("minus"));
+	minusMatureDps.setOrigin(1, 1);
+	minusMatureDps.setPosition(sf::Vector2f(1210, 565));
+
+	showMatureDpsNumber.setFont(manager->GetFont("trebu"));
+	showMatureDpsNumber.setCharacterSize(10);
+	showMatureDpsNumber.setFillColor(sf::Color::Yellow);
+	showMatureDpsNumber.setOrigin(sf::Vector2f(50, 10));
+	showMatureDpsNumber.setPosition(sf::Vector2f(1100, 590));
+	////
+	showOldDpsText.setFont(manager->GetFont("trebu"));
+	showOldDpsText.setCharacterSize(10);
+	showOldDpsText.setFillColor(sf::Color::White);
+	showOldDpsText.setOrigin(sf::Vector2f(50, 10));
+	showOldDpsText.setPosition(sf::Vector2f(1100, 610));
+	showOldDpsText.setString("Nieodpornosc na glod starszej:");
+
+	plusOldDps.setTexture(manager->GetTexture("plus"));
+	plusOldDps.setOrigin(1, 1);
+	plusOldDps.setPosition(sf::Vector2f(1190, 605));
+
+	minusOldDps.setTexture(manager->GetTexture("minus"));
+	minusOldDps.setOrigin(1, 1);
+	minusOldDps.setPosition(sf::Vector2f(1210, 605));
+
+	showOldDpsNumber.setFont(manager->GetFont("trebu"));
+	showOldDpsNumber.setCharacterSize(10);
+	showOldDpsNumber.setFillColor(sf::Color::Yellow);
+	showOldDpsNumber.setOrigin(sf::Vector2f(50, 10));
+	showOldDpsNumber.setPosition(sf::Vector2f(1100, 630));
+	////
 	czasSymulacji.setFont(manager->GetFont("trebu"));
 	czasSymulacji.setCharacterSize(10);
 	czasSymulacji.setFillColor(sf::Color::White);
@@ -101,6 +225,7 @@ Menu::Menu(AssetManager &assets)
 	timeElapsed.setFillColor(sf::Color::Green);
 	timeElapsed.setOrigin(sf::Vector2f(50, 10));
 	timeElapsed.setPosition(sf::Vector2f(1150, 750));
+
 }
 
 
@@ -110,7 +235,6 @@ Menu::~Menu()
 
 void Menu::draw(sf::RenderWindow & target)
 {
-	
 	target.draw(mainMenuBar); //musi byc pierwsze bo zakrywa cala reszte
 	target.draw(czasSymulacji);
 	target.draw(timeElapsed);
@@ -126,6 +250,32 @@ void Menu::draw(sf::RenderWindow & target)
 	target.draw(showNestFoodNumber);
 	target.draw(showNestMoneyText);
 	target.draw(showNestMoneyNumber);
+	target.draw(plusSpriteKid);
+	target.draw(minusSpriteKid);
+	target.draw(plusSpriteMature);
+	target.draw(minusSpriteMature);
+	target.draw(plusSpriteOld);
+	target.draw(minusSpriteOld);
+	target.draw(plusSpriteNestFood);
+	target.draw(minusSpriteNestFood);
+	target.draw(plusSpriteNestMoney);
+	target.draw(minusSpriteNestMoney);
+	target.draw(plusSpriteKidResp);
+	target.draw(minusSpriteKidResp);
+	target.draw(showKidRespText);
+	target.draw(showKidRespNumber);
+	target.draw(showKidDpsText);
+	target.draw(showKidDpsNumber);
+	target.draw(plusKidDps);
+	target.draw(minusKidDps);
+	target.draw(showMatureDpsText);
+	target.draw(showMatureDpsNumber);
+	target.draw(plusMatureDps);
+	target.draw(minusMatureDps);
+	target.draw(showOldDpsText);
+	target.draw(showOldDpsNumber);
+	target.draw(plusOldDps);
+	target.draw(minusOldDps);
 }
 
 void Menu::showTimer(int k)
@@ -168,6 +318,12 @@ void Menu::showOldFly(int k)
 	showOldFlyNumber.setString(s);
 }
 
+void Menu::showKidRespAmmount(int k)
+{
+	std::string s = std::to_string(k);
+	showKidRespNumber.setString(s);
+}
+
 void Menu::showNestAttributes(int k)
 {
 	std::string s = std::to_string(k);
@@ -178,4 +334,98 @@ void Menu::showNestMoney(int k)
 {
 	std::string s = std::to_string(k);
 	showNestMoneyNumber.setString(s);
+}
+
+void Menu::showKidDps(float k)
+{
+	std::string s = std::to_string(k);
+	showKidDpsNumber.setString(s);
+}
+
+void Menu::showMatureDps(float k)
+{
+	std::string s = std::to_string(k);
+	showMatureDpsNumber.setString(s);
+}
+
+void Menu::showOldDps(float k)
+{
+	std::string s = std::to_string(k);
+	showOldDpsNumber.setString(s);
+}
+
+sf::Sprite * Menu::getSprite(int k)
+{
+	if (k == 1)
+	{
+		return &this->plusSpriteKid;
+	}
+	if (k == 2)
+	{
+		return &this->minusSpriteKid;
+	}
+	if (k == 3)
+	{
+		return &this->plusSpriteMature;
+	}
+	if (k == 4)
+	{
+		return &this->minusSpriteMature;
+	}
+	if (k == 5)
+	{
+		return &this->plusSpriteOld;
+	}
+	if (k == 6)
+	{
+		return &this->minusSpriteOld;
+	}
+	if (k == 7)
+	{
+		return &this->plusSpriteNestFood;
+	}
+	if (k == 8)
+	{
+		return &this->minusSpriteNestFood;
+	}
+	if (k == 9)
+	{
+		return &this->plusSpriteNestMoney;
+	}
+	if (k == 10)
+	{
+		return &this->minusSpriteNestMoney;
+	}
+	if (k == 11)
+	{
+		return &this->plusSpriteKidResp;
+	}
+	if (k == 12)
+	{
+		return &this->minusSpriteKidResp;
+	}
+	if (k == 13)
+	{
+		return &this->plusKidDps;
+	}
+	if (k == 14)
+	{
+		return &this->minusKidDps;
+	}
+	if (k == 15)
+	{
+		return &this->plusMatureDps;
+	}
+	if (k == 16)
+	{
+		return &this->minusMatureDps;
+	}
+	if (k == 17)
+	{
+		return &this->plusOldDps;
+	}
+	if (k == 18)
+	{
+		return &this->minusOldDps;
+	}
 }

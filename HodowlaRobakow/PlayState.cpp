@@ -8,7 +8,7 @@ PlayState::PlayState(sf::RenderWindow * window, GameStates * state)
 	this->window = window;
 	this->state = state;
 	this->isGameStarted = false;
-	
+
 }
 
 PlayState::~PlayState()
@@ -28,7 +28,12 @@ void PlayState::Init()
 	assets->LoadTexture("egg", EGG_FILEPATH);
 	assets->LoadTexture("coin", COIN_FILEPATH);
 	assets->LoadTexture("fly-coin", FLYCOIN_FILEPATH);
+	assets->LoadTexture("plus", PLUS_FILEPATH);
+	assets->LoadTexture("minus", MINUS_FILEPATH);
 	assets->LoadFont("trebu", TREBU_FILEPATH);
+
+
+
 	for (int i = 0; i < iloscMuch; i++)
 	{
 		Mature *mature;
@@ -57,12 +62,13 @@ void PlayState::Init()
 void PlayState::HandleInput()
 {
 	sf::Event event;
-	while (window->pollEvent(event)) {
+	while (window->pollEvent(event)) 
+	{
 		if (event.type == sf::Event::Closed) window->close();
 
 
-		if (event.type == sf::Event::KeyPressed) {
-
+		if (event.type == sf::Event::KeyPressed) 
+		{
 			switch (event.key.code) {
 
 			case sf::Keyboard::Escape: window->close(); break;
@@ -97,12 +103,126 @@ void PlayState::HandleInput()
 				break;
 			}
 		}
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		{
+			for (int i = 1; i < 19; i++)
+			{
+				menu->getSprite(i)->getPosition().x;
+				sf::IntRect tempRect(menu->getSprite(i)->getPosition().x, menu->getSprite(i)->getPosition().y, menu->getSprite(i)->getGlobalBounds().width, menu->getSprite(i)->getGlobalBounds().height);
+				if (tempRect.contains(sf::Mouse::getPosition(*window)))
+				{
+					if (i == 1)
+					{
+						std::cout << "Dodano kid muche" << std::endl;
+						Kid *kid;
+						kid = new Kid(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
+						dzieci.push_back(*kid);
+					}
+					if (i == 2)
+					{
+						if (dzieci.size() > 0) {
+							dzieci.erase(dzieci.begin());
+						}
+					}
+					if (i == 3)
+					{
+						std::cout << "Dodano dorosla muche" << std::endl;
+						Mature *mature;
+						mature = new Mature(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
+						dorosli.push_back(*mature);
+					}
+					if (i == 4)
+					{
+						if (dorosli.size() > 0) {
+							dorosli.erase(dorosli.begin());
+						}
+					}
+					if (i == 5)
+					{
+						std::cout << "Dodano starsza muche" << std::endl;
+						Old *old;
+						old = new Old(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
+						stare.push_back(*old);
+					}
+					if (i == 6)
+					{
+						if (stare.size() > 0) {
+							stare.erase(stare.begin());
+						}
+					}
+					if (i == 7)
+					{
+						std::cout << "Dodano jedzenie do gniazda" << std::endl;
+						gniazdo->setNestFood(200);
+					}
+					if (i == 8)
+					{
+						if (gniazdo->getNestFood() > 0) {
+							gniazdo->setNestFood(-200);
+						}
+					}
+					if (i == 9)
+					{
+						std::cout << "Dodano monetke do gniazda" << std::endl;
+						gniazdo->setMoney(1);
+					}
+					if (i == 10)
+					{
+						if (gniazdo->getMoney() > 0) {
+							gniazdo->setMoney(-1);
+						}
+					}
+					if (i == 11)
+					{
+						std::cout << "Dodano ilosc much z jednego legu" << std::endl;
+						kidAmmount += 1;
+					}
+					if (i == 12)
+					{
+						if (kidAmmount > 0) {
+							kidAmmount -= 1;
+						}
+					}
+					if (i == 13)
+					{
+						std::cout << "Zmniejszono przezywalnosc mlodej muchy" << std::endl;
+						kidDPS += 0.01;
+					}
+					if (i == 14)
+					{
+						if (kidDPS > 0.01) {
+							kidDPS -= 0.01;
+						}
+					}
+					if (i == 15)
+					{
+						std::cout << "Zmniejszono przezywalnosc doroslej muchy" << std::endl;
+						matureDPS += 0.01;
+					}
+					if (i == 16)
+					{
+						if (matureDPS > 0.01) {
+							matureDPS -= 0.01;
+						}
+					}
+					if (i == 17)
+					{
+						std::cout << "Zmniejszono przezywalnosc starszej muchy" << std::endl;
+						oldDPS += 0.01;
+					}
+					if (i == 18)
+					{
+						if (oldDPS > 0.01) {
+							oldDPS -= 0.01;
+						}
+					}
+				}
+			}
+		}
 	}
-
-
-
-
 }
+
+
 
 void PlayState::Update()
 {
@@ -113,6 +233,10 @@ void PlayState::Update()
 	menu->showOldFly(stare.size());
 	menu->showNestAttributes(gniazdo->getNestFood());
 	menu->showNestMoney(gniazdo->getMoney());
+	menu->showKidRespAmmount(kidAmmount);
+	menu->showKidDps(kidDPS);
+	menu->showMatureDps(matureDPS);
+	menu->showOldDps(oldDPS);
 	evolution(); //sprawdzanie ewolucji malej muchy
 	randomGen();
 	cleanUp(); //sprzatanie zdechlych much
@@ -120,7 +244,7 @@ void PlayState::Update()
 	{
 		for (int i = 0; i < dorosli.size(); i++)
 		{
-			dorosli[i].setSize(); // zwiekszanie wieku doroslych 
+			dorosli[i].setSize(matureDPS); // zwiekszanie wieku doroslych 
 
 			if (dorosli[i].isAsleep == false)
 			{
@@ -209,7 +333,7 @@ void PlayState::Update()
 	{
 		for (int i = 0; i < dzieci.size(); i++)
 		{
-			dzieci[i].setSize(); //zwiekszanie ich wieku
+			dzieci[i].setSize(kidDPS); //zwiekszanie ich wieku
 			if (dzieci[i].isAsleep == false)
 			{
 				dzieci[i].updateMove(*dzieci[i].getSprite()); //poruszanie dziecmi
@@ -445,7 +569,7 @@ void PlayState::Update()
 	//}
 	for (int i = 0; i < stare.size(); i++)
 	{
-		stare[i].setSize(); // zwiekszanie wieku doroslych 
+		stare[i].setSize(oldDPS); // zwiekszanie wieku doroslych 
 
 		if (stare[i].isAsleep == false)
 		{
@@ -545,7 +669,6 @@ void PlayState::Draw()
 
 	gniazdo->draw(*window);
 	menu->draw(*window);
-
 }
 
 
@@ -569,7 +692,7 @@ void PlayState::evolution()
 
 		//check to wakeUp
 
-		if (dzieci[i].getSize() == dzieci[i].wakeUp) //wybudza dzieci ze snu XD
+		if (dzieci[i].getSize() == dzieci[i].wakeUp && dzieci[i].isAsleep == true) //wybudza dzieci ze snu XD
 		{
 			if (gniazdo->getNestFood() >= 10)
 			{
@@ -605,7 +728,7 @@ void PlayState::evolution()
 			dorosli[i].goToSleep = true;
 			dorosli[i].sleep(dt);
 		}
-		if (dorosli[i].getSize() == dorosli[i].wakeUp)
+		if (dorosli[i].getSize() == dorosli[i].wakeUp && dorosli[i].isAsleep == true)
 		{
 			if (gniazdo->getNestFood() >= 20)
 			{
@@ -639,7 +762,7 @@ void PlayState::evolution()
 			stare[i].goToSleep = true;
 			stare[i].sleep(dt);
 		}
-		if (stare[i].getSize() == stare[i].wakeUp && stare[i].givingBirth == false)
+		if (stare[i].getSize() == stare[i].wakeUp && stare[i].givingBirth == false && stare[i].isAsleep == true)
 		{
 			if (gniazdo->getNestFood() >= 15)
 			{
@@ -660,7 +783,7 @@ void PlayState::evolution()
 			stare[i].isAsleep = true;
 			stare[i].flagaKolizja = false;
 			stare[i].wakeUp = stare[i].getSize() + 150;
-			for (i = 0; i < 5; i++)
+			for (i = 0; i < kidAmmount; i++)
 			{
 				Kid *kid;
 				kid = new Kid(*assets, sf::Vector2f(x+rand()%5,y+rand()%5));

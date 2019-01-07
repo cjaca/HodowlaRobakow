@@ -16,4 +16,7 @@
 #define EGG_FILEPATH "img/egg.png"
 #define COIN_FILEPATH "img/coin.png"
 
+#define PLUS_FILEPATH "img/plus.png"
+#define MINUS_FILEPATH "img/minus.png"
+
 #define TREBU_FILEPATH "font/TrebuchetMS.ttf"
