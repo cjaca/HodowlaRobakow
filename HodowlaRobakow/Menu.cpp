@@ -390,7 +390,7 @@ void Menu::showCoinResp(int k)
 	showCoinRespNumber.setString(s+" s");
 }
 
-void Menu::showEggResp(int) k)
+void Menu::showEggResp(int k)
 {
 	int time = k / 30;
 	std::string s = std::to_string(k);
