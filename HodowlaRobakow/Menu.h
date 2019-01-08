@@ -23,6 +23,8 @@ public:
 	void showKidDps(float k);
 	void showMatureDps(float k);
 	void showOldDps(float k);
+	void showCoinResp(float k);
+	void showEggResp(float k);
 	sf::Sprite *getSprite(int k);
 private:
 	AssetManager *manager;
@@ -38,7 +40,9 @@ private:
 		showKidRespText, showKidRespNumber,
 		showKidDpsText, showKidDpsNumber,
 		showMatureDpsText, showMatureDpsNumber,
-		showOldDpsText, showOldDpsNumber;
+		showOldDpsText, showOldDpsNumber,
+		showEggRespText, showEggRespNumber,
+		showCoinRespText, showCoinRespNumber;
 	sf::RectangleShape mainMenuBar;
 	sf::Sprite plusSpriteKid, minusSpriteKid,
 		plusSpriteMature, minusSpriteMature,
@@ -48,7 +52,10 @@ private:
 		plusSpriteKidResp, minusSpriteKidResp,
 		plusKidDps, minusKidDps,
 		plusMatureDps, minusMatureDps,
-		plusOldDps, minusOldDps;
+		plusOldDps, minusOldDps,
+		plusEggResp, minusEggResp,
+		plusCoinResp, minusCoinResp;
+		
 	
 	//TODO: Add edition fields for attributes of simulation etc.
 };

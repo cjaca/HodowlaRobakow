@@ -56,6 +56,8 @@ private:
 	float kidDPS = 0.22;
 	float matureDPS = 0.22;
 	float oldDPS = 0.22;
+	int eggTR = 90;
+	int coinTR = 150;
 protected:
 	int dt = 0;
 };

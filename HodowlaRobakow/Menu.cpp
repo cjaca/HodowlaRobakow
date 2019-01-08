@@ -213,6 +213,27 @@ Menu::Menu(AssetManager &assets)
 	showOldDpsNumber.setOrigin(sf::Vector2f(50, 10));
 	showOldDpsNumber.setPosition(sf::Vector2f(1100, 630));
 	////
+	showEggRespText.setFont(manager->GetFont("trebu"));
+	showEggRespText.setCharacterSize(10);
+	showEggRespText.setFillColor(sf::Color::White);
+	showEggRespText.setOrigin(sf::Vector2f(50, 10));
+	showEggRespText.setPosition(sf::Vector2f(1100, 650));
+	showEggRespText.setString("Nowe jajka generuja sie co:");
+
+	plusEggResp.setTexture(manager->GetTexture("plus"));
+	plusEggResp.setOrigin(1, 1);
+	plusEggResp.setPosition(sf::Vector2f(1190, 645));
+
+	minusEggResp.setTexture(manager->GetTexture("minus"));
+	minusEggResp.setOrigin(1, 1);
+	minusEggResp.setPosition(sf::Vector2f(1210, 605));
+
+	showEggRespNumber.setFont(manager->GetFont("trebu"));
+	showEggRespNumber.setCharacterSize(10);
+	showEggRespNumber.setFillColor(sf::Color::Yellow);
+	showEggRespNumber.setOrigin(sf::Vector2f(50, 10));
+	showEggRespNumber.setPosition(sf::Vector2f(1100, 670));
+	////
 	czasSymulacji.setFont(manager->GetFont("trebu"));
 	czasSymulacji.setCharacterSize(10);
 	czasSymulacji.setFillColor(sf::Color::White);
@@ -276,6 +297,14 @@ void Menu::draw(sf::RenderWindow & target)
 	target.draw(showOldDpsNumber);
 	target.draw(plusOldDps);
 	target.draw(minusOldDps);
+	target.draw(showEggRespNumber);
+	target.draw(showEggRespText);
+	target.draw(plusEggResp);
+	target.draw(minusEggResp);
+	target.draw(showCoinRespNumber);
+	target.draw(showCoinRespText);
+	target.draw(plusCoinResp);
+	target.draw(minusCoinResp);
 }
 
 void Menu::showTimer(int k)
@@ -354,6 +383,20 @@ void Menu::showOldDps(float k)
 	showOldDpsNumber.setString(s);
 }
 
+void Menu::showCoinResp(float k)
+{
+	int time = k/30
+	std::string s = std::to_string(time);
+	showCoinRespNumber.setString(s);
+}
+
+void Menu::showEggResp(float k)
+{
+	int time = k/30
+	std::string s = std::to_string(k);
+	showEggRespNumber.setString(s);
+}
+
 sf::Sprite * Menu::getSprite(int k)
 {
 	if (k == 1)
@@ -427,5 +470,21 @@ sf::Sprite * Menu::getSprite(int k)
 	if (k == 18)
 	{
 		return &this->minusOldDps;
+	}
+	if (k == 19)
+	{
+		return &this->plusCoinResp;
+	}
+	if (k == 20)
+	{
+		return &this->minusCoinResp;
+	}
+	if (k == 21)
+	{
+		return &this->plusEggResp;
+	}
+	if (k == 22)
+	{
+		return &this->minusEggResp;
 	}
 }

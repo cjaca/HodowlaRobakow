@@ -105,7 +105,7 @@ void PlayState::HandleInput()
 		}
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		{
-			for (int i = 1; i < 19; i++)
+			for (int i = 1; i < 23; i++)
 			{
 				menu->getSprite(i)->getPosition().x;
 				sf::IntRect tempRect(menu->getSprite(i)->getPosition().x, menu->getSprite(i)->getPosition().y, menu->getSprite(i)->getGlobalBounds().width, menu->getSprite(i)->getGlobalBounds().height);
@@ -216,6 +216,28 @@ void PlayState::HandleInput()
 							oldDPS -= 0.01;
 						}
 					}
+					if (i == 19)
+					{
+						std::cout << "Zwiekszono czas respawnu monetek o sekunde" << std::endl;
+						coinTR += 30;
+					}
+					if (i == 20)
+					{
+						if (coinTR > 30) {
+							coinTR -= 30;
+						}
+					}
+					if (i == 21)
+					{
+						std::cout << "Zwiekszono czas respawnu jajek o sekunde" << std::endl;
+						eggTR += 30;
+					}
+					if (i == 22)
+					{
+						if (eggTR > 30) {
+							eggTR -= 30;
+						}
+					}
 				}
 			}
 		}
@@ -237,6 +259,8 @@ void PlayState::Update()
 	menu->showKidDps(kidDPS);
 	menu->showMatureDps(matureDPS);
 	menu->showOldDps(oldDPS);
+	menu->showCoinResp(coinTR);
+	menu->showEggResp(eggTR);
 	evolution(); //sprawdzanie ewolucji malej muchy
 	randomGen();
 	cleanUp(); //sprzatanie zdechlych much
@@ -862,7 +886,7 @@ void PlayState::randomGen()
 {
 	if (dorosli.size() > 0)
 	{
-		if (dt % 90 == 0)
+		if (dt % eggTR == 0)
 		{
 			Egg *egg;
 			egg = new Egg(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
@@ -872,7 +896,7 @@ void PlayState::randomGen()
 
 	if (stare.size() > 0)
 	{
-		if (dt % 150 == 0)
+		if (dt % 150 coinTR == 0)
 		{
 			Coin *coin;
 			coin = new Coin(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
