@@ -827,6 +827,7 @@ void PlayState::evolution()
 		if (stare[i].getSize() > 5400) //smierc najstarszej muchy!
 		{
 			stare.erase(stare.begin() + i);
+			i--;
 		}
 	}
 }
