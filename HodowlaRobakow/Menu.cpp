@@ -226,13 +226,34 @@ Menu::Menu(AssetManager &assets)
 
 	minusEggResp.setTexture(manager->GetTexture("minus"));
 	minusEggResp.setOrigin(1, 1);
-	minusEggResp.setPosition(sf::Vector2f(1210, 605));
+	minusEggResp.setPosition(sf::Vector2f(1210, 645));
 
 	showEggRespNumber.setFont(manager->GetFont("trebu"));
 	showEggRespNumber.setCharacterSize(10);
 	showEggRespNumber.setFillColor(sf::Color::Yellow);
 	showEggRespNumber.setOrigin(sf::Vector2f(50, 10));
 	showEggRespNumber.setPosition(sf::Vector2f(1100, 670));
+	////
+	showCoinRespText.setFont(manager->GetFont("trebu"));
+	showCoinRespText.setCharacterSize(10);
+	showCoinRespText.setFillColor(sf::Color::White);
+	showCoinRespText.setOrigin(sf::Vector2f(50, 10));
+	showCoinRespText.setPosition(sf::Vector2f(1100, 690));
+	showCoinRespText.setString("Nowe monety generuja sie co:");
+
+	plusCoinResp.setTexture(manager->GetTexture("plus"));
+	plusCoinResp.setOrigin(1, 1);
+	plusCoinResp.setPosition(sf::Vector2f(1190, 685));
+
+	minusCoinResp.setTexture(manager->GetTexture("minus"));
+	minusCoinResp.setOrigin(1, 1);
+	minusCoinResp.setPosition(sf::Vector2f(1210, 685));
+
+	showCoinRespNumber.setFont(manager->GetFont("trebu"));
+	showCoinRespNumber.setCharacterSize(10);
+	showCoinRespNumber.setFillColor(sf::Color::Yellow);
+	showCoinRespNumber.setOrigin(sf::Vector2f(50, 10));
+	showCoinRespNumber.setPosition(sf::Vector2f(1100, 710));
 	////
 	czasSymulacji.setFont(manager->GetFont("trebu"));
 	czasSymulacji.setCharacterSize(10);
