@@ -387,14 +387,14 @@ void Menu::showCoinResp(float k)
 {
 	int time = k/30
 	std::string s = std::to_string(time);
-	showCoinRespNumber.setString(s);
+	showCoinRespNumber.setString(s+" s");
 }
 
 void Menu::showEggResp(float k)
 {
 	int time = k/30
 	std::string s = std::to_string(k);
-	showEggRespNumber.setString(s);
+	showEggRespNumber.setString(s+" s");
 }
 
 sf::Sprite * Menu::getSprite(int k)

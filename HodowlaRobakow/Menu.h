@@ -23,8 +23,8 @@ public:
 	void showKidDps(float k);
 	void showMatureDps(float k);
 	void showOldDps(float k);
-	void showCoinResp(float k);
-	void showEggResp(float k);
+	void showCoinResp(int k);
+	void showEggResp(int k);
 	sf::Sprite *getSprite(int k);
 private:
 	AssetManager *manager;
