@@ -896,7 +896,7 @@ void PlayState::randomGen()
 
 	if (stare.size() > 0)
 	{
-		if (dt % 150 coinTR == 0)
+		if (dt % coinTR == 0)
 		{
 			Coin *coin;
 			coin = new Coin(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));

@@ -385,14 +385,14 @@ void Menu::showOldDps(float k)
 
 void Menu::showCoinResp(float k)
 {
-	int time = k/30
+	int time = k / 30;
 	std::string s = std::to_string(time);
 	showCoinRespNumber.setString(s);
 }
 
 void Menu::showEggResp(float k)
 {
-	int time = k/30
+	int time = k / 30;
 	std::string s = std::to_string(k);
 	showEggRespNumber.setString(s);
 }
