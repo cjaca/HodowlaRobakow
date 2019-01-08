@@ -414,7 +414,7 @@ void Menu::showCoinResp(int k)
 void Menu::showEggResp(int k)
 {
 	int time = k / 30;
-	std::string s = std::to_string(k);
+	std::string s = std::to_string(time);
 	showEggRespNumber.setString(s+" s");
 }
 
