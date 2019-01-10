@@ -58,7 +58,7 @@ private:
 	float oldDPS = 0.22;
 	int eggTR = 90;
 	int coinTR = 150;
-	bool pause = true;
+	bool pause = false;
 protected:
 	int dt = 0;
 };
