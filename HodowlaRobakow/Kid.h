@@ -27,7 +27,7 @@ protected:
 	int wPoziomie = 0, wPionie = 0;
 	int size = 0;
 public:
-	Kid(AssetManager &assets, sf::Vector2f position = sf::Vector2f(rand() % 800, rand() % 600));
+	Kid(AssetManager &assets, sf::Vector2f position = sf::Vector2f(rand() % 800, rand() % 600), float lifek = 100);
 	~Kid();
 	void draw(sf::RenderTarget & target);
 	int updateMove(sf::Sprite &target);
@@ -46,7 +46,7 @@ public:
 	int goSleep, wakeUp;
 	int instrukcja = 0;
 	bool collectedInfo = false; // flaga ktora mowi czy mucha ma info gdzie jest jajo
-	float life = 100; //wartosc poczatkowa zycia muchy
+	float life; //wartosc poczatkowa zycia muchy
 	bool isDead = false; //jezeli life<=0 to zmieni status na true, i mucha powinna zostac usunieta
 	
 };

@@ -59,6 +59,9 @@ private:
 	int eggTR = 90;
 	int coinTR = 150;
 	bool pause = true;
+	float kidLife = 100;
+	float matureLife = 200;
+	float oldLife = 300;
 protected:
 	int dt = 0;
 };

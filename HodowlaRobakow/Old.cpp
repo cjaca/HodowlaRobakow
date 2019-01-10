@@ -1,10 +1,10 @@
 #include "Old.h"
 
 
-Old::Old(AssetManager &assets, sf::Vector2f position):Mature(assets)
+Old::Old(AssetManager &assets, sf::Vector2f position, float lifek):Mature(assets)
 {
 	manager = &assets;
-	life = 300;
+	life = lifek;
 	this->position = position;
 	x = position.x;
 	y = position.y;

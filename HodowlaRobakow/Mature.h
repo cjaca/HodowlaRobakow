@@ -21,7 +21,7 @@ private:
 	int loadTexture();
 
 public:
-	Mature(AssetManager &assets, sf::Vector2f position = sf::Vector2f(rand() % 800, rand() % 600));
+	Mature(AssetManager &assets, sf::Vector2f position = sf::Vector2f(rand() % 800, rand() % 600), float lifek);
 	~Mature();
 	void draw(sf::RenderTarget & target);
 	sf::Sprite *getSprite();

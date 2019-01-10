@@ -3,10 +3,10 @@
 #define SPRITE_SPEED	1
 
 
-Mature::Mature(AssetManager &assets, sf::Vector2f position): Kid(assets)
+Mature::Mature(AssetManager &assets, sf::Vector2f position, float lifek = 200): Kid(assets)
 {
 	manager = &assets;
-	life = 200;
+	life = lifek;
 	this->position = position;
 	x = position.x;
 	y = position.y;
