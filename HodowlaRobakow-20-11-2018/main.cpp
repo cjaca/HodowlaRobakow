@@ -20,7 +20,7 @@ int main()
 	Mrowka *krowa;
 	krowa = new Mrowka(sf::Vector2f(300.f, 300.f));*/
 
-	int iloscMuch = 5;
+	int iloscMuch = 600;
 	std::vector<Mrowka> mrowki;
 	//mrowki.reserve(mrowka);
 

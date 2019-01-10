@@ -13,7 +13,7 @@ Kid::Kid(AssetManager &assets, sf::Vector2f position, float lifek)
 	sprite.setPosition(position);
 	HpBar.setPosition(position.x-3,position.y-3);
 	HpBar.setOutlineColor(sf::Color::Red);
-	HpBar.setSize(sf::Vector2f(4,4));
+	HpBar.setSize(sf::Vector2f(6,6));
 	a = 0;
 	b = 0;
 	c = 0;

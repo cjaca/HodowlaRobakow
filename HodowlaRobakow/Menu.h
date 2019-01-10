@@ -63,7 +63,7 @@ private:
 		plusOldDps, minusOldDps,
 		plusEggResp, minusEggResp,
 		plusCoinResp, minusCoinResp,
-		btnPause, btnGenerate,
+		btnPause,
 		plusKidLife, minusKidLife,
 		plusMatureLife, minusMatureLife,
 		plusOldLife, minusOldLife;

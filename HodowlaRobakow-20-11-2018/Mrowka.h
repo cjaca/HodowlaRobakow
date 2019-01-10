@@ -19,7 +19,7 @@ private:
 	int loadTexture();
 	float x;
 	float y;
-	int a, a0, b, b0, c, c0, licznik, predkosc = 5;
+	int a, b, c, licznik, predkosc = 5;
 
 
 public:

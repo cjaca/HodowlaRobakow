@@ -21,6 +21,5 @@
 
 #define BTNPAUSE_FILEPATH "img/pause.png"
 #define BTNSTART_FILEPATH "img/start.png"
-#define BTNGEN_FILEPATH "img/generate.png"
 
 #define TREBU_FILEPATH "font/TrebuchetMS.ttf"

@@ -51,7 +51,6 @@ private:
 	void evolution();
 	void cleanUp();
 	void randomGen();
-	void generate();
 	int totalEggCount = 0;
 	int kidAmmount = 5;
 	float kidDPS = 0.22;

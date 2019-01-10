@@ -38,17 +38,10 @@ int Mrowka::loadTexture()
 void Mrowka::updateMove(sf::RenderTarget & target, sf::Event &event)
 {
 	
-	if (licznik == a + a0) {
-
-
-
-
-		a = rand() % 100 + 1; //ilosc pol do przejscia x
-		a0 = rand() % 100 + 1; // ilosc poj do przejscia y
+	if (licznik == a) {
+		a = rand() % 100 + 1; //ilosc pol do przejscia
 		b = rand() % 2; //okresla x(horyzontalnie) = 0 lub y (pionowo) = 1
-		b0 = rand() % 2;
 		c = rand() % 2; //okresla kierunek 0 to minus(w lewo, w dol), 1 to plus(w prawo, do gory)
-		c0 = rand() % 2;
 		//predkosc = rand() % 3 + 1;
 		licznik = 0;
 	}
