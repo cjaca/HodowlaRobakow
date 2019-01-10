@@ -116,7 +116,7 @@ int Old::updateMove(sf::Sprite & target)
 		// Rotate and draw the sprite
 		target.setPosition(x, y);
 		//Change HpBar position with Fly
-		this->HpBar.setPosition(x - 10, y + 10);
+		this->HpBar.setPosition(x-3, y -3);
 	}
 	if (instrukcja == 1)
 	{
@@ -177,7 +177,7 @@ int Old::updateMove(sf::Sprite & target)
 
 		//Change HpBar position with Fly
 		target.setPosition(x, y);
-		this->HpBar.setPosition(x - 10, y + 10);
+		this->HpBar.setPosition(x-3, y -3);
 
 		if (getPosition().x > 510 && getPosition().x < 520 && getPosition().y > 375 && getPosition().y < 385) {
 			instrukcja -= 1;
@@ -271,7 +271,7 @@ int Old::updateMove(sf::Sprite & target)
 
 		//Change HpBar position with Fly
 		target.setPosition(x, y);
-		this->HpBar.setPosition(x - 10, y + 10);
+		this->HpBar.setPosition(x-3, y -3);
 		if (getPosition().y > 375 && getPosition().y < 385) {
 			instrukcja -= 1;
 			licznik = 0;
