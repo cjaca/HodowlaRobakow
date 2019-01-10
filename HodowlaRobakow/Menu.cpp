@@ -330,6 +330,7 @@ void Menu::draw(sf::RenderWindow & target)
 	target.draw(showCoinRespText);
 	target.draw(plusCoinResp);
 	target.draw(minusCoinResp);
+	target.draw(btnPause);
 }
 
 void Menu::showTimer(int k)
