@@ -13,7 +13,9 @@ Mature::Mature(AssetManager &assets, sf::Vector2f position): Kid(assets)
 	loadTexture();
 	sprite.setOrigin(12,12);
 	sprite.setPosition(position);
-	hpBar();
+	hpBar.setPosition(position.x-3,position.y-3);
+	HpBar.setOutlineColor(sf::Color::Red);
+	HpBar.setSize(sf::Vector2f(6,6));
 }
 
 Mature::~Mature()
