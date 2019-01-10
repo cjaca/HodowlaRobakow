@@ -358,6 +358,8 @@ void Menu::draw(sf::RenderWindow & target)
 	target.draw(showOldLifeText);
 	target.draw(showMatureLifeText);
 	target.draw(showKidLifeText);
+	target.draw(plusKidLife);
+	target.draw(minusKidLife);
 }
 
 void Menu::showTimer(int k)
