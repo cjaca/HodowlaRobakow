@@ -107,7 +107,7 @@ void PlayState::HandleInput()
 		// }
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		{
-			for (int i = 1; i < 26; i++)
+			for (int i = 1; i < 28; i++)
 			{
 				menu->getSprite(i)->getPosition().x;
 				sf::IntRect tempRect(menu->getSprite(i)->getPosition().x, menu->getSprite(i)->getPosition().y, menu->getSprite(i)->getGlobalBounds().width, menu->getSprite(i)->getGlobalBounds().height);
@@ -262,6 +262,15 @@ void PlayState::HandleInput()
 					{
 						kidLife-=1;
 					}
+					if (i == 26)
+					{
+						std::cout<<"zwiekszono zycie doroslej muchy"<<std::endl;
+						matureLife +=1;
+					}
+					if (i == 27)
+					{
+						matureLife -=1;
+					}
 				}
 			}
 		}
@@ -287,6 +296,8 @@ void PlayState::Update()
 	menu->showEggResp(eggTR);
 	menu->buttonPause(pause);
 	menu->showKidLife(kidLife);
+	menu->showMatureLife(matureLife);
+	menu->showOldLife(oldLife);
 	if (pause == false)
 	{
 	evolution(); //sprawdzanie ewolucji malej muchy

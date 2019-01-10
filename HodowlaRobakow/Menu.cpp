@@ -292,6 +292,27 @@ Menu::Menu(AssetManager &assets)
 	showKidLifeNumber.setFillColor(sf::Color::Yellow);
 	showKidLifeNumber.setOrigin(sf::Vector2f(50, 10));
 	showKidLifeNumber.setPosition(sf::Vector2f(1100, 610));
+	////
+	showMatureLifeText.setFont(manager->GetFont("trebu"));
+	showMatureLifeText.setCharacterSize(10);
+	showMatureLifeText.setFillColor(sf::Color::White);
+	showMatureLifeText.setOrigin(sf::Vector2f(50, 10));
+	showMatureLifeText.setPosition(sf::Vector2f(1100, 630));
+	showMatureLifeText.setString("Ilosc zycia doroslej muchy:");
+
+	plusMatureLife.setTexture(manager->GetTexture("plus"));
+	plusMatureLife.setOrigin(1, 1);
+	plusMatureLife.setPosition(sf::Vector2f(1190, 625));
+
+	minusMatureLife.setTexture(manager->GetTexture("minus"));
+	minusMatureLife.setOrigin(1, 1);
+	minusMatureLife.setPosition(sf::Vector2f(1210, 625));
+
+	showMatureLifeNumber.setFont(manager->GetFont("trebu"));
+	showMatureLifeNumber.setCharacterSize(10);
+	showMatureLifeNumber.setFillColor(sf::Color::Yellow);
+	showMatureLifeNumber.setOrigin(sf::Vector2f(50, 10));
+	showMatureLifeNumber.setPosition(sf::Vector2f(1100, 650));
 
 }
 
@@ -360,6 +381,10 @@ void Menu::draw(sf::RenderWindow & target)
 	target.draw(showKidLifeText);
 	target.draw(plusKidLife);
 	target.draw(minusKidLife);
+	target.draw(plusMatureLife);
+	target.draw(minusMatureLife);
+	target.draw(plusOldLife);
+	target.draw(minusOldLife);
 }
 
 void Menu::showTimer(int k)
@@ -578,5 +603,13 @@ sf::Sprite * Menu::getSprite(int k)
 	if (k == 25)
 	{
 		return &this->minusKidLife;
+	}
+	if (k == 26)
+	{
+		return &this->plusMatureLife;
+	}
+	if (k == 27)
+	{
+		return &this->minusMatureLife;
 	}
 }
