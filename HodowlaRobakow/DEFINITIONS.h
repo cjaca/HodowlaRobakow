@@ -19,4 +19,7 @@
 #define PLUS_FILEPATH "img/plus.png"
 #define MINUS_FILEPATH "img/minus.png"
 
+#define BTNPAUSE_FILEPATH "img/pause.png"
+#define BTNSTART_FILEPATH "img/start.png"
+
 #define TREBU_FILEPATH "font/TrebuchetMS.ttf"

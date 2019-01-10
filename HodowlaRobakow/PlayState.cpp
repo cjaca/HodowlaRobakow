@@ -30,6 +30,8 @@ void PlayState::Init()
 	assets->LoadTexture("fly-coin", FLYCOIN_FILEPATH);
 	assets->LoadTexture("plus", PLUS_FILEPATH);
 	assets->LoadTexture("minus", MINUS_FILEPATH);
+	assets->LoadTexture("pause", BTNPAUSE_FILEPATH);
+	assets->LoadTexture("start", BTNSTART_FILEPATH);
 	assets->LoadFont("trebu", TREBU_FILEPATH);
 
 
@@ -105,7 +107,7 @@ void PlayState::HandleInput()
 		}
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		{
-			for (int i = 1; i < 23; i++)
+			for (int i = 1; i < 24; i++)
 			{
 				menu->getSprite(i)->getPosition().x;
 				sf::IntRect tempRect(menu->getSprite(i)->getPosition().x, menu->getSprite(i)->getPosition().y, menu->getSprite(i)->getGlobalBounds().width, menu->getSprite(i)->getGlobalBounds().height);
@@ -240,6 +242,17 @@ void PlayState::HandleInput()
 							eggTR -= 30;
 						}
 					}
+					if (i == 23)
+					{
+						if (pause == true)
+						{
+							pause = false;
+						}
+						if (pause == false)
+						{
+							pause = true;
+						}
+					}
 				}
 			}
 		}
@@ -263,6 +276,9 @@ void PlayState::Update()
 	menu->showOldDps(oldDPS*50);
 	menu->showCoinResp(coinTR);
 	menu->showEggResp(eggTR);
+	menu->buttonPause(pause);
+	if (pause == false)
+	{
 	evolution(); //sprawdzanie ewolucji malej muchy
 	randomGen();
 	cleanUp(); //sprzatanie zdechlych much
@@ -671,6 +687,7 @@ void PlayState::Update()
 		}
 	}
 	countTime();
+}
 }
 
 void PlayState::Draw()

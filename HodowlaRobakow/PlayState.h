@@ -40,7 +40,7 @@ private:
 	Menu *menu;
 	Collision collision;
 	sf::Vector2f ScreenSize;
-	int iloscMuch = 0;
+	int iloscMuch = 15;
 	std::vector<Kid> dzieci;
 	std::vector<Mature> dorosli;
 	std::vector<Old> stare;
@@ -58,6 +58,7 @@ private:
 	float oldDPS = 0.22;
 	int eggTR = 90;
 	int coinTR = 150;
+	bool pause = true;
 protected:
 	int dt = 0;
 };

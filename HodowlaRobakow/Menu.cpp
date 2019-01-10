@@ -259,14 +259,18 @@ Menu::Menu(AssetManager &assets)
 	czasSymulacji.setCharacterSize(10);
 	czasSymulacji.setFillColor(sf::Color::White);
 	czasSymulacji.setOrigin(sf::Vector2f(50, 10));
-	czasSymulacji.setPosition(sf::Vector2f(1100, 730));
+	czasSymulacji.setPosition(sf::Vector2f(1100, 20));
 	czasSymulacji.setString("Czas symulacji: ");
 
 	timeElapsed.setFont(manager->GetFont("trebu"));
 	timeElapsed.setCharacterSize(18);
 	timeElapsed.setFillColor(sf::Color::Green);
 	timeElapsed.setOrigin(sf::Vector2f(50, 10));
-	timeElapsed.setPosition(sf::Vector2f(1150, 750));
+	timeElapsed.setPosition(sf::Vector2f(1150, 40));
+	////
+	buttonPause.setTexture(manager->GetTexture("pause"));
+	buttonPause.setOrigin(1, 1);
+	buttonPause.setPosition(sf::Vector2f(1190, 30));
 
 }
 
@@ -417,7 +421,17 @@ void Menu::showEggResp(int k)
 	std::string s = std::to_string(time);
 	showEggRespNumber.setString(s+" s");
 }
-
+void Menu::buttonPause(bool k)
+{
+	if (k == true)
+	{
+		buttonPause.setTexture(manager->GetTexture("pause"));
+	}
+	if (k == false)
+	{
+		buttonPause.setTexture(manager->GetTexture("start"));
+	}
+}
 sf::Sprite * Menu::getSprite(int k)
 {
 	if (k == 1)
@@ -507,5 +521,9 @@ sf::Sprite * Menu::getSprite(int k)
 	if (k == 22)
 	{
 		return &this->minusEggResp;
+	}
+		if (k == 23)
+	{
+		return &this->buttonPause;
 	}
 }

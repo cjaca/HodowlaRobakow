@@ -26,6 +26,7 @@ public:
 	void showOldDps(int k);
 	void showCoinResp(int k);
 	void showEggResp(int k);
+	void buttonPause(bool k);
 	sf::Sprite *getSprite(int k);
 private:
 	AssetManager *manager;
@@ -55,7 +56,8 @@ private:
 		plusMatureDps, minusMatureDps,
 		plusOldDps, minusOldDps,
 		plusEggResp, minusEggResp,
-		plusCoinResp, minusCoinResp;
+		plusCoinResp, minusCoinResp,
+		buttonPause;
 		
 	
 	//TODO: Add edition fields for attributes of simulation etc.
