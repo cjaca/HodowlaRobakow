@@ -53,14 +53,14 @@ void Mature::setSize(float k) //TODO: Ogarnac setSize aby byl wspolny dla wszyst
 	}
 
 	int kolorG = 2.55 * life;
-	if (life <= 200) {
-		rozmiarPaskaHP = life / 10;
-	}
-	else {
-		rozmiarPaskaHP = (0.005*life) - 20;
-	}
+	//if (life <= 200) {
+	//	rozmiarPaskaHP = life / 10;
+	//}
+	//else {
+	//	rozmiarPaskaHP = (0.005*life) - 20;
+	//}
 	HpBar.setFillColor(sf::Color(255, kolorG, 0));
-	HpBar.setSize(sf::Vector2f(rozmiarPaskaHP, 4));
+	HpBar.setSize(sf::Vector2f(6,6));
 }
 
 void Mature::collect()
@@ -252,9 +252,9 @@ int Mature::updateMove(sf::Sprite & target)
 		}
 
 		// Rotate and draw the sprite
-		target.setPosition(x, y);
+		target.setPosition(x,y);
 		//Change HpBar position with Fly
-		this->HpBar.setPosition(x - 10, y + 10);
+		this->HpBar.setPosition(x-3, y -3);
 	}
 	if (instrukcja == 1)
 	{
@@ -315,7 +315,7 @@ int Mature::updateMove(sf::Sprite & target)
 
 		//Change HpBar position with Fly
 		target.setPosition(x, y);
-		this->HpBar.setPosition(x - 10, y + 10);
+		this->HpBar.setPosition(x - 3, y - 3);
 		if (getPosition().x > 500 && getPosition().x < 530 && getPosition().y > 375 && getPosition().y < 385) {
 			instrukcja -= 1;
 			
@@ -409,7 +409,7 @@ int Mature::updateMove(sf::Sprite & target)
 
 		//Change HpBar position with Fly
 		target.setPosition(x, y);
-		this->HpBar.setPosition(x - 10, y + 10);
+		this->HpBar.setPosition(x - 3, y - 3);
 		if (getPosition().y > 375 && getPosition().y < 385) {
 			instrukcja -= 1;
 			licznik = 0;

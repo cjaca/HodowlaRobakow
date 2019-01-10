@@ -3,6 +3,7 @@
 #include "DEFINITIONS.h"
 #include "AssetManager.h"
 #include <iostream>
+#include <iomanip>
 class Menu
 {
 public:
@@ -20,9 +21,9 @@ public:
 	void showKidRespAmmount(int k);
 	void showNestAttributes(int k);
 	void showNestMoney(int k);
-	void showKidDps(float k);
-	void showMatureDps(float k);
-	void showOldDps(float k);
+	void showKidDps(int k);
+	void showMatureDps(int k);
+	void showOldDps(int k);
 	void showCoinResp(int k);
 	void showEggResp(int k);
 	sf::Sprite *getSprite(int k);

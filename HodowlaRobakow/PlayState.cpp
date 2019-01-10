@@ -186,35 +186,37 @@ void PlayState::HandleInput()
 					if (i == 13)
 					{
 						std::cout << "Zmniejszono przezywalnosc mlodej muchy" << std::endl;
-						kidDPS += 0.01;
+						kidDPS += 0.02;
 					}
 					if (i == 14)
 					{
-						if (kidDPS > 0.01) {
-							kidDPS -= 0.01;
+						if (kidDPS > 0.02) {
+							kidDPS -= 0.02;
 						}
 					}
 					if (i == 15)
 					{
 						std::cout << "Zmniejszono przezywalnosc doroslej muchy" << std::endl;
-						matureDPS += 0.01;
+						matureDPS += 0.02;
 					}
 					if (i == 16)
 					{
-						if (matureDPS > 0.01) {
-							matureDPS -= 0.01;
+						if (matureDPS > 0.02) {
+							matureDPS -= 0.02;
 						}
+						else std::cout << "nie mozna juz zmniejszyc przezywalnosci muchy" << std::endl;
 					}
 					if (i == 17)
 					{
 						std::cout << "Zmniejszono przezywalnosc starszej muchy" << std::endl;
-						oldDPS += 0.01;
+						oldDPS += 0.02;
 					}
 					if (i == 18)
 					{
-						if (oldDPS > 0.01) {
-							oldDPS -= 0.01;
+						if (oldDPS > 0.02) {
+							oldDPS -= 0.02;
 						}
+						else std::cout << "nie mozna juz zmniejszyc przezywalnosci muchy" << std::endl;
 					}
 					if (i == 19)
 					{
@@ -256,9 +258,9 @@ void PlayState::Update()
 	menu->showNestAttributes(gniazdo->getNestFood());
 	menu->showNestMoney(gniazdo->getMoney());
 	menu->showKidRespAmmount(kidAmmount);
-	menu->showKidDps(kidDPS);
-	menu->showMatureDps(matureDPS);
-	menu->showOldDps(oldDPS);
+	menu->showKidDps(kidDPS*50);
+	menu->showMatureDps(matureDPS*50);
+	menu->showOldDps(oldDPS*50);
 	menu->showCoinResp(coinTR);
 	menu->showEggResp(eggTR);
 	evolution(); //sprawdzanie ewolucji malej muchy

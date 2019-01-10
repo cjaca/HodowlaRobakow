@@ -386,19 +386,19 @@ void Menu::showNestMoney(int k)
 	showNestMoneyNumber.setString(s);
 }
 
-void Menu::showKidDps(float k)
+void Menu::showKidDps(int k)
 {
 	std::string s = std::to_string(k);
 	showKidDpsNumber.setString(s);
 }
 
-void Menu::showMatureDps(float k)
+void Menu::showMatureDps(int k)
 {
 	std::string s = std::to_string(k);
 	showMatureDpsNumber.setString(s);
 }
 
-void Menu::showOldDps(float k)
+void Menu::showOldDps(int k)
 {
 	std::string s = std::to_string(k);
 	showOldDpsNumber.setString(s);
