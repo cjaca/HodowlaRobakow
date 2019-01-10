@@ -11,11 +11,13 @@ Kid::Kid(AssetManager &assets, sf::Vector2f position)
 	loadTexture();
 	sprite.setOrigin(8,8);
 	sprite.setPosition(position);
+	hpBar.setPosition(position.x-3,position.y-3);
+	HpBar.setOutlineColor(sf::Color::Red);
+	HpBar.setSize(sf::Vector2f(6,6));
 	a = 0;
 	b = 0;
 	c = 0;
 	licznik = 0;
-	hpBar();
 }
 
 
@@ -349,13 +351,6 @@ void Kid::setSize(float k) //TODO: Ogarnac setSize aby byl wspolny dla wszystkic
 	HpBar.setSize(sf::Vector2f(6,6));
 }
 
-void Kid::hpBar()
-{
-	HpBar.setSize(sf::Vector2f(20, 4));
-	HpBar.setOutlineColor(sf::Color::Red);
-	HpBar.setPosition(position);
-
-}
 
 void Kid::setPosition(sf::Vector2f target)
 {

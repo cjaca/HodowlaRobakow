@@ -39,7 +39,6 @@ public:
 	void gatherInfo(sf::Vector2f position);
 	int getSize();
 	void setSize(float k);
-	void hpBar();
 	void setPosition(sf::Vector2f position);
 	bool flagaKolizja = true; //ustawia flage czy ma kolizjowac
 	bool isAsleep = false; //ustawia flage do spania
