@@ -43,11 +43,11 @@ void PlayState::Init()
 		Egg *egg;
 		Coin *coin;
 		Old *old;
-		mature = new Mature(*assets,sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
-		kid = new Kid(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
+		mature = new Mature(*assets,sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT), matureLife);
+		kid = new Kid(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT), kidLife);
 		egg = new Egg(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
 		coin = new Coin(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
-		old = new Old(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
+		old = new Old(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT), oldLife);
 		dorosli.push_back(*mature);
 		dzieci.push_back(*kid);
 		jaja.push_back(*egg);
@@ -69,42 +69,42 @@ void PlayState::HandleInput()
 		if (event.type == sf::Event::Closed) window->close();
 
 
-		if (event.type == sf::Event::KeyPressed) 
-		{
-			switch (event.key.code) {
+		// if (event.type == sf::Event::KeyPressed) 
+		// {
+		// 	switch (event.key.code) {
 
-			case sf::Keyboard::Escape: window->close(); break;
+		// 	case sf::Keyboard::Escape: window->close(); break;
 
 
-			case sf::Keyboard::Space:
-				std::cout << "Dodano kid muche" << std::endl;
-				Kid *kid;
-				kid = new Kid(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
-				dzieci.push_back(*kid);
-				break;
-			case sf::Keyboard::X:
-				if (dorosli.size() > 0) {
-					std::cout << "Usunieto jedna dorosla muche" << std::endl;
-					dorosli.erase(dorosli.begin());
-					std::cout << dorosli.size() << std::endl;
-				}
-				else std::cout << "Nie ma juz much do usuniecia" << std::endl;
-				break;
-			case sf::Keyboard::E:
-				std::cout << "Dodano jajko" << std::endl;
-				Egg *egg;
-				egg = new Egg(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
-				jaja.push_back(*egg);
-				break;
-			case sf::Keyboard::D:
-				if (jaja.size() > 0) {
-					std::cout << "usunieto jajo" << std::endl;
-					jaja.erase(jaja.begin());
-				}
-				else std::cout << "Nie ma juz jaj do usuniecia" << std::endl;
-				break;
-			}
-		}
+		// 	case sf::Keyboard::Space:
+		// 		std::cout << "Dodano kid muche" << std::endl;
+		// 		Kid *kid;
+		// 		kid = new Kid(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
+		// 		dzieci.push_back(*kid);
+		// 		break;
+		// 	case sf::Keyboard::X:
+		// 		if (dorosli.size() > 0) {
+		// 			std::cout << "Usunieto jedna dorosla muche" << std::endl;
+		// 			dorosli.erase(dorosli.begin());
+		// 			std::cout << dorosli.size() << std::endl;
+		// 		}
+		// 		else std::cout << "Nie ma juz much do usuniecia" << std::endl;
+		// 		break;
+		// 	case sf::Keyboard::E:
+		// 		std::cout << "Dodano jajko" << std::endl;
+		// 		Egg *egg;
+		// 		egg = new Egg(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
+		// 		jaja.push_back(*egg);
+		// 		break;
+		// 	case sf::Keyboard::D:
+		// 		if (jaja.size() > 0) {
+		// 			std::cout << "usunieto jajo" << std::endl;
+		// 			jaja.erase(jaja.begin());
+		// 		}
+		// 		else std::cout << "Nie ma juz jaj do usuniecia" << std::endl;
+		// 		break;
+		// 	}
+		// }
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		{
 			for (int i = 1; i < 24; i++)
@@ -117,7 +117,7 @@ void PlayState::HandleInput()
 					{
 						std::cout << "Dodano kid muche" << std::endl;
 						Kid *kid;
-						kid = new Kid(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
+						kid = new Kid(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT), kidLife);
 						dzieci.push_back(*kid);
 					}
 					if (i == 2)
@@ -130,7 +130,7 @@ void PlayState::HandleInput()
 					{
 						std::cout << "Dodano dorosla muche" << std::endl;
 						Mature *mature;
-						mature = new Mature(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
+						mature = new Mature(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT), matureLife);
 						dorosli.push_back(*mature);
 					}
 					if (i == 4)
@@ -143,7 +143,7 @@ void PlayState::HandleInput()
 					{
 						std::cout << "Dodano starsza muche" << std::endl;
 						Old *old;
-						old = new Old(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
+						old = new Old(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT), oldLife);
 						stare.push_back(*old);
 					}
 					if (i == 6)
@@ -755,7 +755,7 @@ void PlayState::evolution()
 			igrek = (dzieci[i].getPosition()).y;
 
 			Mature *mature;
-			mature = new Mature(*assets,sf::Vector2f(iks, igrek));
+			mature = new Mature(*assets,sf::Vector2f(iks, igrek), matureLife);
 			dorosli.push_back(*mature);
 			dzieci.erase(dzieci.begin() + i);
 
@@ -789,7 +789,7 @@ void PlayState::evolution()
 			igrek = (dorosli[i].getPosition()).y;
 
 			Old *old;
-			old = new Old(*assets, sf::Vector2f(iks, igrek));
+			old = new Old(*assets, sf::Vector2f(iks, igrek), oldLife);
 			stare.push_back(*old);
 			dorosli.erase(dorosli.begin() + i);
 
@@ -834,7 +834,7 @@ void PlayState::evolution()
 			for (i = 0; i < kidAmmount; i++)
 			{
 				Kid *kid;
-				kid = new Kid(*assets, sf::Vector2f(x+rand()%5,y+rand()%5));
+				kid = new Kid(*assets, sf::Vector2f(x+rand()%5,y+rand()%5), kidLife);
 				dzieci.push_back(*kid);
 			}
 		}
