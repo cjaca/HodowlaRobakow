@@ -448,6 +448,13 @@ void PlayState::Update()
 					}
 				}
 			}
+			for (int k = 0; k < jaja.size(); k++) //kolizja stary - jaja
+			{
+				if (collision.CheckCollision(*stare[i].getSprite(), *jaja[k].getSprite()) == true)
+				{
+						stare[i].kolizja();
+				}
+			}
 
 
 
