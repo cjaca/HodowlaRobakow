@@ -800,6 +800,11 @@ void PlayState::evolution()
 
 	for (int i = 0; i < stare.size(); i++)
 	{
+		if (stare[i].getSize() > 5400) //smierc najstarszej muchy!
+		{
+			stare.erase(stare.begin() + i);
+			i--;
+		}
 		if (stare[i].life <= 80 && stare[i].flagaKolizja == true)
 		{
 			stare[i].goToSleep = true;
@@ -842,11 +847,6 @@ void PlayState::evolution()
 			stare[i].givingBirth = false;
 			stare[i].isAsleep = false; //zdjecie flagi ze mucha spi
 			
-		}
-		if (stare[i].getSize() > 5400) //smierc najstarszej muchy!
-		{
-			stare.erase(stare.begin() + i);
-			i--;
 		}
 	}
 }
