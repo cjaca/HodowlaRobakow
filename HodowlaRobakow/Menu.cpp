@@ -271,6 +271,27 @@ Menu::Menu(AssetManager &assets)
 	btnPause.setTexture(manager->GetTexture("start"));
 	btnPause.setOrigin(1, 1);
 	btnPause.setPosition(sf::Vector2f(1150, 30));
+	////
+	showKidLifeText.setFont(manager->GetFont("trebu"));
+	showKidLifeText.setCharacterSize(10);
+	showKidLifeText.setFillColor(sf::Color::White);
+	showKidLifeText.setOrigin(sf::Vector2f(50, 10));
+	showKidLifeText.setPosition(sf::Vector2f(1100, 590));
+	showKidLifeText.setString("Ilosc zycia mlodej muchy:");
+
+	plusKidLife.setTexture(manager->GetTexture("plus"));
+	plusKidLife.setOrigin(1, 1);
+	plusKidLife.setPosition(sf::Vector2f(1190, 585));
+
+	minusKidLife.setTexture(manager->GetTexture("minus"));
+	minusKidLife.setOrigin(1, 1);
+	minusKidLife.setPosition(sf::Vector2f(1210, 585));
+
+	showKidLifeNumber.setFont(manager->GetFont("trebu"));
+	showKidLifeNumber.setCharacterSize(10);
+	showKidLifeNumber.setFillColor(sf::Color::Yellow);
+	showKidLifeNumber.setOrigin(sf::Vector2f(50, 10));
+	showKidLifeNumber.setPosition(sf::Vector2f(1100, 610));
 
 }
 
@@ -331,6 +352,12 @@ void Menu::draw(sf::RenderWindow & target)
 	target.draw(plusCoinResp);
 	target.draw(minusCoinResp);
 	target.draw(btnPause);
+	target.draw(showOldLifeNumber);
+	target.draw(showMatureLifeNumber);
+	target.draw(showKidLifeNumber);
+	target.draw(showOldLifeText);
+	target.draw(showMatureLifeText);
+	target.draw(showKidLifeText);
 }
 
 void Menu::showTimer(int k)
@@ -433,6 +460,21 @@ void Menu::buttonPause(bool k)
 		btnPause.setTexture(manager->GetTexture("pause"));
 	}
 }
+void Menu::showKidLife(int k)
+{
+	std::string s = std::to_string(k);
+	showKidLifeNumber.setString(s);
+}
+void Menu::showMatureLife(int k)
+{
+	std::string s = std::to_string(k);
+	showMatureLifeNumber.setString(s);
+}
+void Menu::showOldLife(int k)
+{
+	std::string s = std::to_string(k);
+	showOldLifeNumber.setString(s);
+}
 sf::Sprite * Menu::getSprite(int k)
 {
 	if (k == 1)
@@ -523,8 +565,16 @@ sf::Sprite * Menu::getSprite(int k)
 	{
 		return &this->minusEggResp;
 	}
-		if (k == 23)
+	if (k == 23)
 	{
 		return &this->btnPause;
+	}
+	if (k == 24)
+	{
+		return &this->plusKidLife;
+	}
+	if (k == 25)
+	{
+		return &this->minusKidLife;
 	}
 }

@@ -107,7 +107,7 @@ void PlayState::HandleInput()
 		// }
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		{
-			for (int i = 1; i < 24; i++)
+			for (int i = 1; i < 26; i++)
 			{
 				menu->getSprite(i)->getPosition().x;
 				sf::IntRect tempRect(menu->getSprite(i)->getPosition().x, menu->getSprite(i)->getPosition().y, menu->getSprite(i)->getGlobalBounds().width, menu->getSprite(i)->getGlobalBounds().height);
@@ -253,6 +253,15 @@ void PlayState::HandleInput()
 							pause = true;
 						}
 					}
+					if (i == 24)
+					{
+						std::cout<<"zwiekszono zycie mlodej muchy"<<std::endl;
+						kidLife +=1;
+					}
+					if (i == 25)
+					{
+						kidLife-=1;
+					}
 				}
 			}
 		}
@@ -277,6 +286,7 @@ void PlayState::Update()
 	menu->showCoinResp(coinTR);
 	menu->showEggResp(eggTR);
 	menu->buttonPause(pause);
+	menu->showKidLife(kidLife);
 	if (pause == false)
 	{
 	evolution(); //sprawdzanie ewolucji malej muchy
@@ -421,194 +431,6 @@ void PlayState::Update()
 		}
 	}
 
-
-	//if (stare.size() > 0)
-	//{
-	//	for (int i = 0; i < stare.size(); i++)
-	//	{
-	//		stare[i].setSize(); // zwiekszanie wieku starych
-
-	//		if (stare[i].isAsleep == false)
-	//		{
-	//			for (int j = 0; j < stare.size() - 1; j++)
-	//			{
-	//				if (i != j)
-	//				{
-	//					if (collision.CheckCollision(*stare[i].getSprite(), *stare[j].getSprite()) == true) //sprawdzanie kolizji stare - stare
-	//					{
-	//						stare[i].kolizja();
-	//					}
-	//				}
-	//			}
-
-	//			if (stare[i].updateMove(*stare[i].getSprite()) == 1) //poruszanie doroslymi, jezeli zostala zwrocona jedynka, to dodaje do gniazda jedzenie (bo zostalo odniesione jajko)
-	//			{
-	//				gniazdo->setNestFood(50);
-	//			}
-
-	//			if (collision.CheckCollision(*stare[i].getSprite(), *gniazdo->getSprite()) == true) // kolizja stare gniazdo
-	//			{
-	//				stare[i].kolizja();
-	//			}
-
-	//			//for (int k = 0; k < dorosli.size(); k++) //kolizja stare - dziecko - TU JEST KASZANA
-	//			//{
-	//			//	if (collision.CheckCollision(*stare[i].getSprite(), *dorosli[k].getSprite()) == true)
-	//			//	{
-	//			//		if (dorosli[k].collectedInfo == true && stare[i].flagaKolizja == true)
-	//			//		{
-	//			//			stare[i].goGetIt(dorosli[k].itemPosition);
-	//			//			dorosli[k].collectedInfo = false;
-	//			//			dorosli[k].kolizja();
-	//			//		}
-	//			//		else
-	//			//		{
-	//			//			stare[i].kolizja();
-	//			//			dorosli[k].kolizja();
-	//			//		}
-
-	//			//	}
-	//			//}
-
-	//			for (int k = 0; k < dorosli.size(); k++) //kolizja dorosly - dziecko
-	//			{
-	//				if (collision.CheckCollision(*stare[i].getSprite(), *dorosli[k].getSprite()) == true)
-	//				{
-	//					if (dorosli[k].collectedInfo == true && stare[i].flagaKolizja == true)
-	//					{
-	//						stare[i].goGetIt(dorosli[k].itemPosition);
-	//						dorosli[k].collectedInfo = false;
-	//						dorosli[k].kolizja();
-	//					}
-	//					else
-	//					{
-	//						stare[i].kolizja();
-	//						dorosli[k].kolizja();
-	//					}
-
-	//				}
-	//			}
-
-
-	//			for (int m = 0; m < kasa.size(); m++) //kolizja stary-kasa
-	//			{
-	//				if (collision.CheckCollision(*stare[i].getSprite(), *kasa[m].getSprite()) == true)
-	//				{
-	//					if (stare[i].flagaKolizja == true)
-	//					{
-	//						if (kasa[m].flaga == false)
-	//						{
-	//							stare[i].loadCoinTexture();
-	//							stare[i].collect();
-	//							std::cout << m << std::endl;
-	//							kasa.erase(kasa.begin() + m);
-	//							m = m - 1;
-	//						}
-	//						break;
-	//					}
-	//					if (stare[i].flagaKolizja == false && stare[i].goToEgg == true)
-	//					{
-	//						//std::cout << "mucha zrezygnowala z pojscia po jajko i wziela pierwsze po drodze" << std::endl;
-	//						stare[i].instrukcja = 0;
-	//						stare[i].goToEgg = false;
-	//						stare[i].loadCoinTexture();
-	//						stare[i].collect();
-	//						std::cout << m << std::endl;
-	//						kasa.erase(kasa.begin() + m);
-	//						m = m-1;
-	//					}
-
-	//				}
-	//			}
-	//		}
-	//	}
-	//}
-	//if (stare.size() > 0)
-	//{
-	//	for (int i = 0; i < stare.size(); i++)
-	//	{
-	//		stare[i].setSize();
-	//		if (stare[i].isAsleep == false)
-	//		{
-	//			stare[i].updateMove(*stare[i].getSprite());
-
-	//			if (stare[i].flagaKolizja == true)
-	//			{
-	//				for (int j = 0; j < stare.size() - 1; j++)
-	//				{
-	//					if (i != j)
-	//					{
-	//						if (collision.CheckCollision(*stare[i].getSprite(), *stare[j].getSprite()) == true)
-	//						{
-	//							stare[i].kolizja();
-	//						}
-	//					}
-	//				}
-
-	//				if (collision.CheckCollision(*stare[i].getSprite(), *gniazdo->getSprite()) == true) // kolizja stary-gniazdo
-	//				{
-	//					stare[i].kolizja();
-	//				}
-
-	//				for (int j = 0; j < jaja.size(); j++) // kolizja stary-jajo
-	//				{
-	//					if (collision.CheckCollision(*stare[i].getSprite(), *jaja[j].getSprite()) == true) 
-	//					{
-	//						stare[i].kolizja();
-	//					}
-	//				}
-
-	//				for (int k = 0; k < dorosli.size(); k++) //kolizja stary - dorosly
-	//				{
-	//					if (collision.CheckCollision(*stare[i].getSprite(), *dorosli[k].getSprite()) == true)
-	//					{
-	//						if (dorosli[k].collectedInfo == true && stare[i].flagaKolizja == true)
-	//						{
-	//							stare[i].goGetIt(dorosli[k].itemPosition);
-	//							dorosli[k].collectedInfo = false;
-	//							dorosli[k].kolizja();
-	//						}
-	//						else
-	//						{
-	//							stare[i].kolizja();
-	//							dorosli[k].kolizja();
-	//						}
-
-	//					}
-	//				}
-	//				for (int j = 0; j < kasa.size(); j++)
-	//				{
-	//					if (collision.CheckCollision(*stare[i].getSprite(), *kasa[j].getSprite()) == true)
-	//					{
-	//						if (stare[i].flagaKolizja == true)
-	//						{
-	//								if (kasa[j].flaga == false)
-	//								{
-	//									stare[i].loadCoinTexture();
-	//									stare[i].collect();
-	//									std::cout << j << std::endl;
-	//									kasa.erase(kasa.begin() + j);
-	//									j -= j;
-	//								}
-	//							break;
-	//						}
-	//						
-	//						else if (stare[i].flagaKolizja == false && stare[i].goToEgg == true)
-	//						{
-	//							std::cout << "mucha zrezygnowala z pojscia po $$$ i wziela pierwsze po drodze" << std::endl;
-	//							stare[i].instrukcja = 0;
-	//							stare[i].goToEgg = false;
-	//							stare[i].loadCoinTexture();
-	//							stare[i].collect();
-	//							kasa.erase(kasa.begin() + j);
-	//							j -= j;
-	//						}
-	//					}
-	//				}
-	//			}
-	//		}
-	//	}
-	//}
 	for (int i = 0; i < stare.size(); i++)
 	{
 		stare[i].setSize(oldDPS); // zwiekszanie wieku doroslych 

@@ -27,6 +27,9 @@ public:
 	void showCoinResp(int k);
 	void showEggResp(int k);
 	void buttonPause(bool k);
+	void showKidLife(int k);
+	void showMatureLife(int k);
+	void showOldLife(int k);
 	sf::Sprite *getSprite(int k);
 private:
 	AssetManager *manager;
@@ -44,7 +47,10 @@ private:
 		showMatureDpsText, showMatureDpsNumber,
 		showOldDpsText, showOldDpsNumber,
 		showEggRespText, showEggRespNumber,
-		showCoinRespText, showCoinRespNumber;
+		showCoinRespText, showCoinRespNumber,
+		showOldLifeText, showOldLifeNumber,
+		showMatureLifeText, showMatureLifeNumber,
+		showKidLifeText, showKidLifeNumber;
 	sf::RectangleShape mainMenuBar;
 	sf::Sprite plusSpriteKid, minusSpriteKid,
 		plusSpriteMature, minusSpriteMature,
@@ -57,7 +63,10 @@ private:
 		plusOldDps, minusOldDps,
 		plusEggResp, minusEggResp,
 		plusCoinResp, minusCoinResp,
-		btnPause;
+		btnPause,
+		plusKidLife, minusKidLife,
+		plusMatureLife, minusMatureLife,
+		plusOldLife, minusOldLife;
 		
 	
 	//TODO: Add edition fields for attributes of simulation etc.
