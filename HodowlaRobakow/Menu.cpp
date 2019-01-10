@@ -268,7 +268,7 @@ Menu::Menu(AssetManager &assets)
 	timeElapsed.setOrigin(sf::Vector2f(50, 10));
 	timeElapsed.setPosition(sf::Vector2f(1100, 40));
 	////
-	btnPause.setTexture(manager->GetTexture("pause"));
+	btnPause.setTexture(manager->GetTexture("start"));
 	btnPause.setOrigin(1, 1);
 	btnPause.setPosition(sf::Vector2f(1150, 30));
 
@@ -426,11 +426,11 @@ void Menu::buttonPause(bool k)
 {
 	if (k == true)
 	{
-		btnPause.setTexture(manager->GetTexture("pause"));
+		btnPause.setTexture(manager->GetTexture("start"));
 	}
 	if (k == false)
 	{
-		btnPause.setTexture(manager->GetTexture("start"));
+		btnPause.setTexture(manager->GetTexture("pause"));
 	}
 }
 sf::Sprite * Menu::getSprite(int k)
