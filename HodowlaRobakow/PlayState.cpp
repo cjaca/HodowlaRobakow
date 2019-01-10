@@ -68,43 +68,6 @@ void PlayState::HandleInput()
 	{
 		if (event.type == sf::Event::Closed) window->close();
 
-
-		// if (event.type == sf::Event::KeyPressed) 
-		// {
-		// 	switch (event.key.code) {
-
-		// 	case sf::Keyboard::Escape: window->close(); break;
-
-
-		// 	case sf::Keyboard::Space:
-		// 		std::cout << "Dodano kid muche" << std::endl;
-		// 		Kid *kid;
-		// 		kid = new Kid(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
-		// 		dzieci.push_back(*kid);
-		// 		break;
-		// 	case sf::Keyboard::X:
-		// 		if (dorosli.size() > 0) {
-		// 			std::cout << "Usunieto jedna dorosla muche" << std::endl;
-		// 			dorosli.erase(dorosli.begin());
-		// 			std::cout << dorosli.size() << std::endl;
-		// 		}
-		// 		else std::cout << "Nie ma juz much do usuniecia" << std::endl;
-		// 		break;
-		// 	case sf::Keyboard::E:
-		// 		std::cout << "Dodano jajko" << std::endl;
-		// 		Egg *egg;
-		// 		egg = new Egg(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
-		// 		jaja.push_back(*egg);
-		// 		break;
-		// 	case sf::Keyboard::D:
-		// 		if (jaja.size() > 0) {
-		// 			std::cout << "usunieto jajo" << std::endl;
-		// 			jaja.erase(jaja.begin());
-		// 		}
-		// 		else std::cout << "Nie ma juz jaj do usuniecia" << std::endl;
-		// 		break;
-		// 	}
-		// }
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		{
 			for (int i = 1; i < 30; i++)
