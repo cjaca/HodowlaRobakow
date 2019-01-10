@@ -27,7 +27,7 @@ public:
 	sf::Sprite *getSprite();
 	void collect();
 	void goGetIt(sf::Vector2f position);
-	void setSize(float k);
+	//void setSize(float k);
 	int updateMove(sf::Sprite &target);
 	bool goToEgg = false;
 	bool goToSleep = false; 

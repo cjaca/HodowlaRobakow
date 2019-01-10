@@ -13,7 +13,7 @@ public:
 	~Old();
 	void draw(sf::RenderTarget & target);
 	sf::Sprite *getSprite();
-	void setSize(float k);
+	//void setSize(float k);
 	int updateMove(sf::Sprite &target);
 	void loadCoinTexture();
 	void goGetIt(sf::Vector2f position);

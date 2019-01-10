@@ -30,30 +30,30 @@ sf::Sprite * Old::getSprite()
 	return &this->sprite;
 }
 
-void Old::setSize(float k)
-{
-	int rozmiarPaskaHP;
-	//set size of Fly
-	this->size = this->size + 1;
-	if (isAsleep == false)
-	{
-		life = life - k;
-	}
-	if (life <= 0)
-	{
-		isDead = true;
-	}
+// void Old::setSize(float k)
+// {
+// 	int rozmiarPaskaHP;
+// 	//set size of Fly
+// 	this->size = this->size + 1;
+// 	if (isAsleep == false)
+// 	{
+// 		life = life - k;
+// 	}
+// 	if (life <= 0)
+// 	{
+// 		isDead = true;
+// 	}
 
-	int kolorG = 2.55 * life;
-	if (life <= 200) {
-		rozmiarPaskaHP = life / 10;
-	}
-	else {
-		rozmiarPaskaHP = (0.0025*life) - 20;
-	}
-	HpBar.setFillColor(sf::Color(255, kolorG, 0));
-	HpBar.setSize(sf::Vector2f(rozmiarPaskaHP, 4));
-}
+// 	int kolorG = 2.55 * life;
+// 	if (life <= 200) {
+// 		rozmiarPaskaHP = life / 10;
+// 	}
+// 	else {
+// 		rozmiarPaskaHP = (0.0025*life) - 20;
+// 	}
+// 	HpBar.setFillColor(sf::Color(255, kolorG, 0));
+// 	HpBar.setSize(sf::Vector2f(rozmiarPaskaHP, 4));
+// }
 
 int Old::updateMove(sf::Sprite & target)
 {

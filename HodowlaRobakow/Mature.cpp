@@ -38,30 +38,24 @@ sf::Sprite *Mature::getSprite()
 	return &this->sprite;
 }
 
-void Mature::setSize(float k) //TODO: Ogarnac setSize aby byl wspolny dla wszystkich, tak na prawde to zmienia sie tylko zaleznosci od life
-{
-	int rozmiarPaskaHP;
-	//set size of Fly
-	this->size = this->size + 1;
-	if (isAsleep == false)
-	{
-		life = life - k;
-	}
-	if (life <= 0)
-	{
-		isDead = true;
-	}
+// void Mature::setSize(float k) //TODO: Ogarnac setSize aby byl wspolny dla wszystkich, tak na prawde to zmienia sie tylko zaleznosci od life
+// {
+// 	int rozmiarPaskaHP;
+// 	//set size of Fly
+// 	this->size = this->size + 1;
+// 	if (isAsleep == false)
+// 	{
+// 		life = life - k;
+// 	}
+// 	if (life <= 0)
+// 	{
+// 		isDead = true;
+// 	}
 
-	int kolorG = 2.55 * life;
-	//if (life <= 200) {
-	//	rozmiarPaskaHP = life / 10;
-	//}
-	//else {
-	//	rozmiarPaskaHP = (0.005*life) - 20;
-	//}
-	HpBar.setFillColor(sf::Color(255, kolorG, 0));
-	HpBar.setSize(sf::Vector2f(6,6));
-}
+// 	int kolorG = 2.55 * life;
+// 	HpBar.setFillColor(sf::Color(255, kolorG, 0));
+// 	HpBar.setSize(sf::Vector2f(6,6));
+// }
 
 void Mature::collect()
 {
@@ -76,7 +70,7 @@ void Mature::collect()
 
 	//wyznaczanie drogi do gniazda ktore zawsze jest w tym samym miejscu
 
-	//TODO: zrobic z tego oddzieln¹ metodê w klasie bazowej \/
+	//TODO: zrobic z tego oddzielnï¿½ metodï¿½ w klasie bazowej \/
 	wPoziomie = 512.f - pozycjaMuchyX;
 	wPionie = 384.f - pozycjaMuchyY;
 	if (instrukcja == 0) {
