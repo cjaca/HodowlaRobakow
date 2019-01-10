@@ -550,7 +550,7 @@ void PlayState::evolution()
 
 	for (int i = 0; i < dzieci.size(); i++) {
 
-		if (dzieci[i].life <= 31 && dzieci[i].flagaKolizja == true)
+		if (dzieci[i].life <= (kidLife * 0.3) && dzieci[i].flagaKolizja == true)
 		{
 			dzieci[i].sleep(dt);
 		}
@@ -588,7 +588,7 @@ void PlayState::evolution()
 
 	for (int i = 0; i < dorosli.size(); i++)
 	{
-		if (dorosli[i].life <= 50 && dorosli[i].flagaKolizja == true)
+		if (dorosli[i].life <= (matureLife*0.25) && dorosli[i].flagaKolizja == true)
 		{
 			dorosli[i].goToSleep = true;
 			dorosli[i].sleep(dt);
@@ -627,7 +627,7 @@ void PlayState::evolution()
 			stare.erase(stare.begin() + i);
 			i--;
 		}
-		if (stare[i].life <= 80 && stare[i].flagaKolizja == true)
+		if (stare[i].life <= (oldLife*0.26) && stare[i].flagaKolizja == true)
 		{
 			stare[i].goToSleep = true;
 			stare[i].sleep(dt);
