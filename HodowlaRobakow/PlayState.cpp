@@ -248,7 +248,7 @@ void PlayState::HandleInput()
 						{
 							pause = false;
 						}
-						if (pause == false)
+						else if (pause == false)
 						{
 							pause = true;
 						}
