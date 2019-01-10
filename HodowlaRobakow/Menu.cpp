@@ -30,7 +30,7 @@ Menu::Menu(AssetManager &assets)
 	showNestMoneyNumber.setCharacterSize(10);
 	showNestMoneyNumber.setFillColor(sf::Color::Yellow);
 	showNestMoneyNumber.setOrigin(sf::Vector2f(50, 10));
-	showNestMoneyNumber.setPosition(sf::Vector2f(1100, 260));
+	showNestMoneyNumber.setPosition(sf::Vector2f(1100, 265));
 
 	showNestFoodText.setFont(manager->GetFont("trebu"));;
 	showNestFoodText.setCharacterSize(10);
