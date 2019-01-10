@@ -11,7 +11,7 @@ Kid::Kid(AssetManager &assets, sf::Vector2f position)
 	loadTexture();
 	sprite.setOrigin(8,8);
 	sprite.setPosition(position);
-	hpBar.setPosition(position.x-3,position.y-3);
+	HpBar.setPosition(position.x-3,position.y-3);
 	HpBar.setOutlineColor(sf::Color::Red);
 	HpBar.setSize(sf::Vector2f(6,6));
 	a = 0;
