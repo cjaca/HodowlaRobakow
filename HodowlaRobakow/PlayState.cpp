@@ -107,7 +107,7 @@ void PlayState::HandleInput()
 		// }
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		{
-			for (int i = 1; i < 28; i++)
+			for (int i = 1; i < 30; i++)
 			{
 				menu->getSprite(i)->getPosition().x;
 				sf::IntRect tempRect(menu->getSprite(i)->getPosition().x, menu->getSprite(i)->getPosition().y, menu->getSprite(i)->getGlobalBounds().width, menu->getSprite(i)->getGlobalBounds().height);
@@ -270,6 +270,15 @@ void PlayState::HandleInput()
 					if (i == 27)
 					{
 						matureLife -=1;
+					}
+					if (i == 28)
+					{
+						std::cout<<"zwiekszono zycie starszej muchy"<<std::endl;
+						oldLife +=1;
+					}
+					if (i == 29)
+					{
+						oldLife -=1;
 					}
 				}
 			}

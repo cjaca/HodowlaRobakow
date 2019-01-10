@@ -313,6 +313,27 @@ Menu::Menu(AssetManager &assets)
 	showMatureLifeNumber.setFillColor(sf::Color::Yellow);
 	showMatureLifeNumber.setOrigin(sf::Vector2f(50, 10));
 	showMatureLifeNumber.setPosition(sf::Vector2f(1100, 650));
+	////
+	showOldLifeText.setFont(manager->GetFont("trebu"));
+	showOldLifeText.setCharacterSize(10);
+	showOldLifeText.setFillColor(sf::Color::White);
+	showOldLifeText.setOrigin(sf::Vector2f(50, 10));
+	showOldLifeText.setPosition(sf::Vector2f(1100, 670));
+	showOldLifeText.setString("Ilosc zycia starszej muchy:");
+
+	plusOldLife.setTexture(manager->GetTexture("plus"));
+	plusOldLife.setOrigin(1, 1);
+	plusOldLife.setPosition(sf::Vector2f(1190, 665));
+
+	minusOldLife.setTexture(manager->GetTexture("minus"));
+	minusOldLife.setOrigin(1, 1);
+	minusOldLife.setPosition(sf::Vector2f(1210, 665));
+
+	showOldLifeNumber.setFont(manager->GetFont("trebu"));
+	showOldLifeNumber.setCharacterSize(10);
+	showOldLifeNumber.setFillColor(sf::Color::Yellow);
+	showOldLifeNumber.setOrigin(sf::Vector2f(50, 10));
+	showOldLifeNumber.setPosition(sf::Vector2f(1100, 690));
 
 }
 
@@ -611,5 +632,13 @@ sf::Sprite * Menu::getSprite(int k)
 	if (k == 27)
 	{
 		return &this->minusMatureLife;
+	}
+	if (k == 28)
+	{
+		return &this->plusOldLife;
+	}
+	if (k == 29)
+	{
+		return &this->minusOldLife;
 	}
 }
