@@ -269,7 +269,7 @@ Menu::Menu(AssetManager &assets)
 	timeElapsed.setPosition(sf::Vector2f(1150, 40));
 	////
 	btnPause.setTexture(manager->GetTexture("pause"));
-	btnPause.setOrigin(10, 10);
+	btnPause.setOrigin(1, 1);
 	btnPause.setPosition(sf::Vector2f(1150, 30));
 
 }
