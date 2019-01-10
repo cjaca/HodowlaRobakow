@@ -57,7 +57,7 @@ private:
 		plusOldDps, minusOldDps,
 		plusEggResp, minusEggResp,
 		plusCoinResp, minusCoinResp,
-		buttonPause;
+		btnPause;
 		
 	
 	//TODO: Add edition fields for attributes of simulation etc.
