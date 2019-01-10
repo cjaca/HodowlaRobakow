@@ -27,7 +27,7 @@ protected:
 	int wPoziomie = 0, wPionie = 0;
 	int size = 0;
 public:
-	Kid(AssetManager &assets, sf::Vector2f position = sf::Vector2f(rand() % 800, rand() % 600), float lifek = 100);
+	Kid(AssetManager &assets, sf::Vector2f position = sf::Vector2f(rand() % 800, rand() % 600), float lifek = 100.0);
 	~Kid();
 	void draw(sf::RenderTarget & target);
 	int updateMove(sf::Sprite &target);

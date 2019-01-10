@@ -9,7 +9,7 @@ private:
 	int loadTexture();
 
 public:
-	Old(AssetManager &assets, sf::Vector2f position = sf::Vector2f(rand() % 800, rand() % 600), float lifek = 300);
+	Old(AssetManager &assets, sf::Vector2f position = sf::Vector2f(rand() % 800, rand() % 600), float lifek = 300.0);
 	~Old();
 	void draw(sf::RenderTarget & target);
 	sf::Sprite *getSprite();
