@@ -32,6 +32,7 @@ void PlayState::Init()
 	assets->LoadTexture("minus", MINUS_FILEPATH);
 	assets->LoadTexture("pause", BTNPAUSE_FILEPATH);
 	assets->LoadTexture("start", BTNSTART_FILEPATH);
+	assets->LoadTexture("gen", BTNGEN_FILEPATH);
 	assets->LoadFont("trebu", TREBU_FILEPATH);
 
 
@@ -70,7 +71,7 @@ void PlayState::HandleInput()
 
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		{
-			for (int i = 1; i < 30; i++)
+			for (int i = 1; i < 31; i++)
 			{
 				menu->getSprite(i)->getPosition().x;
 				sf::IntRect tempRect(menu->getSprite(i)->getPosition().x, menu->getSprite(i)->getPosition().y, menu->getSprite(i)->getGlobalBounds().width, menu->getSprite(i)->getGlobalBounds().height);
@@ -242,6 +243,11 @@ void PlayState::HandleInput()
 					if (i == 29)
 					{
 						oldLife -=1;
+					}
+					if (i == 30)
+					{
+						std::cout << "generowanie" << std::endl;
+						generate();
 					}
 				}
 			}
@@ -735,4 +741,41 @@ void PlayState::randomGen()
 			kasa.push_back(*coin);
 		}
 	}
+}
+
+void PlayState::generate()
+{
+
+	for (int i=0; i < rand() % 15; i++)
+	{
+		Mature *mature;
+		mature = new Mature(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT), matureLife);
+		dorosli.push_back(*mature);
+	}
+	for (int i = 0; i < rand() % 15; i++)
+	{
+		Kid *kid;
+		kid = new Kid(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT), kidLife);
+		dzieci.push_back(*kid);
+	}
+	for (int i = 0; i < rand() % 15; i++)
+	{
+		Old *old;
+		old = new Old(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT), oldLife);
+		stare.push_back(*old);
+	}
+	for (int i = 0; i < rand() % 15; i++)
+	{
+		Egg *egg;
+		egg = new Egg(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
+		jaja.push_back(*egg);
+	}
+
+	for (int i = 0; i < rand() % 15; i++)
+	{
+		Coin *coin;
+		coin = new Coin(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
+		kasa.push_back(*coin);
+	}
+
 }
