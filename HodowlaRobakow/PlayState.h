@@ -40,7 +40,7 @@ private:
 	Menu *menu;
 	Collision collision;
 	sf::Vector2f ScreenSize;
-	int iloscMuch = 0;
+	int iloscMuch = 200;
 	std::vector<Kid> dzieci;
 	std::vector<Mature> dorosli;
 	std::vector<Old> stare;
