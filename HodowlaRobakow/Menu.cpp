@@ -266,7 +266,7 @@ Menu::Menu(AssetManager &assets)
 	timeElapsed.setCharacterSize(18);
 	timeElapsed.setFillColor(sf::Color::Green);
 	timeElapsed.setOrigin(sf::Vector2f(50, 10));
-	timeElapsed.setPosition(sf::Vector2f(1150, 40));
+	timeElapsed.setPosition(sf::Vector2f(1100, 40));
 	////
 	btnPause.setTexture(manager->GetTexture("pause"));
 	btnPause.setOrigin(1, 1);
