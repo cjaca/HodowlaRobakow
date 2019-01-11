@@ -30,7 +30,7 @@ public:
 	Kid(AssetManager &assets, sf::Vector2f position = sf::Vector2f(rand() % 800, rand() % 600), float lifek = 100.0);
 	~Kid();
 	void draw(sf::RenderTarget & target);
-	int updateMove(sf::Sprite &target);
+	void updateMove(sf::Sprite &target);
 	sf::Sprite *getSprite();
 	sf::Vector2f getPosition();
 	sf::Vector2f itemPosition;

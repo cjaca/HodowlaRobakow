@@ -189,7 +189,7 @@ void Mature::goGetIt(sf::Vector2f position)
 	}
 }
 
-int Mature::updateMove(sf::Sprite & target)
+void Mature::updateMove(sf::Sprite & target)
 {
 	if (instrukcja == 0) {
 		if (licznik == a) {
@@ -320,12 +320,13 @@ int Mature::updateMove(sf::Sprite & target)
 			c1 = 0;
 			if (goToEgg == false && goToSleep == false && carryItem == true)
 			{
+
 				carryItem = false;
 				flagaKolizja = true;
 				randRespawnPosition();
 				target.setPosition(x, y);
 				loadTexture();
-				return 1; // kod nr 1 - powiadamia ze jajko zostalo zwrocone do bazy i ma zwiekszyc ilosc zarcia dla much.
+				missionComplete = true; // kod nr 1 - powiadamia ze jajko zostalo zwrocone do bazy i ma zwiekszyc ilosc zarcia dla much.
 			}
 			else if (goToEgg == true)
 			{

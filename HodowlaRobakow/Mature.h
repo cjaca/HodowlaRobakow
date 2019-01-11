@@ -28,10 +28,11 @@ public:
 	void collect();
 	void goGetIt(sf::Vector2f position);
 	//void setSize(float k);
-	int updateMove(sf::Sprite &target);
+	void updateMove(sf::Sprite &target);
 	bool goToEgg = false;
 	bool goToSleep = false; 
 	bool carryItem = false;
+	bool missionComplete = false;
 
 };
 

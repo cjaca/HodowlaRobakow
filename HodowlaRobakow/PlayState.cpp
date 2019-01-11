@@ -289,10 +289,11 @@ void PlayState::Update()
 
 			if (dorosli[i].isAsleep == false)
 			{
-
-				if (dorosli[i].updateMove(*dorosli[i].getSprite()) == 1) //poruszanie doroslymi, jezeli zostala zwrocona jedynka, to dodaje do gniazda jedzenie (bo zostalo odniesione jajko)
+				dorosli[i].updateMove(*dorosli[i].getSprite());
+				if (dorosli[i].missionComplete == true) //poruszanie doroslymi, jezeli zostala zwrocona jedynka, to dodaje do gniazda jedzenie (bo zostalo odniesione jajko)
 				{
 					gniazdo->setNestFood(200);
+					dorosli[i].missionComplete = false;
 				}
 
 				if (collision.CheckCollision(*dorosli[i].getSprite(), *gniazdo->getSprite()) == true) // kolizja dorosly gniazdo

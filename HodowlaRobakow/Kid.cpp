@@ -39,7 +39,7 @@ int Kid::loadTexture()
 }
 
 
-int Kid::updateMove(sf::Sprite & target)
+void Kid::updateMove(sf::Sprite & target)
 {
 	if (instrukcja == 0) {
 		if (licznik == a) {
@@ -245,7 +245,6 @@ int Kid::updateMove(sf::Sprite & target)
 		}
 
 	}
-	return 0;
 }
 
 sf::Sprite *Kid::getSprite()
