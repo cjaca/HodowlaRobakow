@@ -171,7 +171,7 @@ void Mature::goGetIt(sf::Vector2f position)
 	}
 }
 
-void Mature::updateMove(sf::Sprite & target)
+void Mature::updateMove()
 {
 	if (instrukcja == 0) {
 		if (licznik == a) {
@@ -186,12 +186,12 @@ void Mature::updateMove(sf::Sprite & target)
 			if (c == 0)
 			{
 				x = x - predkosc;
-				target.setRotation(270.f);
+				sprite.setRotation(270.f);
 			}
 			else
 			{
 				x = x + predkosc;
-				target.setRotation(90.f);
+				sprite.setRotation(90.f);
 			}
 		}
 		else
@@ -199,12 +199,12 @@ void Mature::updateMove(sf::Sprite & target)
 			if (c == 0)
 			{
 				y = y - predkosc;
-				target.setRotation(0.f);
+				sprite.setRotation(0.f);
 			}
 			else
 			{
 				y = y + predkosc;
-				target.setRotation(180.f);
+				sprite.setRotation(180.f);
 			}
 		}
 		licznik++;
@@ -230,7 +230,7 @@ void Mature::updateMove(sf::Sprite & target)
 		}
 
 		// Rotate and draw the sprite
-		target.setPosition(x,y);
+		sprite.setPosition(x,y);
 		//Change HpBar position with Fly
 		this->HpBar.setPosition(x-3, y -3);
 	}
@@ -292,7 +292,7 @@ void Mature::updateMove(sf::Sprite & target)
 
 
 		//Change HpBar position with Fly
-		target.setPosition(x, y);
+		sprite.setPosition(x, y);
 		this->HpBar.setPosition(x - 3, y - 3);
 		if (getPosition().x > 500 && getPosition().x < 530 && getPosition().y > 375 && getPosition().y < 385) {
 			instrukcja -= 1;
@@ -306,7 +306,7 @@ void Mature::updateMove(sf::Sprite & target)
 				carryItem = false;
 				flagaKolizja = true;
 				randRespawnPosition();
-				target.setPosition(x, y);
+				sprite.setPosition(x, y);
 				loadTexture();
 				missionComplete = true; // kod nr 1 - powiadamia ze jajko zostalo zwrocone do bazy i ma zwiekszyc ilosc zarcia dla much.
 			}
@@ -387,7 +387,7 @@ void Mature::updateMove(sf::Sprite & target)
 
 
 		//Change HpBar position with Fly
-		target.setPosition(x, y);
+		sprite.setPosition(x, y);
 		this->HpBar.setPosition(x - 3, y - 3);
 		if (getPosition().y > 375 && getPosition().y < 385) {
 			instrukcja -= 1;

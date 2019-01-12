@@ -307,30 +307,6 @@ int Kid::getSize()
 	return this->size;
 }
 
-// void Kid::setSize(float k)
-// {
-// 	int rozmiarPaskaHP;
-// 	//set size of Fly
-// 	size = size+1;
-// 	if (isAsleep == false)
-// 	{
-// 		life = life - k;
-// 	}
-// 	if (life <= 0)
-// 	{
-// 		isDead = true;
-// 	}
-	
-// 	int kolorG = 2.55 * life;
-// 	if (life <= 100 ) {
-// 		rozmiarPaskaHP = life/5;
-// 	}
-// 	else {
-// 		rozmiarPaskaHP = (0.01*life) - 20;
-// 	}
-// 	HpBar.setFillColor(sf::Color(255, kolorG, 0));
-// 	HpBar.setSize(sf::Vector2f(rozmiarPaskaHP, 4));
-// }
 
 void Kid::setSize(float k) //TODO: Ogarnac setSize aby byl wspolny dla wszystkich, tak na prawde to zmienia sie tylko zaleznosci od life
 {

@@ -13,24 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Pliki nagłówkowe\states">
-      <UniqueIdentifier>{d84bdd82-753c-46ca-a43b-db9367d34990}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Pliki źródłowe\states">
-      <UniqueIdentifier>{5255b571-be63-4416-9b97-5106586d9e1d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Pliki nagłówkowe\Flys">
-      <UniqueIdentifier>{8674d7b6-bedc-461e-9ebb-818f216490f0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Pliki źródłowe\flys">
-      <UniqueIdentifier>{895ff111-37df-498b-bae0-4790bf2f8f57}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Pliki nagłówkowe\Nest">
-      <UniqueIdentifier>{c9af8061-c53e-4989-a6f6-5e0b2f03d67d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Pliki źródłowe\Nest">
-      <UniqueIdentifier>{823ce63b-f201-40a8-a034-9b86f2cbddd5}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

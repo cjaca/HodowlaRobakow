@@ -1,12 +1,12 @@
 #include "Coin.h"
-#include <string>
+
 
 
 Coin::Coin(AssetManager &assets, sf::Vector2f position): Egg(assets)
 {
 	manager = &assets;
 	this->position = position;
-	loadTexture();
+	LoadTexture();
 	sprite.setOrigin(12, 12);
 	sprite.setPosition(position);
 	timeLeftToAutoDestroy.setFont(manager->GetFont("trebu"));
@@ -23,7 +23,7 @@ Coin::~Coin()
 }
 
 
-int Coin::loadTexture()
+int Coin::LoadTexture()
 {
 	sprite.setTexture(manager->GetTexture("coin"));
 	return 0;

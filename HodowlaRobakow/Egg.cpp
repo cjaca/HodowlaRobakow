@@ -1,12 +1,12 @@
 #include "Egg.h"
-#include <string>
+
 
 
 Egg::Egg(AssetManager &assets, sf::Vector2f position)
 {
 	manager = &assets;
 	this->position = position;
-	loadTexture();
+	Load_Texture();
 	sprite.setOrigin(16, 16);
 	sprite.setPosition(position);
 	timeLeftToAutoDestroy.setFont(manager->GetFont("trebu"));
@@ -20,7 +20,7 @@ Egg::~Egg()
 {
 }
 
-int Egg::loadTexture()
+int Egg::Load_Texture()
 {
 	sprite.setTexture(manager->GetTexture("egg"));
 	return 0;
@@ -52,16 +52,16 @@ sf::Vector2f Egg::getPosition()
 
 int Egg::getSize()
 {
-	return size;
+	return m_Size;
 }
 
 void Egg::setSize()
 {
-	this->size = this->size + 1;
+	this->m_Size = this->m_Size + 1;
 }
 
 void Egg::timeLeft()
 {
-	std::string s = std::to_string(((this->size - 900)*-1)/30);
+	std::string s = std::to_string(((this->m_Size - 900)*-1)/30);
 	timeLeftToAutoDestroy.setString(s);
 }

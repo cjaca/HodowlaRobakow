@@ -7,8 +7,6 @@ PlayState::PlayState(sf::RenderWindow * window)
 {
 	this->window = window;
 	this->state = state;
-	this->isGameStarted = false;
-
 }
 
 PlayState::~PlayState()
@@ -35,31 +33,8 @@ void PlayState::Init()
 	assets->LoadTexture("gen", BTNGEN_FILEPATH);
 	assets->LoadFont("trebu", TREBU_FILEPATH);
 
-
-
-	for (int i = 0; i < iloscMuch; i++)
-	{
-		Mature *mature;
-		Kid *kid;
-		Egg *egg;
-		Coin *coin;
-		Old *old;
-		mature = new Mature(*assets,sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT), matureLife);
-		kid = new Kid(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT), kidLife);
-		egg = new Egg(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
-		coin = new Coin(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
-		old = new Old(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT), oldLife);
-		dorosli.push_back(*mature);
-		dzieci.push_back(*kid);
-		jaja.push_back(*egg);
-		kasa.push_back(*coin);
-		stare.push_back(*old);
-	}
 	menu = new Menu(*assets);
 	gniazdo = new Nest(*assets);
-
-	
-
 }
 
 void PlayState::HandleInput()
@@ -81,39 +56,39 @@ void PlayState::HandleInput()
 					{
 						std::cout << "Dodano kid muche" << std::endl;
 						Kid *kid;
-						kid = new Kid(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT), kidLife);
-						dzieci.push_back(*kid);
+						kid = new Kid(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT), m_Kid_Life);
+						v_Kids.push_back(*kid);
 					}
 					if (i == 2)
 					{
-						if (dzieci.size() > 0) {
-							dzieci.erase(dzieci.begin());
+						if (v_Kids.size() > 0) {
+							v_Kids.erase(v_Kids.begin());
 						}
 					}
 					if (i == 3)
 					{
 						std::cout << "Dodano dorosla muche" << std::endl;
 						Mature *mature;
-						mature = new Mature(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT), matureLife);
-						dorosli.push_back(*mature);
+						mature = new Mature(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT), m_Mature_Life);
+						v_Mature.push_back(*mature);
 					}
 					if (i == 4)
 					{
-						if (dorosli.size() > 0) {
-							dorosli.erase(dorosli.begin());
+						if (v_Mature.size() > 0) {
+							v_Mature.erase(v_Mature.begin());
 						}
 					}
 					if (i == 5)
 					{
 						std::cout << "Dodano starsza muche" << std::endl;
 						Old *old;
-						old = new Old(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT), oldLife);
-						stare.push_back(*old);
+						old = new Old(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT), m_Old_Life);
+						v_Old.push_back(*old);
 					}
 					if (i == 6)
 					{
-						if (stare.size() > 0) {
-							stare.erase(stare.begin());
+						if (v_Old.size() > 0) {
+							v_Old.erase(v_Old.begin());
 						}
 					}
 					if (i == 7)
@@ -141,69 +116,69 @@ void PlayState::HandleInput()
 					if (i == 11)
 					{
 						std::cout << "Dodano ilosc much z jednego legu" << std::endl;
-						kidAmmount += 1;
+						m_Kid_Ammount += 1;
 					}
 					if (i == 12)
 					{
-						if (kidAmmount > 0) {
-							kidAmmount -= 1;
+						if (m_Kid_Ammount > 0) {
+							m_Kid_Ammount -= 1;
 						}
 					}
 					if (i == 13)
 					{
 						std::cout << "Zmniejszono przezywalnosc mlodej muchy" << std::endl;
-						kidDPS += 0.02;
+						m_Kid_DPS += 0.02;
 					}
 					if (i == 14)
 					{
-						if (kidDPS > 0.02) {
-							kidDPS -= 0.02;
+						if (m_Kid_DPS > 0.02) {
+							m_Kid_DPS -= 0.02;
 						}
 					}
 					if (i == 15)
 					{
 						std::cout << "Zmniejszono przezywalnosc doroslej muchy" << std::endl;
-						matureDPS += 0.02;
+						m_Mature_DPS += 0.02;
 					}
 					if (i == 16)
 					{
-						if (matureDPS > 0.02) {
-							matureDPS -= 0.02;
+						if (m_Mature_DPS > 0.02) {
+							m_Mature_DPS -= 0.02;
 						}
 						else std::cout << "nie mozna juz zmniejszyc przezywalnosci muchy" << std::endl;
 					}
 					if (i == 17)
 					{
 						std::cout << "Zmniejszono przezywalnosc starszej muchy" << std::endl;
-						oldDPS += 0.02;
+						m_Old_DPS += 0.02;
 					}
 					if (i == 18)
 					{
-						if (oldDPS > 0.02) {
-							oldDPS -= 0.02;
+						if (m_Old_DPS > 0.02) {
+							m_Old_DPS -= 0.02;
 						}
 						else std::cout << "nie mozna juz zmniejszyc przezywalnosci muchy" << std::endl;
 					}
 					if (i == 19)
 					{
 						std::cout << "Zwiekszono czas respawnu monetek o sekunde" << std::endl;
-						coinTR += 30;
+						m_Coin_Time_Respawn += 30;
 					}
 					if (i == 20)
 					{
-						if (coinTR > 30) {
-							coinTR -= 30;
+						if (m_Coin_Time_Respawn > 30) {
+							m_Coin_Time_Respawn -= 30;
 						}
 					}
 					if (i == 21)
 					{
 						std::cout << "Zwiekszono czas respawnu jajek o sekunde" << std::endl;
-						eggTR += 30;
+						m_Egg_Time_Respawn += 30;
 					}
 					if (i == 22)
 					{
-						if (eggTR > 30) {
-							eggTR -= 30;
+						if (m_Egg_Time_Respawn > 30) {
+							m_Egg_Time_Respawn -= 30;
 						}
 					}
 					if (i == 23)
@@ -220,34 +195,34 @@ void PlayState::HandleInput()
 					if (i == 24)
 					{
 						std::cout<<"zwiekszono zycie mlodej muchy"<<std::endl;
-						kidLife +=1;
+						m_Kid_Life +=1;
 					}
 					if (i == 25)
 					{
-						kidLife-=1;
+						m_Kid_Life-=1;
 					}
 					if (i == 26)
 					{
 						std::cout<<"zwiekszono zycie doroslej muchy"<<std::endl;
-						matureLife +=1;
+						m_Mature_Life +=1;
 					}
 					if (i == 27)
 					{
-						matureLife -=1;
+						m_Mature_Life -=1;
 					}
 					if (i == 28)
 					{
 						std::cout<<"zwiekszono zycie starszej muchy"<<std::endl;
-						oldLife +=1;
+						m_Old_Life +=1;
 					}
 					if (i == 29)
 					{
-						oldLife -=1;
+						m_Old_Life -=1;
 					}
 					if (i == 30)
 					{
 						std::cout << "generowanie" << std::endl;
-						generate();
+						Generate();
 					}
 				}
 			}
@@ -259,118 +234,114 @@ void PlayState::HandleInput()
 
 void PlayState::Update()
 {
-	menu->showTimer(this->dt);
-	menu->showTotalFly(dzieci.size()+ dorosli.size()+ stare.size());
-	menu->showKidFly(dzieci.size());
-	menu->showMatureFly(dorosli.size());
-	menu->showOldFly(stare.size());
+	menu->showTimer(this->m_dt);
+	menu->showTotalFly(v_Kids.size()+ v_Mature.size()+ v_Old.size());
+	menu->showKidFly(v_Kids.size());
+	menu->showMatureFly(v_Mature.size());
+	menu->showOldFly(v_Old.size());
 	menu->showNestAttributes(gniazdo->getNestFood());
 	menu->showNestMoney(gniazdo->getMoney());
-	menu->showKidRespAmmount(kidAmmount);
-	menu->showKidDps(kidDPS*50);
-	menu->showMatureDps(matureDPS*50);
-	menu->showOldDps(oldDPS*50);
-	menu->showCoinResp(coinTR);
-	menu->showEggResp(eggTR);
+	menu->showKidRespAmmount(m_Kid_Ammount);
+	menu->showKidDps(m_Kid_DPS*50);
+	menu->showMatureDps(m_Mature_DPS*50);
+	menu->showOldDps(m_Old_DPS*50);
+	menu->showCoinResp(m_Coin_Time_Respawn);
+	menu->showEggResp(m_Egg_Time_Respawn);
 	menu->buttonPause(pause);
-	menu->showKidLife(kidLife);
-	menu->showMatureLife(matureLife);
-	menu->showOldLife(oldLife);
+	menu->showKidLife(m_Kid_Life);
+	menu->showMatureLife(m_Mature_Life);
+	menu->showOldLife(m_Old_Life);
 	if (pause == false)
 	{
-	evolution(); //sprawdzanie ewolucji much
-	randomGen(); //tworzenie nowych jajek i monetek na mapie
-	cleanUp(); //sprzatanie zmarlych much
-	if (dorosli.size() > 0)
+	Evolution(); //sprawdzanie ewolucji much
+	RandomGen(); //tworzenie nowych jajek i monetek na mapie
+	CleanUp(); //sprzatanie zmarlych much
+	if (v_Mature.size() > 0)
 	{
-		for (int i = 0; i < dorosli.size(); i++)
+		for (int i = 0; i < v_Mature.size(); i++)
 		{
-			dorosli[i].setSize(matureDPS); // zwiekszanie wieku doroslych much
+			v_Mature[i].setSize(m_Mature_DPS); // zwiekszanie wieku doroslych much
 
-			if (dorosli[i].isAsleep == false)
+			if (v_Mature[i].isAsleep == false)
 			{
-				dorosli[i].updateMove(*dorosli[i].getSprite());//poruszanie doroslymi
-				if (dorosli[i].missionComplete == true) //dodaje do gniazda jedzenie (bo zostalo odniesione jajko)
+				v_Mature[i].updateMove();//poruszanie doroslymi
+				if (v_Mature[i].missionComplete == true) //dodaje do gniazda jedzenie (bo zostalo odniesione jajko)
 				{
 					gniazdo->setNestFood(200);
-					dorosli[i].missionComplete = false;
+					v_Mature[i].missionComplete = false;
 				}
 
-				if (collision.CheckCollision(*dorosli[i].getSprite(), *gniazdo->getSprite()) == true) // kolizja dorosly gniazdo
+				if (collision.CheckCollision(*v_Mature[i].getSprite(), *gniazdo->getSprite()) == true) // kolizja dorosly gniazdo
 				{
-					dorosli[i].kolizja();
+					v_Mature[i].kolizja();
 				}
 
-				for (int k = 0; k < dzieci.size(); k++) //kolizja dorosly - dziecko
+				for (int k = 0; k < v_Kids.size(); k++) //kolizja dorosly - dziecko
 				{
-					if (collision.CheckCollision(*dorosli[i].getSprite(), *dzieci[k].getSprite()) == true)
+					if (collision.CheckCollision(*v_Mature[i].getSprite(), *v_Kids[k].getSprite()) == true)
 					{
-						if (dzieci[k].collectedInfo == true && dorosli[i].flagaKolizja == true)
+						if (v_Kids[k].collectedInfo == true && v_Mature[i].flagaKolizja == true)
 						{
-							dorosli[i].goGetIt(dzieci[k].itemPosition);
-							dzieci[k].collectedInfo = false;
-							dzieci[k].kolizja();
+							v_Mature[i].goGetIt(v_Kids[k].itemPosition);
+							v_Kids[k].collectedInfo = false;
+							v_Kids[k].kolizja();
 						}
 						else
 						{
-							dorosli[i].kolizja();
-							dzieci[k].kolizja();
+							v_Mature[i].kolizja();
+							v_Kids[k].kolizja();
 						}
 
 					}
 				}
-				
 
-
-				for (int l = 0; l < jaja.size(); l++) //kolizja dorosly - jajko
+				for (int l = 0; l < v_Eggs.size(); l++) //kolizja dorosly - jajko
 				{
-					if (collision.CheckCollision(*dorosli[i].getSprite(), *jaja[l].getSprite()) == true)
+					if (collision.CheckCollision(*v_Mature[i].getSprite(), *v_Eggs[l].getSprite()) == true)
 					{
-						if (dorosli[i].flagaKolizja == true)
+						if (v_Mature[i].flagaKolizja == true)
 						{
-							if (jaja[l].flaga == false) 
+							if (v_Eggs[l].flaga == false) 
 							{
-								dorosli[i].collect();
-								jaja.erase(jaja.begin() + l);
+								v_Mature[i].collect();
+								v_Eggs.erase(v_Eggs.begin() + l);
 								l -= l;
 							}
 							break;
 						}
-						if (dorosli[i].flagaKolizja == false && dorosli[i].goToEgg == true)
+						if (v_Mature[i].flagaKolizja == false && v_Mature[i].goToEgg == true)
 						{
-							std::cout << "Dorosla mucha zrezygnowa z pojscia po jajko, bo wziela pierwsze napotkane po drodze" << std::endl;
-							dorosli[i].instrukcja = 0;
-							dorosli[i].goToEgg = false;
-							dorosli[i].collect();
-							jaja.erase(jaja.begin() + l);
+							v_Mature[i].instrukcja = 0;
+							v_Mature[i].goToEgg = false;
+							v_Mature[i].collect();
+							v_Eggs.erase(v_Eggs.begin() + l);
 							l -= l;
 						}
 
 					}
 				}
-				for (int j = 0; j < kasa.size(); j++) // kolizja dorosly-kasa, zbieranie informacji
+				for (int j = 0; j < v_Coins.size(); j++) // kolizja dorosly-v_Coins, zbieranie informacji
 				{
-					if (collision.CheckCollision(*dorosli[i].getSprite(), *kasa[j].getSprite()) == true)
+					if (collision.CheckCollision(*v_Mature[i].getSprite(), *v_Coins[j].getSprite()) == true)
 					{
-						if (dorosli[i].collectedInfo == false)
+						if (v_Mature[i].collectedInfo == false)
 						{
-							std::cout << "Dorosla mucha zebrala informacje gdzie jest moneta" << std::endl;
-							dorosli[i].gatherInfo(kasa[j].getPosition());
-							dorosli[i].kolizja();
+							v_Mature[i].gatherInfo(v_Coins[j].getPosition());
+							v_Mature[i].kolizja();
 						}
 						else
 						{
-							dorosli[i].kolizja();
+							v_Mature[i].kolizja();
 						}
 					}
 				}
-				for (int j = 0; j < dorosli.size() - 1; j++)
+				for (int j = 0; j < v_Mature.size() - 1; j++)
 				{
 					if (i != j)
 					{
-						if (collision.CheckCollision(*dorosli[i].getSprite(), *dorosli[j].getSprite()) == true) //sprawdzanie kolizji dorosly - dorosly
+						if (collision.CheckCollision(*v_Mature[i].getSprite(), *v_Mature[j].getSprite()) == true) //sprawdzanie kolizji dorosly - dorosly
 						{
-							dorosli[i].kolizja();
+							v_Mature[i].kolizja();
 						}
 					}
 				}
@@ -378,172 +349,168 @@ void PlayState::Update()
 		}
 	}
 
-	if (dzieci.size() > 0)
+	if (v_Kids.size() > 0)
 	{
-		for (int i = 0; i < dzieci.size(); i++)
+		for (int i = 0; i < v_Kids.size(); i++)
 		{
-			dzieci[i].setSize(kidDPS); //zwiekszanie ich wieku
-			if (dzieci[i].isAsleep == false)
+			v_Kids[i].setSize(m_Kid_DPS); //zwiekszanie ich wieku
+			if (v_Kids[i].isAsleep == false)
 			{
-				dzieci[i].updateMove(*dzieci[i].getSprite()); //poruszanie dziecmi
+				v_Kids[i].updateMove(*v_Kids[i].getSprite()); //poruszanie dziecmi
 
-				//if (dzieci[i].flagaKolizja == true)
-				//{
-				//	for (int j = 0; j < dzieci.size() - 1; j++)
-				//	{
-				//		if (i != j)
-				//		{
-				//			if (collision.CheckCollision(*dzieci[i].getSprite(), *dzieci[j].getSprite()) == true) // kolizja dzieci-dzieci
-				//			{
-				//				dzieci[i].kolizja();
-				//			}
-				//		}
-				//	}
-				//	if (collision.CheckCollision(*dzieci[i].getSprite(), *gniazdo->getSprite()) == true) // kolizja dziecko-gniazdo
-				//	{
-				//		dzieci[i].kolizja();
-				//	}
-				//	for (int j = 0; j < jaja.size(); j++)
-				//	{
-				//		if (collision.CheckCollision(*dzieci[i].getSprite(), *jaja[j].getSprite()) == true) // kolizja dziecko-jajo zbieranie informacji
-				//		{
-				//			if (dzieci[i].collectedInfo == false)
-				//			{
-				//				std::cout << "Mloda mucha zebrala informacje gdzie jest jajko" << std::endl;
-				//				dzieci[i].gatherInfo(jaja[j].getPosition());
-				//				dzieci[i].kolizja();
-				//			}
-				//			else
-				//			{
-				//				dzieci[i].kolizja();
-				//			}
-				//		}
-				//	}
-				//	for (int j = 0; j < kasa.size(); j++)
-				//	{
-				//		if (collision.CheckCollision(*dzieci[i].getSprite(), *kasa[j].getSprite()) == true) //kolizja dziecko-kasa
-				//		{
-				//			dzieci[i].kolizja();
-				//		}
-				//	}
-				//	for (int j = 0; j < stare.size(); j++)
-				//	{
-				//		if (collision.CheckCollision(*dzieci[i].getSprite(), *stare[j].getSprite()) == true) //kolizja dziecko-stary
-				//		{
-				//			dzieci[i].kolizja();
-				//		}
-				//	}
-				//}
+				if (v_Kids[i].flagaKolizja == true)
+				{
+					for (int j = 0; j < v_Kids.size() - 1; j++)
+					{
+						if (i != j)
+						{
+							if (collision.CheckCollision(*v_Kids[i].getSprite(), *v_Kids[j].getSprite()) == true) // kolizja v_Kids-v_Kids
+							{
+								v_Kids[i].kolizja();
+							}
+						}
+					}
+					if (collision.CheckCollision(*v_Kids[i].getSprite(), *gniazdo->getSprite()) == true) // kolizja dziecko-gniazdo
+					{
+						v_Kids[i].kolizja();
+					}
+					for (int j = 0; j < v_Eggs.size(); j++)
+					{
+						if (collision.CheckCollision(*v_Kids[i].getSprite(), *v_Eggs[j].getSprite()) == true) // kolizja dziecko-jajo zbieranie informacji
+						{
+							if (v_Kids[i].collectedInfo == false)
+							{
+								v_Kids[i].gatherInfo(v_Eggs[j].getPosition());
+								v_Kids[i].kolizja();
+							}
+							else
+							{
+								v_Kids[i].kolizja();
+							}
+						}
+					}
+					for (int j = 0; j < v_Coins.size(); j++)
+					{
+						if (collision.CheckCollision(*v_Kids[i].getSprite(), *v_Coins[j].getSprite()) == true) //kolizja dziecko-v_Coins
+						{
+							v_Kids[i].kolizja();
+						}
+					}
+					for (int j = 0; j < v_Old.size(); j++)
+					{
+						if (collision.CheckCollision(*v_Kids[i].getSprite(), *v_Old[j].getSprite()) == true) //kolizja dziecko-stary
+						{
+							v_Kids[i].kolizja();
+						}
+					}
+				}
 			}
 		}
 	}
 
-	for (int i = 0; i < stare.size(); i++)
+	for (int i = 0; i < v_Old.size(); i++)
 	{
-		stare[i].setSize(oldDPS); // zwiekszanie wieku doroslych 
+		v_Old[i].setSize(m_Old_DPS); // zwiekszanie wieku doroslych 
 
-		if (stare[i].isAsleep == false)
+		if (v_Old[i].isAsleep == false)
 		{
-			stare[i].updateMove(*stare[i].getSprite());
+			v_Old[i].updateMove(*v_Old[i].getSprite());
 
-			//if (stare[i].missionComplete == true) //poruszanie doroslymi, jezeli zostala zwrocona jedynka, to dodaje do gniazda jedzenie (bo zostalo odniesione jajko)
-			//{
-			//	gniazdo->setMoney(1);
-			//	stare[i].missionComplete = false;
-			//}
-			//if (collision.CheckCollision(*stare[i].getSprite(), *gniazdo->getSprite()) == true) // kolizja starsza-gniazdo
-			//{
-			//	stare[i].kolizja();
-			//}
-			//for (int k = 0; k < dorosli.size(); k++) //kolizja starszy-dorosly
-			//{
-			//	if (collision.CheckCollision(*stare[i].getSprite(), *dorosli[k].getSprite()) == true)
-			//	{
-			//		if (dorosli[k].collectedInfo == true && stare[i].flagaKolizja == true)
-			//		{
-			//			stare[i].goGetIt(dorosli[k].itemPosition);
-			//			dorosli[k].collectedInfo = false;
-			//			dorosli[k].kolizja();
-			//		}
-			//		else
-			//		{
-			//			stare[i].kolizja();
-			//			dorosli[k].kolizja();
-			//		}
-			//	}
-			//}
-			//for (int k = 0; k < jaja.size(); k++) //kolizja stary - jaja
-			//{
-			//	if (collision.CheckCollision(*stare[i].getSprite(), *jaja[k].getSprite()) == true)
-			//	{
-			//			stare[i].kolizja();
-			//	}
-			//}
+			if (v_Old[i].missionComplete == true) //poruszanie doroslymi, jezeli zostala zwrocona jedynka, to dodaje do gniazda jedzenie (bo zostalo odniesione jajko)
+			{
+				gniazdo->setMoney(1);
+				v_Old[i].missionComplete = false;
+			}
+			if (collision.CheckCollision(*v_Old[i].getSprite(), *gniazdo->getSprite()) == true) // kolizja starsza-gniazdo
+			{
+				v_Old[i].kolizja();
+			}
+			for (int k = 0; k < v_Mature.size(); k++) //kolizja starszy-dorosly
+			{
+				if (collision.CheckCollision(*v_Old[i].getSprite(), *v_Mature[k].getSprite()) == true)
+				{
+					if (v_Mature[k].collectedInfo == true && v_Old[i].flagaKolizja == true)
+					{
+						v_Old[i].goGetIt(v_Mature[k].itemPosition);
+						v_Mature[k].collectedInfo = false;
+						v_Mature[k].kolizja();
+					}
+					else
+					{
+						v_Old[i].kolizja();
+						v_Mature[k].kolizja();
+					}
+				}
+			}
+			for (int k = 0; k < v_Eggs.size(); k++) //kolizja stary - v_Eggs
+			{
+				if (collision.CheckCollision(*v_Old[i].getSprite(), *v_Eggs[k].getSprite()) == true)
+				{
+						v_Old[i].kolizja();
+				}
+			}
 
+			for (int l = 0; l < v_Coins.size(); l++) //kolizja stary - v_Coins
+			{
+				if (collision.CheckCollision(*v_Old[i].getSprite(), *v_Coins[l].getSprite()) == true)
+				{
+					if (v_Old[i].flagaKolizja == true)
+					{
+						if (v_Coins[l].flaga == false)
+						{
+							v_Old[i].loadCoinTexture();
+							v_Old[i].collect();
+							v_Coins.erase(v_Coins.begin() + l);
+							l -= l;
+						}
+						break;
+					}
+					if (v_Old[i].flagaKolizja == false && v_Old[i].goToEgg == true)
+					{
+						v_Old[i].loadCoinTexture();
+						v_Old[i].instrukcja = 0;
+						v_Old[i].goToEgg = false;
+						v_Old[i].collect();
+						v_Coins.erase(v_Coins.begin() + l);
+						l -= l;
+					}
 
-
-			//for (int l = 0; l < kasa.size(); l++) //kolizja stary - kasa
-			//{
-			//	if (collision.CheckCollision(*stare[i].getSprite(), *kasa[l].getSprite()) == true)
-			//	{
-			//		if (stare[i].flagaKolizja == true)
-			//		{
-			//			if (kasa[l].flaga == false)
-			//			{
-			//				stare[i].loadCoinTexture();
-			//				stare[i].collect();
-			//				kasa.erase(kasa.begin() + l);
-			//				l -= l;
-			//			}
-			//			break;
-			//		}
-			//		if (stare[i].flagaKolizja == false && stare[i].goToEgg == true)
-			//		{
-			//			std::cout << "Starsza mucha zrezygnowala z pojscia po MONETE i wziela pierwsza po drodze" << std::endl;
-			//			stare[i].loadCoinTexture();
-			//			stare[i].instrukcja = 0;
-			//			stare[i].goToEgg = false;
-			//			stare[i].collect();
-			//			kasa.erase(kasa.begin() + l);
-			//			l -= l;
-			//		}
-
-			//	}
-			//}
-			//for (int j = 0; j < stare.size() - 1; j++)
-			//{
-			//	if (i != j)
-			//	{
-			//		if (collision.CheckCollision(*stare[i].getSprite(), *stare[j].getSprite()) == true) //sprawdzanie kolizji starsza-starsza
-			//		{
-			//			stare[i].kolizja();
-			//		}
-			//	}
-			//}
+				}
+			}
+			for (int j = 0; j < v_Old.size() - 1; j++)
+			{
+				if (i != j)
+				{
+					if (collision.CheckCollision(*v_Old[i].getSprite(), *v_Old[j].getSprite()) == true) //sprawdzanie kolizji starsza-starsza
+					{
+						v_Old[i].kolizja();
+					}
+				}
+			}
 		}
 	}
-	countTime();
+	CountTime();
 	}
 }
 
 void PlayState::Draw()
 {
-	for (int i = 0; i < stare.size(); i++)
+	for (int i = 0; i < v_Old.size(); i++)
 	{
-		stare[i].draw(*window);
+		v_Old[i].draw(*window);
 	}
-	for (int i = 0; i < dorosli.size(); i++) 
+	for (int i = 0; i < v_Mature.size(); i++) 
 	{
-		dorosli[i].draw(*window);
+		v_Mature[i].draw(*window);
 	}
-	for (int i = 0; i < dzieci.size(); i++) {
-		dzieci[i].draw(*window);
+	for (int i = 0; i < v_Kids.size(); i++) {
+		v_Kids[i].draw(*window);
 	}
-	for (int i = 0; i < jaja.size(); i++) {
-		jaja[i].draw(*window);
+	for (int i = 0; i < v_Eggs.size(); i++) {
+		v_Eggs[i].draw(*window);
 	}
-	for (int i = 0; i < kasa.size(); i++) {
-		kasa[i].draw(*window);
+	for (int i = 0; i < v_Coins.size(); i++) {
+		v_Coins[i].draw(*window);
 	}
 
 	gniazdo->draw(*window);
@@ -551,230 +518,228 @@ void PlayState::Draw()
 }
 
 
-int PlayState::countTime()
+int PlayState::CountTime()
 {
-	dt++;
-	return dt;
+	m_dt++;
+	return m_dt;
 }
 
-void PlayState::evolution()
+void PlayState::Evolution()
 {
-	for (int i = 0; i < dzieci.size(); i++) 
+	for (int i = 0; i < v_Kids.size(); i++) 
 	{
 
-		if (dzieci[i].life <= (kidLife * 0.3) && dzieci[i].flagaKolizja == true)
+		if (v_Kids[i].life <= (m_Kid_Life * 0.3) && v_Kids[i].flagaKolizja == true)
 		{
-			dzieci[i].sleep(dt);
+			v_Kids[i].sleep(m_dt);
 		}
 
-		if (dzieci[i].getSize() == dzieci[i].wakeUp && dzieci[i].isAsleep == true) //wybudza dzieci ze snu
+		if (v_Kids[i].getSize() == v_Kids[i].wakeUp && v_Kids[i].isAsleep == true) //wybudza v_Kids ze snu
 		{
 			if (gniazdo->getNestFood() >= 10)
 			{
 				gniazdo->setNestFood(-10);
-				dzieci[i].life = kidLife; //ustawienie zycia na 100
+				v_Kids[i].life = m_Kid_Life; //ustawienie zycia na 100
 			}
-			dzieci[i].isAsleep = false; //zdjecie flagi ze mucha spi
-			dzieci[i].flagaKolizja = true; //nadanie flagi ze mucha musi sie juz odbijac od otoczenia
-			dzieci[i].setPosition(sf::Vector2f(512,520)); // ustawia muche w podanym miejscu po snie
+			v_Kids[i].isAsleep = false; //zdjecie flagi ze mucha spi
+			v_Kids[i].flagaKolizja = true; //nadanie flagi ze mucha musi sie juz odbijac od otoczenia
+			v_Kids[i].randRespawnPosition();
 		}
-		if (dzieci[i].getSize() > 1800) //ewolucja muchy mlodej
+		if (v_Kids[i].getSize() > 1800) //ewolucja muchy mlodej
 		{
 			Mature *mature;
-			mature = new Mature(*assets,sf::Vector2f((dzieci[i].getPosition()).x, (dzieci[i].getPosition()).y), matureLife);
-			dorosli.push_back(*mature);
-			dzieci.erase(dzieci.begin() + i);
+			mature = new Mature(*assets,sf::Vector2f((v_Kids[i].getPosition()).x, (v_Kids[i].getPosition()).y), m_Mature_Life);
+			v_Mature.push_back(*mature);
+			v_Kids.erase(v_Kids.begin() + i);
 		}
 	}
 
-	for (int i = 0; i < dorosli.size(); i++)
+	for (int i = 0; i < v_Mature.size(); i++)
 	{
-		if (dorosli[i].life <= (matureLife*0.25) && dorosli[i].flagaKolizja == true)
+		if (v_Mature[i].life <= (m_Mature_Life*0.25) && v_Mature[i].flagaKolizja == true)
 		{
-			dorosli[i].goToSleep = true;
-			dorosli[i].sleep(dt);
+			v_Mature[i].goToSleep = true;
+			v_Mature[i].sleep(m_dt);
 		}
-		if (dorosli[i].getSize() == dorosli[i].wakeUp && dorosli[i].isAsleep == true)
+		if (v_Mature[i].getSize() == v_Mature[i].wakeUp && v_Mature[i].isAsleep == true)
 		{
 			if (gniazdo->getNestFood() >= 20)
 			{
 				gniazdo->setNestFood(-20);
-				dorosli[i].life = matureLife;
+				v_Mature[i].life = m_Mature_Life;
 			}
 
-			dorosli[i].isAsleep = false; //zdjecie flagi ze mucha spi
-			dorosli[i].flagaKolizja = true; //nadanie flagi ze mucha musi sie juz odbijac od otoczenia
-			dorosli[i].setPosition(sf::Vector2f(512, 520)); // ustawia muche w podanym miejscu po snie
+			v_Mature[i].isAsleep = false; //zdjecie flagi ze mucha spi
+			v_Mature[i].flagaKolizja = true; //nadanie flagi ze mucha musi sie juz odbijac od otoczenia
+			v_Mature[i].randRespawnPosition();
 		}
-		if (dorosli[i].getSize() > 3600) //ewolucja muchy MATURE
+		if (v_Mature[i].getSize() > 3600) //ewolucja muchy MATURE
 		{
 			Old *old;
-			old = new Old(*assets, sf::Vector2f((dorosli[i].getPosition()).x, (dorosli[i].getPosition()).y), oldLife);
-			stare.push_back(*old);
-			dorosli.erase(dorosli.begin() + i);
+			old = new Old(*assets, sf::Vector2f((v_Mature[i].getPosition()).x, (v_Mature[i].getPosition()).y), m_Old_Life);
+			v_Old.push_back(*old);
+			v_Mature.erase(v_Mature.begin() + i);
 		}
 	}
 
-	for (int i = 0; i < stare.size(); i++)
+	for (int i = 0; i < v_Old.size(); i++)
 	{
-		if (stare[i].getSize() > 5400) //smierc najstarszej muchy!
+		if (v_Old[i].getSize() > 5400) //smierc najstarszej muchy!
 		{
-			stare.erase(stare.begin() + i);
+			v_Old.erase(v_Old.begin() + i);
 			i--;
 		}
-		if (stare[i].life <= (oldLife*0.26) && stare[i].flagaKolizja == true)
+		if (v_Old[i].life <= (m_Old_Life*0.26) && v_Old[i].flagaKolizja == true)
 		{
-			stare[i].goToSleep = true;
-			stare[i].sleep(dt);
+			v_Old[i].goToSleep = true;
+			v_Old[i].sleep(m_dt);
 		}
-		if (stare[i].getSize() == stare[i].wakeUp && stare[i].givingBirth == false && stare[i].isAsleep == true)
+		if (v_Old[i].getSize() == v_Old[i].wakeUp && v_Old[i].givingBirth == false && v_Old[i].isAsleep == true)
 		{
 			if (gniazdo->getNestFood() >= 15)
 			{
 				gniazdo->setNestFood(-15);
-				stare[i].life = oldLife;
+				v_Old[i].life = m_Old_Life;
 			}
 
-			stare[i].isAsleep = false; //zdjecie flagi ze mucha spi
-			stare[i].flagaKolizja = true; //nadanie flagi ze mucha musi sie juz odbijac od otoczenia
-			stare[i].setPosition(sf::Vector2f(512, 520)); // ustawia muche w podanym miejscu po snie
+			v_Old[i].isAsleep = false; 
+			v_Old[i].flagaKolizja = true; 
+			v_Old[i].randRespawnPosition();
 		}
 
-		if (stare[i].getSize() % 1800 == 0 && stare[i].getSize() > 0 && stare[i].givingBirth == false)
+		if (v_Old[i].getSize() % 1800 == 0 && v_Old[i].getSize() > 0 && v_Old[i].givingBirth == false)
 		{
-			float x = stare[i].getPosition().x;
-			float y = stare[i].getPosition().y;
-			stare[i].givingBirth = true;
-			stare[i].isAsleep = true;
-			stare[i].flagaKolizja = false;
-			stare[i].wakeUp = stare[i].getSize() + 150;
-			for (i = 0; i < kidAmmount; i++)
+			float x = v_Old[i].getPosition().x;
+			float y = v_Old[i].getPosition().y;
+			v_Old[i].givingBirth = true;
+			v_Old[i].isAsleep = true;
+			v_Old[i].flagaKolizja = false;
+			v_Old[i].wakeUp = v_Old[i].getSize() + 150;
+			for (i = 0; i < m_Kid_Ammount; i++)
 			{
 				Kid *kid;
-				kid = new Kid(*assets, sf::Vector2f(x+rand()%5,y+rand()%5), kidLife);
-				dzieci.push_back(*kid);
+				kid = new Kid(*assets, sf::Vector2f(x+rand()%5,y+rand()%5), m_Kid_Life);
+				v_Kids.push_back(*kid);
 			}
 		}
-		if (stare[i].getSize() == stare[i].wakeUp && stare[i].givingBirth == true)
+		if (v_Old[i].getSize() == v_Old[i].wakeUp && v_Old[i].givingBirth == true)
 		{
-			if (stare[i].carryItem == false)
+			if (v_Old[i].carryItem == false)
 			{
-				stare[i].flagaKolizja = true; //nadanie flagi ze mucha musi sie juz odbijac od otoczenia
+				v_Old[i].flagaKolizja = true; 
 			}
-			stare[i].givingBirth = false;
-			stare[i].isAsleep = false; //zdjecie flagi ze mucha spi
+			v_Old[i].givingBirth = false;
+			v_Old[i].isAsleep = false; 
 			
 		}
 	}
 }
 
-void PlayState::cleanUp()
+void PlayState::CleanUp()
 {
 
-	for (int i = 0; i < dzieci.size(); i++)
+	for (int i = 0; i < v_Kids.size(); i++)
 	{
-		if (dzieci[i].isDead == true)
+		if (v_Kids[i].isDead == true)
 		{
-			dzieci.erase(dzieci.begin() + i);
+			v_Kids.erase(v_Kids.begin() + i);
 			i--;
 		}
 	}
 
-	for (int i = 0; i < dorosli.size(); i++)
+	for (int i = 0; i < v_Mature.size(); i++)
 	{
-		if (dorosli[i].isDead == true)
+		if (v_Mature[i].isDead == true)
 		{
-			dorosli.erase(dorosli.begin() + i);
+			v_Mature.erase(v_Mature.begin() + i);
 			i--;
 		}
 	}
 
-	for (int i = 0; i < stare.size(); i++)
+	for (int i = 0; i < v_Old.size(); i++)
 	{
-		if (stare[i].isDead == true)
+		if (v_Old[i].isDead == true)
 		{
-			stare.erase(stare.begin() + i);
+			v_Old.erase(v_Old.begin() + i);
 			i--;
 		}
 	}
 
-	for (int i = 0; i < jaja.size(); i++)
+	for (int i = 0; i < v_Eggs.size(); i++)
 	{
-		if (jaja[i].getSize() == 900)
+		if (v_Eggs[i].getSize() == 900)
 		{
-			jaja.erase(jaja.begin() + i);
+			v_Eggs.erase(v_Eggs.begin() + i);
 			i--;
 		}
-		else jaja[i].setSize(); //increase egg size by 1 on every update of the simulation
+		else v_Eggs[i].setSize();
 	}
 
-	for (int i = 0; i < kasa.size(); i++)
+	for (int i = 0; i < v_Coins.size(); i++)
 	{
-		if (kasa[i].getSize() == 900)
+		if (v_Coins[i].getSize() == 900)
 		{
-			kasa.erase(kasa.begin() + i);
+			v_Coins.erase(v_Coins.begin() + i);
 			i--;
 		}
-		else kasa[i].setSize();
+		else v_Coins[i].setSize();
 	}
 }
 
-void PlayState::randomGen()
+void PlayState::RandomGen()
 {
-	if (dorosli.size() > 0)
+	if (v_Mature.size() > 0)
 	{
-		if (dt % eggTR == 0)
+		if (m_dt % m_Egg_Time_Respawn == 0)
 		{
 			Egg *egg;
 			egg = new Egg(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
-			jaja.push_back(*egg);
+			v_Eggs.push_back(*egg);
 		}
 	}
 
-	if (stare.size() > 0)
+	if (v_Old.size() > 0)
 	{
-		if (dt % coinTR == 0)
+		if (m_dt % m_Coin_Time_Respawn == 0)
 		{
 			Coin *coin;
 			coin = new Coin(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
-			kasa.push_back(*coin);
+			v_Coins.push_back(*coin);
 		}
 	}
 }
 
-void PlayState::generate()
+void PlayState::Generate()
 {
-
-	for (int i=0; i < rand() % 15; i++)
+	for (int i=0; i < rand() % 10; i++)
 	{
 		Mature *mature;
-		mature = new Mature(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT), matureLife);
-		dorosli.push_back(*mature);
+		mature = new Mature(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT), m_Mature_Life);
+		v_Mature.push_back(*mature);
 	}
-	for (int i = 0; i < rand() % 15; i++)
+	for (int i = 0; i < rand() % 10; i++)
 	{
 		Kid *kid;
-		kid = new Kid(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT), kidLife);
-		dzieci.push_back(*kid);
+		kid = new Kid(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT), m_Kid_Life);
+		v_Kids.push_back(*kid);
 	}
-	for (int i = 0; i < rand() % 15; i++)
+	for (int i = 0; i < rand() % 10; i++)
 	{
 		Old *old;
-		old = new Old(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT), oldLife);
-		stare.push_back(*old);
+		old = new Old(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT), m_Old_Life);
+		v_Old.push_back(*old);
 	}
-	for (int i = 0; i < rand() % 3; i++)
+	for (int i = 0; i < rand() % 5; i++)
 	{
 		Egg *egg;
 		egg = new Egg(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
-		jaja.push_back(*egg);
+		v_Eggs.push_back(*egg);
 	}
 
-	for (int i = 0; i < rand() % 3; i++)
+	for (int i = 0; i < rand() % 5; i++)
 	{
 		Coin *coin;
 		coin = new Coin(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT));
-		kasa.push_back(*coin);
+		v_Coins.push_back(*coin);
 	}
-
 }

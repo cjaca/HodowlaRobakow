@@ -1,9 +1,8 @@
 #pragma once
+#include <iostream>
 #include <SFML/Graphics.hpp>
 #include "DEFINITIONS.h"
 #include "AssetManager.h"
-#include <iostream>
-#include <iomanip>
 class Menu
 {
 public:
@@ -11,9 +10,7 @@ public:
 	~Menu();
 
 	void draw(sf::RenderWindow &target);
-
 	void showTimer(int k );
-
 	void showTotalFly(int k);
 	void showKidFly(int k);
 	void showMatureFly(int k);
@@ -35,7 +32,6 @@ private:
 	AssetManager *manager;
 	sf::Clock clock;
 	sf::Time elapsed;
-	//sf::Font Trebu;
 	sf::Text timeElapsed, czasSymulacji, showTotalFlyText,
 		showTotalFlyNumber, showKidFlyText, showKidFlyNumber,
 		showMatureFlyText, showMatureFlyNumber,

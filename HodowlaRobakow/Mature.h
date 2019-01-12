@@ -28,7 +28,7 @@ public:
 	void collect();
 	void goGetIt(sf::Vector2f position);
 	//void setSize(float k);
-	void updateMove(sf::Sprite &target);
+	void updateMove();
 	bool goToEgg = false;
 	bool goToSleep = false; 
 	bool carryItem = false;

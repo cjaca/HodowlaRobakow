@@ -2,10 +2,10 @@
 
 
 
-MainState::MainState(sf::String title, sf::Vector2f ScreenSize)
+MainState::MainState(sf::String title, sf::Vector2f m_ScreenSize)
 {
-	this->ScreenSize = ScreenSize;
-	window = new sf::RenderWindow(sf::VideoMode(ScreenSize.x, ScreenSize.y), title, sf::Style::Close);
+	this->m_ScreenSize = m_ScreenSize;
+	window = new sf::RenderWindow(sf::VideoMode(m_ScreenSize.x, m_ScreenSize.y), title, sf::Style::Close);
 	window->setFramerateLimit(FPS_LIMIT);
 	window->setKeyRepeatEnabled(false);
 }

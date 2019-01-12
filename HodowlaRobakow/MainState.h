@@ -17,6 +17,6 @@ public:
 
 private:
 	sf::RenderWindow *window;
-	sf::Vector2f ScreenSize;
+	sf::Vector2f m_ScreenSize;
 	PlayState *playState;
 };
