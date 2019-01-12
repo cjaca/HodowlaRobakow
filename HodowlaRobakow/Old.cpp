@@ -58,7 +58,7 @@ sf::Sprite * Old::getSprite()
 // 	HpBar.setSize(sf::Vector2f(rozmiarPaskaHP, 4));
 // }
 
-int Old::updateMove(sf::Sprite & target)
+void Old::updateMove(sf::Sprite & target)
 {
 	if (instrukcja == 0) {
 		if (licznik == a) {
@@ -194,7 +194,7 @@ int Old::updateMove(sf::Sprite & target)
 				randRespawnPosition();
 				target.setPosition(x, y);
 				loadTexture();
-				return 1; // kod nr 1 - powiadamia ze jajko zostalo zwrocone do bazy i ma zwiekszyc ilosc zarcia dla much.
+				missionComplete = true; // kod nr 1 - powiadamia ze jajko zostalo zwrocone do bazy i ma zwiekszyc ilosc zarcia dla much.
 			}
 			else if (goToEgg == true)
 			{

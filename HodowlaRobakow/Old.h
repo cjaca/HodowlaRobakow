@@ -14,7 +14,7 @@ public:
 	void draw(sf::RenderTarget & target);
 	sf::Sprite *getSprite();
 	//void setSize(float k);
-	int updateMove(sf::Sprite &target);
+	void updateMove(sf::Sprite &target);
 	void loadCoinTexture();
 	void goGetIt(sf::Vector2f position);
 	bool givingBirth = false;

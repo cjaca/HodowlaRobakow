@@ -152,7 +152,6 @@
     <ClInclude Include="Nest.h" />
     <ClInclude Include="Old.h" />
     <ClInclude Include="PlayState.h" />
-    <ClInclude Include="State.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

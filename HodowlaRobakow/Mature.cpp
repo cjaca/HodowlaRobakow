@@ -40,24 +40,6 @@ sf::Sprite *Mature::getSprite()
 	return &this->sprite;
 }
 
-// void Mature::setSize(float k) //TODO: Ogarnac setSize aby byl wspolny dla wszystkich, tak na prawde to zmienia sie tylko zaleznosci od life
-// {
-// 	int rozmiarPaskaHP;
-// 	//set size of Fly
-// 	this->size = this->size + 1;
-// 	if (isAsleep == false)
-// 	{
-// 		life = life - k;
-// 	}
-// 	if (life <= 0)
-// 	{
-// 		isDead = true;
-// 	}
-
-// 	int kolorG = 2.55 * life;
-// 	HpBar.setFillColor(sf::Color(255, kolorG, 0));
-// 	HpBar.setSize(sf::Vector2f(6,6));
-// }
 
 void Mature::collect()
 {

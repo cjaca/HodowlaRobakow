@@ -18,61 +18,18 @@ MainState::~MainState()
 
 void MainState::runGame()
 {
-	Init();
+	playState = new PlayState(window);
+	playState->Init();
 	while (window->isOpen())
 	{
-		HandleInput();
-		Update();
-		Draw();
-	}
-}
-
-void MainState::Init()
-{
-	state = Play;
-	playState = new PlayState(window, &state);
-	playState->Init();
-
-}
-
-void MainState::HandleInput()
-{
-	switch (state)
-	{
-	case MainState::Play:
 		playState->HandleInput();
-		break;
-
-	default:
-		break;
-	}
-
-}
-
-void MainState::Update()
-{
-	switch (state)
-	{
-	case MainState::Play:
 		playState->Update();
-		break;
-	default:
-		break;
+		playState->Draw();
+		window->display();
+		window->clear(sf::Color(50, 50, 50));
 	}
 }
 
-void MainState::Draw()
-{
-	switch (state)
-	{
-	case MainState::Play:
-		playState->Draw();
-		break;
-	default:
-		break;
-	}
-	window->display();
-	window->clear(sf::Color(50, 50, 50));
-}
+
 
 

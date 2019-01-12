@@ -22,7 +22,7 @@ class PlayState : public State
 {
 public:
 
-	PlayState(sf::RenderWindow *window , GameStates *state);
+	PlayState(sf::RenderWindow *window );
 	~PlayState();
 
 	void Init();
