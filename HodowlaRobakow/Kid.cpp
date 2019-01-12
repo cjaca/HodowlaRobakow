@@ -8,7 +8,7 @@ Kid::Kid(AssetManager &assets, sf::Vector2f position, float lifek)
 	this->position = position;
 	x = position.x;
 	y = position.y;
-	loadTexture();
+	Load_Texture();
 	sprite.setOrigin(8,8);
 	sprite.setPosition(position);
 	HpBar.setPosition(position.x-3,position.y-3);
@@ -32,14 +32,14 @@ void Kid::draw(sf::RenderTarget & target)
 	target.draw(HpBar);
 }
 
-int Kid::loadTexture()
+int Kid::Load_Texture()
 {
 	sprite.setTexture(manager->GetTexture("kid"));
 	return 0;
 }
 
 
-void Kid::updateMove(sf::Sprite & target)
+void Kid::Update_Move(sf::Sprite & target)
 {
 	if (instrukcja == 0) {
 		if (licznik == a) {
@@ -168,7 +168,7 @@ void Kid::updateMove(sf::Sprite & target)
 			a1 = 0;
 			b1 = 0;
 			c1 = 0;
-			randRespawnPosition();
+			Random_Respawn_Position();
 			this->isAsleep = true; //ustawia flage ze mucha spi i zeby jej nie ruszac
 			this->goSleep = this->size;
 			this->wakeUp = this->size + 300;
@@ -259,7 +259,7 @@ sf::Vector2f Kid::getPosition()
 	return this->position;
 }
 
-void Kid::randRespawnPosition()
+void Kid::Random_Respawn_Position()
 {
 	int i = rand() % 5;
 	if (i == 0)

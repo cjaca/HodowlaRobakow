@@ -12,7 +12,7 @@ private:
 	sf::Texture NestTexture;
 	sf::Sprite NestSprite;
 	sf::RectangleShape HpBar;
-	int loadTexture(AssetManager & assets);
+	int Load_Texture(AssetManager & assets);
 	int level = 1; //poziom
 	int food = 50; //jedzenie
 	int foodCapacity = 500;
@@ -25,8 +25,6 @@ public:
 	~Nest();
 	void setNestFood(int n);
 	int getNestFood();
-	void setGarner(int n);
-	int getGarner(); //kazda mucha zajmuje wiecej miejsca w zagrodzie
 	void setMoney(int n);
 	int getMoney();
 	void draw(sf::RenderTarget & target);

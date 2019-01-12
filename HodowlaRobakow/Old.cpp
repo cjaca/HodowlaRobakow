@@ -8,7 +8,7 @@ Old::Old(AssetManager &assets, sf::Vector2f position, float lifek):Mature(assets
 	this->position = position;
 	x = position.x;
 	y = position.y;
-	loadTexture();
+	Load_Texture();
 	sprite.setOrigin(16, 16);
 	sprite.setPosition(position);
 	HpBar.setPosition(position.x-3,position.y-3);
@@ -33,32 +33,7 @@ sf::Sprite * Old::getSprite()
 	return &this->sprite;
 }
 
-// void Old::setSize(float k)
-// {
-// 	int rozmiarPaskaHP;
-// 	//set size of Fly
-// 	this->size = this->size + 1;
-// 	if (isAsleep == false)
-// 	{
-// 		life = life - k;
-// 	}
-// 	if (life <= 0)
-// 	{
-// 		isDead = true;
-// 	}
-
-// 	int kolorG = 2.55 * life;
-// 	if (life <= 200) {
-// 		rozmiarPaskaHP = life / 10;
-// 	}
-// 	else {
-// 		rozmiarPaskaHP = (0.0025*life) - 20;
-// 	}
-// 	HpBar.setFillColor(sf::Color(255, kolorG, 0));
-// 	HpBar.setSize(sf::Vector2f(rozmiarPaskaHP, 4));
-// }
-
-void Old::updateMove(sf::Sprite & target)
+void Old::Update_Move(sf::Sprite & target)
 {
 	if (instrukcja == 0) {
 		if (licznik == a) {
@@ -187,25 +162,25 @@ void Old::updateMove(sf::Sprite & target)
 			a1 = 0;
 			b1 = 0;
 			c1 = 0;
-			if (goToEgg == false && goToSleep == false && carryItem == true)
+			if (m_Go_To_Egg == false && m_Go_To_Sleep == false && m_Carry_Item == true)
 			{
-				carryItem = false;
+				m_Carry_Item = false;
 				flagaKolizja = true;
-				randRespawnPosition();
+				Random_Respawn_Position();
 				target.setPosition(x, y);
-				loadTexture();
-				missionComplete = true; // kod nr 1 - powiadamia ze jajko zostalo zwrocone do bazy i ma zwiekszyc ilosc zarcia dla much.
+				Load_Texture();
+				m_Mission_Complete = true; // kod nr 1 - powiadamia ze jajko zostalo zwrocone do bazy i ma zwiekszyc ilosc zarcia dla much.
 			}
-			else if (goToEgg == true)
+			else if (m_Go_To_Egg == true)
 			{
 				flagaKolizja = true;
 				//std::cout << "powinienem teraz podniesc $$$ " << std::endl;
-				goToEgg = false;
+				m_Go_To_Egg = false;
 			}
-			if (goToSleep == true)
+			if (m_Go_To_Sleep == true)
 			{
-				randRespawnPosition();
-				this->goToSleep = false;
+				Random_Respawn_Position();
+				this->m_Go_To_Sleep = false;
 				this->isAsleep = true; //ustawia flage ze mucha spi i zeby jej nie ruszac
 				this->goSleep = size;
 				this->wakeUp = size + 300;
@@ -286,7 +261,7 @@ void Old::updateMove(sf::Sprite & target)
 	}
 }
 
-int Old::loadTexture()
+int Old::Load_Texture()
 {
 	sprite.setTexture(manager->GetTexture("fly-old"));
 	return 0;
@@ -297,12 +272,12 @@ void Old::loadCoinTexture()
 	sprite.setTexture(manager->GetTexture("fly-coin"));
 }
 
-void Old::goGetIt(sf::Vector2f position)
+void Old::Go_Get_It(sf::Vector2f position)
 {
 	//int x, y;
 	float pozycjaMuchyX, pozycjaMuchyY;
 	this->flagaKolizja = false; 	 //ustawia flage musze ze jest zajeta i zeby wiedziala ze sie nie odbija od innych w tym momencie	
-	this->goToEgg = true;
+	this->m_Go_To_Egg = true;
 	pozycjaMuchyX = this->getPosition().x;
 	pozycjaMuchyY = this->getPosition().y;
 

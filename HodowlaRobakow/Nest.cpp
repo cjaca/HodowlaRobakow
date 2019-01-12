@@ -2,7 +2,7 @@
 
 Nest::Nest(AssetManager & assets)
 {
-	loadTexture(assets);
+	Load_Texture(assets);
 	NestSprite.setOrigin(50, 50);
 	NestSprite.setPosition(RESPAWN_WIDTH / 2, RESPAWN_HEIGHT / 2);
 }
@@ -42,7 +42,7 @@ sf::Sprite * Nest::getSprite()
 	return &this->NestSprite;
 }
 
-int Nest::loadTexture(AssetManager &assets)
+int Nest::Load_Texture(AssetManager &assets)
 {
 	if (!NestTexture.loadFromFile("img/nest.png"))
 		return -1;

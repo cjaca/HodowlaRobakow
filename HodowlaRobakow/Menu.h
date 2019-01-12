@@ -63,9 +63,6 @@ private:
 		plusKidLife, minusKidLife,
 		plusMatureLife, minusMatureLife,
 		plusOldLife, minusOldLife;
-		
-	
-	//TODO: Add edition fields for attributes of simulation etc.
 };
 
 

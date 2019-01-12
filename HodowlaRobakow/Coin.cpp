@@ -6,7 +6,7 @@ Coin::Coin(AssetManager &assets, sf::Vector2f position): Egg(assets)
 {
 	manager = &assets;
 	this->position = position;
-	LoadTexture();
+	Load_Texture();
 	sprite.setOrigin(12, 12);
 	sprite.setPosition(position);
 	timeLeftToAutoDestroy.setFont(manager->GetFont("trebu"));
@@ -23,7 +23,7 @@ Coin::~Coin()
 }
 
 
-int Coin::LoadTexture()
+int Coin::Load_Texture()
 {
 	sprite.setTexture(manager->GetTexture("coin"));
 	return 0;

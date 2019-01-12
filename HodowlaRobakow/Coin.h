@@ -6,6 +6,6 @@ public:
 	Coin(AssetManager &assets, sf::Vector2f position);
 	~Coin();
 private:
-	int LoadTexture();
+	int Load_Texture();
 };
 

@@ -18,19 +18,19 @@ void PlayState::Init()
 	assets = new AssetManager();
 	
 	srand(time(NULL));
-	assets->LoadTexture("kid", KIDFLY_FILEPATH);
-	assets->LoadTexture("fly-mature", MATUREFLY_FILEPATH);
-	assets->LoadTexture("fly-egg", MATUREFLYEGG_FILEPATH);
-	assets->LoadTexture("fly-old", OLDFLY_FILEPATH);
-	assets->LoadTexture("nest", NEST_FILEPATH);
-	assets->LoadTexture("egg", EGG_FILEPATH);
-	assets->LoadTexture("coin", COIN_FILEPATH);
-	assets->LoadTexture("fly-coin", FLYCOIN_FILEPATH);
-	assets->LoadTexture("plus", PLUS_FILEPATH);
-	assets->LoadTexture("minus", MINUS_FILEPATH);
-	assets->LoadTexture("pause", BTNPAUSE_FILEPATH);
-	assets->LoadTexture("start", BTNSTART_FILEPATH);
-	assets->LoadTexture("gen", BTNGEN_FILEPATH);
+	assets->Load_Texture("kid", KIDFLY_FILEPATH);
+	assets->Load_Texture("fly-mature", MATUREFLY_FILEPATH);
+	assets->Load_Texture("fly-egg", MATUREFLYEGG_FILEPATH);
+	assets->Load_Texture("fly-old", OLDFLY_FILEPATH);
+	assets->Load_Texture("nest", NEST_FILEPATH);
+	assets->Load_Texture("egg", EGG_FILEPATH);
+	assets->Load_Texture("coin", COIN_FILEPATH);
+	assets->Load_Texture("fly-coin", FLYCOIN_FILEPATH);
+	assets->Load_Texture("plus", PLUS_FILEPATH);
+	assets->Load_Texture("minus", MINUS_FILEPATH);
+	assets->Load_Texture("pause", BTNPAUSE_FILEPATH);
+	assets->Load_Texture("start", BTNSTART_FILEPATH);
+	assets->Load_Texture("gen", BTNGEN_FILEPATH);
 	assets->LoadFont("trebu", TREBU_FILEPATH);
 
 	menu = new Menu(*assets);
@@ -264,11 +264,11 @@ void PlayState::Update()
 
 			if (v_Mature[i].isAsleep == false)
 			{
-				v_Mature[i].updateMove();//poruszanie doroslymi
-				if (v_Mature[i].missionComplete == true) //dodaje do gniazda jedzenie (bo zostalo odniesione jajko)
+				v_Mature[i].Update_Move();//poruszanie doroslymi
+				if (v_Mature[i].m_Mission_Complete == true) //dodaje do gniazda jedzenie (bo zostalo odniesione jajko)
 				{
 					gniazdo->setNestFood(200);
-					v_Mature[i].missionComplete = false;
+					v_Mature[i].m_Mission_Complete = false;
 				}
 
 				if (collision.CheckCollision(*v_Mature[i].getSprite(), *gniazdo->getSprite()) == true) // kolizja dorosly gniazdo
@@ -282,7 +282,7 @@ void PlayState::Update()
 					{
 						if (v_Kids[k].collectedInfo == true && v_Mature[i].flagaKolizja == true)
 						{
-							v_Mature[i].goGetIt(v_Kids[k].itemPosition);
+							v_Mature[i].Go_Get_It(v_Kids[k].itemPosition);
 							v_Kids[k].collectedInfo = false;
 							v_Kids[k].kolizja();
 						}
@@ -303,17 +303,17 @@ void PlayState::Update()
 						{
 							if (v_Eggs[l].flaga == false) 
 							{
-								v_Mature[i].collect();
+								v_Mature[i].Collect();
 								v_Eggs.erase(v_Eggs.begin() + l);
 								l -= l;
 							}
 							break;
 						}
-						if (v_Mature[i].flagaKolizja == false && v_Mature[i].goToEgg == true)
+						if (v_Mature[i].flagaKolizja == false && v_Mature[i].m_Go_To_Egg == true)
 						{
 							v_Mature[i].instrukcja = 0;
-							v_Mature[i].goToEgg = false;
-							v_Mature[i].collect();
+							v_Mature[i].m_Go_To_Egg = false;
+							v_Mature[i].Collect();
 							v_Eggs.erase(v_Eggs.begin() + l);
 							l -= l;
 						}
@@ -356,7 +356,7 @@ void PlayState::Update()
 			v_Kids[i].setSize(m_Kid_DPS); //zwiekszanie ich wieku
 			if (v_Kids[i].isAsleep == false)
 			{
-				v_Kids[i].updateMove(*v_Kids[i].getSprite()); //poruszanie dziecmi
+				v_Kids[i].Update_Move(*v_Kids[i].getSprite()); //poruszanie dziecmi
 
 				if (v_Kids[i].flagaKolizja == true)
 				{
@@ -414,12 +414,12 @@ void PlayState::Update()
 
 		if (v_Old[i].isAsleep == false)
 		{
-			v_Old[i].updateMove(*v_Old[i].getSprite());
+			v_Old[i].Update_Move(*v_Old[i].getSprite());
 
-			if (v_Old[i].missionComplete == true) //poruszanie doroslymi, jezeli zostala zwrocona jedynka, to dodaje do gniazda jedzenie (bo zostalo odniesione jajko)
+			if (v_Old[i].m_Mission_Complete == true) //poruszanie doroslymi, jezeli zostala zwrocona jedynka, to dodaje do gniazda jedzenie (bo zostalo odniesione jajko)
 			{
 				gniazdo->setMoney(1);
-				v_Old[i].missionComplete = false;
+				v_Old[i].m_Mission_Complete = false;
 			}
 			if (collision.CheckCollision(*v_Old[i].getSprite(), *gniazdo->getSprite()) == true) // kolizja starsza-gniazdo
 			{
@@ -431,7 +431,7 @@ void PlayState::Update()
 				{
 					if (v_Mature[k].collectedInfo == true && v_Old[i].flagaKolizja == true)
 					{
-						v_Old[i].goGetIt(v_Mature[k].itemPosition);
+						v_Old[i].Go_Get_It(v_Mature[k].itemPosition);
 						v_Mature[k].collectedInfo = false;
 						v_Mature[k].kolizja();
 					}
@@ -459,18 +459,18 @@ void PlayState::Update()
 						if (v_Coins[l].flaga == false)
 						{
 							v_Old[i].loadCoinTexture();
-							v_Old[i].collect();
+							v_Old[i].Collect();
 							v_Coins.erase(v_Coins.begin() + l);
 							l -= l;
 						}
 						break;
 					}
-					if (v_Old[i].flagaKolizja == false && v_Old[i].goToEgg == true)
+					if (v_Old[i].flagaKolizja == false && v_Old[i].m_Go_To_Egg == true)
 					{
 						v_Old[i].loadCoinTexture();
 						v_Old[i].instrukcja = 0;
-						v_Old[i].goToEgg = false;
-						v_Old[i].collect();
+						v_Old[i].m_Go_To_Egg = false;
+						v_Old[i].Collect();
 						v_Coins.erase(v_Coins.begin() + l);
 						l -= l;
 					}
@@ -543,7 +543,7 @@ void PlayState::Evolution()
 			}
 			v_Kids[i].isAsleep = false; //zdjecie flagi ze mucha spi
 			v_Kids[i].flagaKolizja = true; //nadanie flagi ze mucha musi sie juz odbijac od otoczenia
-			v_Kids[i].randRespawnPosition();
+			v_Kids[i].Random_Respawn_Position();
 		}
 		if (v_Kids[i].getSize() > 1800) //ewolucja muchy mlodej
 		{
@@ -558,7 +558,7 @@ void PlayState::Evolution()
 	{
 		if (v_Mature[i].life <= (m_Mature_Life*0.25) && v_Mature[i].flagaKolizja == true)
 		{
-			v_Mature[i].goToSleep = true;
+			v_Mature[i].m_Go_To_Sleep = true;
 			v_Mature[i].sleep(m_dt);
 		}
 		if (v_Mature[i].getSize() == v_Mature[i].wakeUp && v_Mature[i].isAsleep == true)
@@ -571,7 +571,7 @@ void PlayState::Evolution()
 
 			v_Mature[i].isAsleep = false; //zdjecie flagi ze mucha spi
 			v_Mature[i].flagaKolizja = true; //nadanie flagi ze mucha musi sie juz odbijac od otoczenia
-			v_Mature[i].randRespawnPosition();
+			v_Mature[i].Random_Respawn_Position();
 		}
 		if (v_Mature[i].getSize() > 3600) //ewolucja muchy MATURE
 		{
@@ -591,7 +591,7 @@ void PlayState::Evolution()
 		}
 		if (v_Old[i].life <= (m_Old_Life*0.26) && v_Old[i].flagaKolizja == true)
 		{
-			v_Old[i].goToSleep = true;
+			v_Old[i].m_Go_To_Sleep = true;
 			v_Old[i].sleep(m_dt);
 		}
 		if (v_Old[i].getSize() == v_Old[i].wakeUp && v_Old[i].givingBirth == false && v_Old[i].isAsleep == true)
@@ -604,7 +604,7 @@ void PlayState::Evolution()
 
 			v_Old[i].isAsleep = false; 
 			v_Old[i].flagaKolizja = true; 
-			v_Old[i].randRespawnPosition();
+			v_Old[i].Random_Respawn_Position();
 		}
 
 		if (v_Old[i].getSize() % 1800 == 0 && v_Old[i].getSize() > 0 && v_Old[i].givingBirth == false)
@@ -624,7 +624,7 @@ void PlayState::Evolution()
 		}
 		if (v_Old[i].getSize() == v_Old[i].wakeUp && v_Old[i].givingBirth == true)
 		{
-			if (v_Old[i].carryItem == false)
+			if (v_Old[i].m_Carry_Item == false)
 			{
 				v_Old[i].flagaKolizja = true; 
 			}
