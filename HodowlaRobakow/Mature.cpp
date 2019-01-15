@@ -3,7 +3,7 @@
 #define SPRITE_SPEED	1
 
 
-Mature::Mature(AssetManager &assets, sf::Vector2f position, float lifek): Kid(assets)
+Mature::Mature(AssetManager &assets, sf::Vector2f position, float lifek, int t): Kid(assets)
 {
 	manager = &assets;
 	life = lifek;
@@ -16,6 +16,8 @@ Mature::Mature(AssetManager &assets, sf::Vector2f position, float lifek): Kid(as
 	HpBar.setPosition(position.x-3,position.y-3);
 	HpBar.setOutlineColor(sf::Color::Red);
 	HpBar.setSize(sf::Vector2f(6,6));
+	startLife = life;
+	bornTime = t;
 }
 
 Mature::~Mature()
@@ -53,8 +55,6 @@ void Mature::Collect()
 	pozycjaMuchyY = this->getPosition().y;
 
 	//wyznaczanie drogi do gniazda ktore zawsze jest w tym samym miejscu
-
-	//TODO: zrobic z tego oddzieln� metod� w klasie bazowej \/
 	wPoziomie = 512.f - pozycjaMuchyX;
 	wPionie = 384.f - pozycjaMuchyY;
 	if (instrukcja == 0) {
@@ -109,7 +109,6 @@ void Mature::Collect()
 
 void Mature::Go_Get_It(sf::Vector2f position)
 {
-	//int x, y;
 	float pozycjaMuchyX, pozycjaMuchyY;
 	this->flagaKolizja = false; 	 //ustawia flage musze ze jest zajeta i zeby wiedziala ze sie nie odbija od innych w tym momencie	
 	this->m_Go_To_Egg = true;
@@ -120,7 +119,6 @@ void Mature::Go_Get_It(sf::Vector2f position)
 
 	wPoziomie = position.x - pozycjaMuchyX;
 	wPionie = position.y - pozycjaMuchyY;
-	//std::cout << "Mucha dostala info ze jajko jest na pozycji "<< position.x<< " "<< position.y << std::endl;
 	if (instrukcja == 0) {
 		if (wPoziomie > 0) // ---->
 		{
@@ -313,7 +311,6 @@ void Mature::Update_Move()
 			else if (m_Go_To_Egg == true)
 			{
 				flagaKolizja = true;
-				//std::cout << "powinienem teraz podniesc jajko " << std::endl;
 				m_Go_To_Egg = false;
 			}
 			if (m_Go_To_Sleep == true)

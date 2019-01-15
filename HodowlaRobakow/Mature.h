@@ -4,10 +4,10 @@
 class Mature : public Kid
 {
 public:
-	Mature(AssetManager &assets, sf::Vector2f position = sf::Vector2f(rand() % 800, rand() % 600), float lifek = 200.0);
+	Mature(AssetManager &assets, sf::Vector2f position = sf::Vector2f(rand() % 800, rand() % 600), float lifek = 200.0, int t = 0);
 	~Mature();
-	void draw(sf::RenderTarget & target);
 	sf::Sprite *getSprite();
+	void draw(sf::RenderTarget & target);
 	void Collect();
 	void Go_Get_It(sf::Vector2f position);
 	void Update_Move();

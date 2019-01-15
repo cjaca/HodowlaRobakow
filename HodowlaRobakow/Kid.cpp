@@ -2,7 +2,7 @@
 
 
 
-Kid::Kid(AssetManager &assets, sf::Vector2f position, float lifek)
+Kid::Kid(AssetManager &assets, sf::Vector2f position, float lifek, int t)
 {
 	manager = &assets;
 	this->position = position;
@@ -19,6 +19,8 @@ Kid::Kid(AssetManager &assets, sf::Vector2f position, float lifek)
 	c = 0;
 	licznik = 0;
 	life = lifek;
+	startLife = life;
+	bornTime = t;
 }
 
 

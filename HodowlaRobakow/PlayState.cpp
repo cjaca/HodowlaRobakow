@@ -15,6 +15,7 @@ PlayState::~PlayState()
 
 void PlayState::Init()
 {
+	
 	assets = new AssetManager();
 	
 	srand(time(NULL));
@@ -31,6 +32,8 @@ void PlayState::Init()
 	assets->Load_Texture("pause", BTNPAUSE_FILEPATH);
 	assets->Load_Texture("start", BTNSTART_FILEPATH);
 	assets->Load_Texture("gen", BTNGEN_FILEPATH);
+	assets->Load_Texture("head", HEADER_FILEPATH);
+	assets->Load_Texture("foot", BOTTOM_FILEPATH);
 	assets->LoadFont("trebu", TREBU_FILEPATH);
 
 	menu = new Menu(*assets);
@@ -46,9 +49,35 @@ void PlayState::HandleInput()
 
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		{
-			for (int i = 1; i < 31; i++)
+			for (int i = 0; i < v_Kids.size(); i++)
 			{
-				menu->getSprite(i)->getPosition().x;
+				sf::IntRect tempRect(v_Kids[i].getSprite()->getPosition().x, v_Kids[i].getSprite()->getPosition().y, v_Kids[i].getSprite()->getGlobalBounds().width, v_Kids[i].getSprite()->getGlobalBounds().height);
+				if (tempRect.contains(sf::Mouse::getPosition(*window)))
+				{
+					menu->showFly(v_Kids[i],1);
+				}
+			}
+
+			for (int i = 0; i < v_Mature.size(); i++)
+			{
+				sf::IntRect tempRect(v_Mature[i].getSprite()->getPosition().x, v_Mature[i].getSprite()->getPosition().y, v_Mature[i].getSprite()->getGlobalBounds().width, v_Mature[i].getSprite()->getGlobalBounds().height);
+				if (tempRect.contains(sf::Mouse::getPosition(*window)))
+				{
+					menu->showFly(v_Mature[i], 2);
+				}
+			}
+
+			for (int i = 0; i < v_Old.size(); i++)
+			{
+				sf::IntRect tempRect(v_Old[i].getSprite()->getPosition().x, v_Old[i].getSprite()->getPosition().y, v_Old[i].getSprite()->getGlobalBounds().width, v_Old[i].getSprite()->getGlobalBounds().height);
+				if (tempRect.contains(sf::Mouse::getPosition(*window)))
+				{
+					menu->showFly(v_Old[i], 3);
+				}
+			}
+
+			for (int i = 1; i < 41; i++)
+			{
 				sf::IntRect tempRect(menu->getSprite(i)->getPosition().x, menu->getSprite(i)->getPosition().y, menu->getSprite(i)->getGlobalBounds().width, menu->getSprite(i)->getGlobalBounds().height);
 				if (tempRect.contains(sf::Mouse::getPosition(*window)))
 				{
@@ -56,7 +85,7 @@ void PlayState::HandleInput()
 					{
 						std::cout << "Dodano kid muche" << std::endl;
 						Kid *kid;
-						kid = new Kid(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT), m_Kid_Life);
+						kid = new Kid(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT), m_Kid_Life, m_dt);
 						v_Kids.push_back(*kid);
 					}
 					if (i == 2)
@@ -69,7 +98,7 @@ void PlayState::HandleInput()
 					{
 						std::cout << "Dodano dorosla muche" << std::endl;
 						Mature *mature;
-						mature = new Mature(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT), m_Mature_Life);
+						mature = new Mature(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT), m_Mature_Life, m_dt);
 						v_Mature.push_back(*mature);
 					}
 					if (i == 4)
@@ -82,7 +111,7 @@ void PlayState::HandleInput()
 					{
 						std::cout << "Dodano starsza muche" << std::endl;
 						Old *old;
-						old = new Old(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT), m_Old_Life);
+						old = new Old(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT), m_Old_Life, m_dt);
 						v_Old.push_back(*old);
 					}
 					if (i == 6)
@@ -199,16 +228,23 @@ void PlayState::HandleInput()
 					}
 					if (i == 25)
 					{
-						m_Kid_Life-=1;
+						if (m_Kid_Life >= 1)
+						{
+							m_Kid_Life -= 1;
+						}
 					}
 					if (i == 26)
 					{
+
 						std::cout<<"zwiekszono zycie doroslej muchy"<<std::endl;
 						m_Mature_Life +=1;
 					}
 					if (i == 27)
 					{
-						m_Mature_Life -=1;
+						if (m_Mature_Life >= 1)
+						{
+							m_Mature_Life -= 1;
+						}
 					}
 					if (i == 28)
 					{
@@ -217,12 +253,70 @@ void PlayState::HandleInput()
 					}
 					if (i == 29)
 					{
-						m_Old_Life -=1;
+						if (m_Old_Life >= 1)
+						{
+							m_Old_Life -= 1;
+						}
 					}
 					if (i == 30)
 					{
-						std::cout << "generowanie" << std::endl;
+						std::cout << "Losowe generowanie much" << std::endl;
 						Generate();
+					}
+					if (i == 31)
+					{
+						m_Kid_Time += 30;
+					}
+					if (i == 32)
+					{
+						if(m_Kid_Time >= 30)
+						{ 
+							m_Kid_Time -= 30;
+						}
+					}
+					if (i == 33)
+					{
+						m_Mature_Time += 30;
+					}
+					if (i == 34)
+					{
+						if (m_Mature_Time >= 30)
+						{
+							m_Mature_Time -= 30;
+						}
+					}
+					if (i == 35)
+					{
+							m_Old_Time += 30;
+					}
+					if (i == 36)
+					{
+						if (m_Old_Time >= 30)
+						{
+							m_Old_Time -= 30;
+						}
+					}
+					if (i == 37)
+					{
+						m_Old_Breed += 30;
+					}
+					if (i == 38)
+					{
+						if (m_Old_Breed > 30)
+						{
+							m_Old_Breed -= 30;
+						}
+					}
+					if (i == 39)
+					{
+						m_Egg_Food += 1;
+					}
+					if (i == 40)
+					{
+						if (m_Egg_Food > 1)
+						{
+							m_Egg_Food -= 1;
+						}
 					}
 				}
 			}
@@ -251,6 +345,12 @@ void PlayState::Update()
 	menu->showKidLife(m_Kid_Life);
 	menu->showMatureLife(m_Mature_Life);
 	menu->showOldLife(m_Old_Life);
+	menu->showKidProduct(m_Kid_Time);
+	menu->showMatureProduct(m_Mature_Time);
+	menu->showOldProduct(m_Old_Time);
+	menu->showRespawnTime(m_Old_Breed);
+	menu->showEggFood(m_Egg_Food);
+	
 	if (pause == false)
 	{
 	Evolution(); //sprawdzanie ewolucji much
@@ -267,7 +367,7 @@ void PlayState::Update()
 				v_Mature[i].Update_Move();//poruszanie doroslymi
 				if (v_Mature[i].m_Mission_Complete == true) //dodaje do gniazda jedzenie (bo zostalo odniesione jajko)
 				{
-					gniazdo->setNestFood(200);
+					gniazdo->setNestFood(m_Egg_Food);
 					v_Mature[i].m_Mission_Complete = false;
 				}
 
@@ -491,6 +591,7 @@ void PlayState::Update()
 	}
 	CountTime();
 	}
+	menu->updateFly();
 }
 
 void PlayState::Draw()
@@ -545,12 +646,12 @@ void PlayState::Evolution()
 			v_Kids[i].flagaKolizja = true; //nadanie flagi ze mucha musi sie juz odbijac od otoczenia
 			v_Kids[i].Random_Respawn_Position();
 		}
-		if (v_Kids[i].getSize() > 1800) //ewolucja muchy mlodej
+		if (v_Kids[i].getSize() > m_Kid_Time) //ewolucja muchy mlodej
 		{
 			Mature *mature;
-			mature = new Mature(*assets,sf::Vector2f((v_Kids[i].getPosition()).x, (v_Kids[i].getPosition()).y), m_Mature_Life);
+			mature = new Mature(*assets,sf::Vector2f((v_Kids[i].getPosition()).x, (v_Kids[i].getPosition()).y), m_Mature_Life, m_dt);
 			v_Mature.push_back(*mature);
-			v_Kids.erase(v_Kids.begin() + i);
+			v_Kids[i].isDead = true;
 		}
 	}
 
@@ -573,22 +674,17 @@ void PlayState::Evolution()
 			v_Mature[i].flagaKolizja = true; //nadanie flagi ze mucha musi sie juz odbijac od otoczenia
 			v_Mature[i].Random_Respawn_Position();
 		}
-		if (v_Mature[i].getSize() > 3600) //ewolucja muchy MATURE
+		if (v_Mature[i].getSize() > m_Mature_Time) //ewolucja muchy MATURE
 		{
 			Old *old;
-			old = new Old(*assets, sf::Vector2f((v_Mature[i].getPosition()).x, (v_Mature[i].getPosition()).y), m_Old_Life);
+			old = new Old(*assets, sf::Vector2f((v_Mature[i].getPosition()).x, (v_Mature[i].getPosition()).y), m_Old_Life, m_dt);
 			v_Old.push_back(*old);
-			v_Mature.erase(v_Mature.begin() + i);
+			v_Mature[i].isDead = true;
 		}
 	}
 
 	for (int i = 0; i < v_Old.size(); i++)
 	{
-		if (v_Old[i].getSize() > 5400) //smierc najstarszej muchy!
-		{
-			v_Old.erase(v_Old.begin() + i);
-			i--;
-		}
 		if (v_Old[i].life <= (m_Old_Life*0.26) && v_Old[i].flagaKolizja == true)
 		{
 			v_Old[i].m_Go_To_Sleep = true;
@@ -607,18 +703,18 @@ void PlayState::Evolution()
 			v_Old[i].Random_Respawn_Position();
 		}
 
-		if (v_Old[i].getSize() % 1800 == 0 && v_Old[i].getSize() > 0 && v_Old[i].givingBirth == false)
+		if (v_Old[i].getSize() % m_Old_Breed == 0 && v_Old[i].getSize() > 0 && v_Old[i].givingBirth == false)
 		{
 			float x = v_Old[i].getPosition().x;
 			float y = v_Old[i].getPosition().y;
 			v_Old[i].givingBirth = true;
 			v_Old[i].isAsleep = true;
 			v_Old[i].flagaKolizja = false;
-			v_Old[i].wakeUp = v_Old[i].getSize() + 150;
-			for (i = 0; i < m_Kid_Ammount; i++)
+			v_Old[i].wakeUp = v_Old[i].getSize() + 180;
+			for (int j = 0; j < m_Kid_Ammount; j++)
 			{
 				Kid *kid;
-				kid = new Kid(*assets, sf::Vector2f(x+rand()%5,y+rand()%5), m_Kid_Life);
+				kid = new Kid(*assets, sf::Vector2f(x+rand()%5,y+rand()%5), m_Kid_Life, m_dt);
 				v_Kids.push_back(*kid);
 			}
 		}
@@ -631,6 +727,12 @@ void PlayState::Evolution()
 			v_Old[i].givingBirth = false;
 			v_Old[i].isAsleep = false; 
 			
+		}
+		if (v_Old[i].getSize() > m_Old_Time) //smierc najstarszej muchy!
+		{
+			v_Old[i].isDead = true;
+			v_Old.erase(v_Old.begin() + i);
+			i--;
 		}
 	}
 }
@@ -714,19 +816,19 @@ void PlayState::Generate()
 	for (int i=0; i < rand() % 10; i++)
 	{
 		Mature *mature;
-		mature = new Mature(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT), m_Mature_Life);
+		mature = new Mature(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT), m_Mature_Life, m_dt);
 		v_Mature.push_back(*mature);
 	}
 	for (int i = 0; i < rand() % 10; i++)
 	{
 		Kid *kid;
-		kid = new Kid(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT), m_Kid_Life);
+		kid = new Kid(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT), m_Kid_Life, m_dt);
 		v_Kids.push_back(*kid);
 	}
 	for (int i = 0; i < rand() % 10; i++)
 	{
 		Old *old;
-		old = new Old(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT), m_Old_Life);
+		old = new Old(*assets, sf::Vector2f(rand() % RESPAWN_WIDTH, rand() % RESPAWN_HEIGHT), m_Old_Life, m_dt);
 		v_Old.push_back(*old);
 	}
 	for (int i = 0; i < rand() % 5; i++)

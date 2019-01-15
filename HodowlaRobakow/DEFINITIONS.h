@@ -24,3 +24,6 @@
 #define BTNGEN_FILEPATH "img/generate.png"
 
 #define TREBU_FILEPATH "font/TrebuchetMS.ttf"
+
+#define BOTTOM_FILEPATH "img/stopka.png"
+#define HEADER_FILEPATH "img/symulacja.png"

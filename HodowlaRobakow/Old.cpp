@@ -1,7 +1,7 @@
 #include "Old.h"
 
 
-Old::Old(AssetManager &assets, sf::Vector2f position, float lifek):Mature(assets)
+Old::Old(AssetManager &assets, sf::Vector2f position, float lifek, int t):Mature(assets)
 {
 	manager = &assets;
 	life = lifek;
@@ -14,7 +14,8 @@ Old::Old(AssetManager &assets, sf::Vector2f position, float lifek):Mature(assets
 	HpBar.setPosition(position.x-3,position.y-3);
 	HpBar.setOutlineColor(sf::Color::Red);
 	HpBar.setSize(sf::Vector2f(6,6));
-
+	startLife = life;
+	bornTime = t;
 }
 
 
@@ -174,7 +175,6 @@ void Old::Update_Move(sf::Sprite & target)
 			else if (m_Go_To_Egg == true)
 			{
 				flagaKolizja = true;
-				//std::cout << "powinienem teraz podniesc $$$ " << std::endl;
 				m_Go_To_Egg = false;
 			}
 			if (m_Go_To_Sleep == true)
@@ -274,7 +274,6 @@ void Old::loadCoinTexture()
 
 void Old::Go_Get_It(sf::Vector2f position)
 {
-	//int x, y;
 	float pozycjaMuchyX, pozycjaMuchyY;
 	this->flagaKolizja = false; 	 //ustawia flage musze ze jest zajeta i zeby wiedziala ze sie nie odbija od innych w tym momencie	
 	this->m_Go_To_Egg = true;
@@ -285,7 +284,6 @@ void Old::Go_Get_It(sf::Vector2f position)
 
 	wPoziomie = position.x - pozycjaMuchyX;
 	wPionie = position.y - pozycjaMuchyY;
-	//std::cout << "Mucha dostala info ze jajko jest na pozycji "<< position.x<< " "<< position.y << std::endl;
 	if (instrukcja == 0) {
 		if (wPoziomie > 0) // ---->
 		{

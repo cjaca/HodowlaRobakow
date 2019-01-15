@@ -45,8 +45,13 @@ private:
 	std::vector<Coin> v_Coins;
 	int m_dt = 0;
 	int m_Kid_Ammount = 5;
+	int m_Egg_Food = 200;
 	int m_Egg_Time_Respawn = 90;
 	int m_Coin_Time_Respawn = 150;
+	int m_Kid_Time = 1800;
+	int m_Mature_Time = 3600;
+	int m_Old_Time = 5400;
+	int m_Old_Breed = 1800;
 	float m_Kid_DPS = 0.22;
 	float m_Mature_DPS = 0.22;
 	float m_Old_DPS = 0.22;
